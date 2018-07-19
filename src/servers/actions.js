@@ -37,7 +37,7 @@ export const getServers = () => {
         );
       }
 
-      const url = 'http://www.whateverorigin.org/get?url=' + encodeURIComponent('https://api.nordvpn.com/server') + '&callback=?';
+      const url = 'https://allorigins.me/get?url=' + encodeURIComponent('https://api.nordvpn.com/server') + '&callback=?';
 
       $.getJSON(url)
       .done((data) => {
