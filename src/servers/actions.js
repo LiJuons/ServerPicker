@@ -39,7 +39,7 @@ export const getServers = () => {
 
       const url = 'http://www.whateverorigin.org/get?url=' + encodeURIComponent('https://api.nordvpn.com/server') + '&callback=?';
 
-      $.getJSON('https://api.nordvpn.com/server')
+      $.getJSON(url)
       .done((data) => {
       	let serverList = JSON.parse(data.contents);
         sessionStorage.setItem('servers', JSON.stringify(serverList));
