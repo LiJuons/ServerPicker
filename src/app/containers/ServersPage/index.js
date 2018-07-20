@@ -1,25 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import servers from '../../../servers';
-import country_list from '../../../assets/countryList';
-import { ServerList } from '../../components';
+import { ServerList, Spinner } from '../../components';
 import './ServersPage.css';
 
 class ServersPage extends Component {
+
+  refreshServers = () => {
+    console.log("Server Refresh in process.");
+    this.props.refreshServers();
+  }
 
   componentWillMount() {
     this.props.getServers();
   }
 
   render() {
-    const { filterServers, filteredServers, servers, isFetching, error } = this.props;
-
+    const { filterServers, filteredServers, servers, isFetching } = this.props;
+    console.log(isFetching)
     return (
-      <div className="page-container">
+      <div className={isFetching ? "page-container loading" : "page-container"}>
 
-        <h1>Server List</h1>
+        <div className="emptyDiv"></div>
 
-        <ServerList filterFunc={filterServers} servers={servers} filteredServers={JSON.stringify(filteredServers)} />
+        {
+          isFetching ?
+          <Spinner />
+          :
+          <ServerList filterFunc={filterServers} servers={servers} filteredServers={JSON.stringify(filteredServers)} />
+        }
 
       </div>
     );
@@ -34,6 +43,7 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
+  refreshServers: servers.actions.apiCall,
   getServers: servers.actions.getServers,
   filterServers: servers.actions.filterServers
 }

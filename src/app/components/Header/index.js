@@ -1,37 +1,60 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import pickerIcon from '../../../assets/picker.ico';
+import React, { Component } from 'react';
+import country_list from '../../../assets/countryList';
+import { RefreshButton } from '../';
 import './Header.css';
 
-const Header = (props) => (
-  <div className="navBar">
+class Header extends Component {
 
-    <div className="navBar-title">
-      <Link to="/">
-        Server Picker
-        <img src={pickerIcon} alt="Picker icon"
-          style={{ width: 30, "marginLeft": 10, "marginBottom": -5 }}
-        />
-      </Link>
-    </div>
+  state = {
+    selectValue: '---',
+    refreshed: false
+  }
 
-    <div className="navBar-item-list">
+  handleChange = (e) => {
+    this.setState({selectValue:e.target.value});
+    console.log(e.target.value);
+    this.props.filterFunc(e.target.value);
+  }
 
-      <div className="navBar-item">
-        <Link to="/">
-          Servers
-        </Link>
+  serversRefresh = () => {
+    this.props.refreshFunc();
+    this.setState({selectValue: '---', refreshed: true});
+    setTimeout(() => {
+      this.setState({refreshed: false});
+    }, 300000) //disable refresh for 5 minutes
+  }
+
+  render() {
+    const { selectValue, refreshed } = this.state;
+
+    return (
+      <div className="navBar">
+
+        <div className="navBar-item-left" id="nb-country">Country:</div>
+
+        <div className="navBar-item-left">
+          <select
+            id="country"
+            value={selectValue}
+            onChange={this.handleChange}
+          >
+            {
+              country_list.map(country =>
+                <option key={country} value={country}>{country}</option>
+              )
+            }
+          </select>
+        </div>
+
+        <div className="navBar-item-right">
+
+          <RefreshButton serversRefresh={this.serversRefresh} refreshed={refreshed} />
+
+        </div>
+
       </div>
-
-      <div className="navBar-item">
-        <Link to="/">
-          Search
-        </Link>
-      </div>
-
-    </div>
-
-  </div>
-);
+    );
+  }
+}
 
 export default Header;

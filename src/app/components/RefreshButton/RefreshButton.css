@@ -1,0 +1,27 @@
+#nb-refresh {
+  outline: none;
+  margin: 7.5px 0;
+  height: 85px;
+  width: 85px;
+
+  background-color: #0d802b;
+  border: 2px solid #95af94;
+  border-radius: 60px;
+
+  color: #f0f0f0;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+#nb-refresh:active {
+  background-color: #0b6522;
+  border: 2px solid #5f6d64;
+  -webkit-box-shadow: 0 0 8px 2px #2b1400;
+  box-shadow: 0 0 8px 2px #2b1400;
+}
+
+#nb-refresh:disabled {
+  background-color: #884620;
+  border: 2px solid #59615c;
+  cursor: default;
+}

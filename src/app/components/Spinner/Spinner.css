@@ -1,0 +1,89 @@
+
+.bubbles_container {
+  margin: auto;
+  width: 250px;
+  height: 100px;
+}
+
+.bubbles {
+  display:inline-block;
+  height: 15px;
+  width: 15px;
+  margin: 18px 6px;
+
+  border-radius: 100%;
+  background-color: white;
+  opacity: 0;
+}
+
+.bubble_1 {
+  -webkit-animation: pulse .9s infinite;
+  -moz-animation: pulse .9s infinite;
+  -ms-animation: pulse .9s infinite;
+  -o-animation: pulse .9s infinite;
+  animation: pulse .9s infinite;
+}
+
+.bubble_2 {
+  -webkit-animation: pulse .9s infinite;
+  -moz-animation: pulse .9s infinite;
+  -ms-animation: pulse .9s infinite;
+  -o-animation: pulse .9s infinite;
+  animation: pulse .9s infinite;
+
+  -webkit-animation-delay: .15s;
+  -moz-animation-delay: .15s;
+  -ms-animation-delay: .15s;
+  -o-animation-delay: .15s;
+  animation-delay: .15s;
+}
+
+.bubble_3 {
+  -webkit-animation: pulse .9s infinite;
+  -moz-animation: pulse .9s infinite;
+  -ms-animation: pulse .9s infinite;
+  -o-animation: pulse .9s infinite;
+  animation: pulse .9s infinite;
+
+  -webkit-animation-delay: .3s;
+  -moz-animation-delay: .3s;
+  -ms-animation-delay: .3s;
+  -o-animation-delay: .3s;
+  animation-delay: .3s;
+}
+
+
+@keyframes pulse {
+  0% {transform: scale(0); opacity: 1;}
+  35% {transform: scale(1);}
+  70% {transform: scale(0);opacity: 1;}
+  100% {transform: scale(0);opacity: 1;}
+}
+
+@-webkit-keyframes pulse {
+  0% {transform: scale(0); opacity: 1;}
+  35% {transform: scale(1);}
+  70% {transform: scale(0);opacity: 1;}
+  100% {transform: scale(0);opacity: 1;}
+}
+
+@-moz-keyframes pulse {
+  0% {transform: scale(0); opacity: 1;}
+  35% {transform: scale(1);}
+  70% {transform: scale(0);opacity: 1;}
+  100% {transform: scale(0);opacity: 1;}
+}
+
+@-ms-keyframes pulse {
+  0% {transform: scale(0); opacity: 1;}
+  35% {transform: scale(1);}
+  70% {transform: scale(0);opacity: 1;}
+  100% {transform: scale(0);opacity: 1;}
+}
+
+@-o-keyframes pulse {
+  0% {transform: scale(0); opacity: 1;}
+  35% {transform: scale(1);}
+  70% {transform: scale(0);opacity: 1;}
+  100% {transform: scale(0);opacity: 1;}
+}

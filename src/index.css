@@ -1,8 +1,31 @@
 body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow: hidden;
   font-family: 'Roboto';
   background: #030111;
   color: white;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgb(50, 50, 50, 0.5);
+}
+
+::-webkit-scrollbar-track:hover {
+    background: rgb(50, 50, 50);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #f7f7f7;
+    border-radius: 12px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ff9a9a;
 }

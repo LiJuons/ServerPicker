@@ -1,12 +1,12 @@
+
 .server-list-container {
   width: 100%;
   text-align: center;
-  border: white 1px solid;
 }
 
 .list-item-box {
   position: static;
-  width: 100%;
+  width: 50%;
   height: 20px;
   border-top: 1px dotted grey;
   padding: 10px 30px;
@@ -16,36 +16,4 @@ th {
   padding-top: 15px;
   padding-bottom: 25px;
   font-size: 18px;
-}
-
-select {
-  text-align: center;
-  justify-content: center;
-  border-radius: 12px;
-  outline: none;
-  font-size: 16px;
-  padding: 2px;
-  text-align-last:center;
-  margin: 20px;
-}
-
-.protocols {
-  height: 20px;
-}
-
-.protocolsShow {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  width: 350px;
-}
-
-.protocolsShow:hover {
-  position: absolute;
-  margin-top: -8px;
-  overflow: visible;
-  white-space: normal;
-  width: 350px;
-  height: 38px;
-  background: rgba(40, 6, 38, 0.95);
 }

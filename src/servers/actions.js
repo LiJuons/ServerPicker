@@ -26,39 +26,55 @@ export const getServersFailure = (error) => ({
   }
 )
 
+export const filterServersSuccess = (filteredServers) => ({
+    type: types.FILTER_SERVERS,
+    payload: {
+      filteredServers: filteredServers
+    }
+  }
+)
+
 export const getServers = () => {
   return dispatch => {
       dispatch(getServersRequest());
 
       if (!!sessionStorage.getItem('servers')) {
-        console.log(JSON.parse(sessionStorage.getItem('servers'))[0]);
         dispatch(
           getServersSuccess(JSON.parse(sessionStorage.getItem('servers')))
         );
       }
-
-      const url = 'https://allorigins.me/get?url=' + encodeURIComponent('https://api.nordvpn.com/server') + '&callback=?';
-
-      $.getJSON(url)
-      .done((data) => {
-      	let serverList = JSON.parse(data.contents);
-        sessionStorage.setItem('servers', JSON.stringify(serverList));
-        dispatch(getServersSuccess(serverList));
-      })
-      .fail((error) => {
-        console.log(error);
-        dispatch(getServersFailure(error));
-        alert("Failed to fetch the servers.");
-      });
-
+      else {
+        dispatch(apiCall());
+      }
     }
 }
 
-export const filterServers = (servers, country) => {
+export const apiCall = () => {
   return dispatch => {
+    const url = 'https://allorigins.me/get?url=' + encodeURIComponent('https://api.nordvpn.com/server') + '&callback=?';
+
     dispatch(getServersRequest());
 
+    $.getJSON(url)
+    .done((data) => {
+      let serverList = JSON.parse(data.contents);
+      sessionStorage.setItem('servers', JSON.stringify(serverList));
+      dispatch(getServersSuccess(serverList));
+    })
+    .fail((error) => {
+      console.log(error);
+      dispatch(getServersFailure(error));
+      alert("Failed to fetch the servers.\nPlease try refreshing the page.");
+    });
+  }
+}
+
+export const filterServers = (country) => {
+  return dispatch => {
+    const servers = JSON.parse(sessionStorage.getItem('servers'));
     let filteredServers = [];
+
+    dispatch(getServersRequest());
 
     servers.forEach(server => {
       if (server.name.includes(country)){
@@ -69,11 +85,3 @@ export const filterServers = (servers, country) => {
     dispatch(filterServersSuccess(filteredServers));
   }
 }
-
-export const filterServersSuccess = (filteredServers) => ({
-    type: types.FILTER_SERVERS,
-    payload: {
-      filteredServers: filteredServers
-    }
-  }
-)
