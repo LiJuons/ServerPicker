@@ -88,6 +88,7 @@ export const filterServers = (country) => {
       dispatch(filterServersSuccess(filteredServers));
     }
     else {
+      alert("STOP");
       dispatch(getServersFailure("Please wait until servers are fully fetched. Then try again."));
     }
 

@@ -17,7 +17,7 @@ class ServersPage extends Component {
 
   render() {
     const { filterServers, filteredServers, servers, isFetching } = this.props;
-    console.log(isFetching)
+    
     return (
       <div className={isFetching ? "page-container loading" : "page-container"}>
 
