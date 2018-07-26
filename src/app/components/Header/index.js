@@ -36,6 +36,7 @@ class Header extends Component {
             id="country"
             value={selectValue}
             onChange={this.handleChange}
+            disabled={this.props.disableFilter}
           >
             {
               country_list.map(country =>

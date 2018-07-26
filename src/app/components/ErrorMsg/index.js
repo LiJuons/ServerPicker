@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ErrorMsg = (props) => (
-  <div>
+  <div style={{ margin: 20 }}>
     {props.message}
   </div>
 );

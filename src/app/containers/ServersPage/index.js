@@ -7,7 +7,6 @@ import './ServersPage.css';
 class ServersPage extends Component {
 
   refreshServers = () => {
-    console.log("Server Refresh in process.");
     this.props.refreshServers();
   }
 

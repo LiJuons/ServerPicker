@@ -36,9 +36,10 @@ export const filterServersSuccess = (filteredServers) => ({
 
 export const getServers = () => {
   return dispatch => {
-      dispatch(getServersRequest());
 
       if (!!sessionStorage.getItem('servers')) {
+        dispatch(getServersRequest());
+
         dispatch(
           getServersSuccess(JSON.parse(sessionStorage.getItem('servers')))
         );
@@ -62,9 +63,7 @@ export const apiCall = () => {
       dispatch(getServersSuccess(serverList));
     })
     .fail((error) => {
-      console.log(error);
-      dispatch(getServersFailure(error));
-      alert("Failed to fetch the servers.\nPlease try refreshing the page.");
+      dispatch(getServersFailure("Failed to fetch the servers.\nPlease try refreshing the page."));
     });
   }
 }
@@ -88,8 +87,8 @@ export const filterServers = (country) => {
       dispatch(filterServersSuccess(filteredServers));
     }
     else {
-      alert("STOP");
-      dispatch(getServersFailure("Please wait until servers are fully fetched. Then try again."));
+      alert("Too soon!");
+      dispatch(getServersFailure("Servers were not fully fetched yet. Please choose the country again."));
     }
 
   }

@@ -8,12 +8,15 @@ import './App.css';
 
 class App extends Component {
   render() {
+    const { refreshServers, filterServers, isFetching } = this.props;
+
     return (
       <div className="App">
 
         <Header
-          refreshFunc={this.props.refreshServers}
-          filterFunc={this.props.filterServers}
+          refreshFunc={refreshServers}
+          filterFunc={filterServers}
+          disableFilter={isFetching}
         />
 
         <Switch>
