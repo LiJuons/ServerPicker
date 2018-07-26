@@ -71,17 +71,25 @@ export const apiCall = () => {
 
 export const filterServers = (country) => {
   return dispatch => {
-    const servers = JSON.parse(sessionStorage.getItem('servers'));
-    let filteredServers = [];
 
-    dispatch(getServersRequest());
+    if (!!sessionStorage.getItem('servers')) {
 
-    servers.forEach(server => {
-      if (server.name.includes(country)){
-        filteredServers.push(server);
-      }
-    })
+      const servers = JSON.parse(sessionStorage.getItem('servers'));
+      let filteredServers = [];
 
-    dispatch(filterServersSuccess(filteredServers));
+      dispatch(getServersRequest());
+
+      servers.forEach(server => {
+        if (server.name.includes(country)){
+          filteredServers.push(server);
+        }
+      })
+
+      dispatch(filterServersSuccess(filteredServers));
+    }
+    else {
+      dispatch(getServersFailure("Please wait until servers are fully fetched. Then try again."));
+    }
+
   }
 }

@@ -11,9 +11,13 @@ class Header extends Component {
   }
 
   handleChange = (e) => {
-    this.setState({selectValue:e.target.value});
-    console.log(e.target.value);
-    this.props.filterFunc(e.target.value);
+    if (!this.props.isFetching) {
+      this.setState({selectValue:e.target.value});
+      this.props.filterFunc(e.target.value);
+    }
+    else {
+      alert("Servers are still being fetched. \nPlease wait a few seconds.")
+    }
   }
 
   serversRefresh = () => {
