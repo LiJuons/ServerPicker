@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import servers from '../../../servers';
-import { ServerList, Spinner } from '../../components';
+import { ErrorMsg, ServerList, Spinner } from '../../components';
 import './ServersPage.css';
 
 class ServersPage extends Component {
@@ -16,17 +16,22 @@ class ServersPage extends Component {
   }
 
   render() {
-    const { filterServers, filteredServers, servers, isFetching } = this.props;
-    
+    const { filterServers, filteredServers, servers, isFetching, fetchError } = this.props;
+
     return (
       <div className={isFetching ? "page-container loading" : "page-container"}>
 
         <div className="emptyDiv"></div>
 
         {
-          isFetching ?
-          <Spinner />
-          :
+          isFetching ? //if Fetching show spinner, else...
+
+          <Spinner /> :
+
+          !!fetchError ? //if error, show message, else...
+
+          <ErrorMsg message={fetchError} /> :
+
           <ServerList filterFunc={filterServers} servers={servers} filteredServers={JSON.stringify(filteredServers)} />
         }
 
@@ -39,7 +44,7 @@ const mapStateToProps = state => ({
     isFetching: servers.selectors.isFetching(state),
     servers: servers.selectors.getServers(state),
     filteredServers: servers.selectors.getFilteredServers(state),
-    error: servers.selectors.getError(state)
+    fetchError: servers.selectors.getError(state)
 });
 
 const mapActionsToProps = {

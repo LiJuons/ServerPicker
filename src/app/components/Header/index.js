@@ -11,13 +11,8 @@ class Header extends Component {
   }
 
   handleChange = (e) => {
-    if (!this.props.isFetching) {
-      this.setState({selectValue:e.target.value});
-      this.props.filterFunc(e.target.value);
-    }
-    else {
-      alert("Servers are still being fetched. \nPlease wait a few seconds.")
-    }
+    this.setState({selectValue:e.target.value});
+    this.props.filterFunc(e.target.value);
   }
 
   serversRefresh = () => {
@@ -41,7 +36,6 @@ class Header extends Component {
             id="country"
             value={selectValue}
             onChange={this.handleChange}
-            disabled={ this.props.isFetching ? true : false }
           >
             {
               country_list.map(country =>
