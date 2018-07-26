@@ -7,12 +7,6 @@ class ServerList extends Component {
     serverList: []
   }
 
-  handleChange = (e) => {
-    this.setState({selectValue:e.target.value});
-    console.log(e.target.value);
-    this.props.filterFunc(this.props.servers, e.target.value);
-  }
-
   componentWillReceiveProps(newProps) {
     this.setState({ serverList: JSON.parse(newProps.filteredServers) })
   }

@@ -6,16 +6,12 @@ import './ServersPage.css';
 
 class ServersPage extends Component {
 
-  refreshServers = () => {
-    this.props.refreshServers();
-  }
-
   componentWillMount() {
     this.props.getServers();
   }
 
   render() {
-    const { filterServers, filteredServers, servers, isFetching, fetchError } = this.props;
+    const { filteredServers, servers, isFetching, fetchError } = this.props;
 
     return (
       <div className={isFetching ? "page-container loading" : "page-container"}>
@@ -31,7 +27,7 @@ class ServersPage extends Component {
 
           <ErrorMsg message={fetchError} /> :
 
-          <ServerList filterFunc={filterServers} servers={servers} filteredServers={JSON.stringify(filteredServers)} />
+          <ServerList servers={servers} filteredServers={JSON.stringify(filteredServers)} />
         }
 
       </div>
@@ -47,9 +43,7 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
-  refreshServers: servers.actions.apiCall,
-  getServers: servers.actions.getServers,
-  filterServers: servers.actions.filterServers
+  getServers: servers.actions.getServers
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(ServersPage);

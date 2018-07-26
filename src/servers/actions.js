@@ -37,11 +37,11 @@ export const filterServersSuccess = (filteredServers) => ({
 export const getServers = () => {
   return dispatch => {
 
-      if (!!sessionStorage.getItem('servers')) {
+      if (!!localStorage.getItem('servers')) {
         dispatch(getServersRequest());
 
         dispatch(
-          getServersSuccess(JSON.parse(sessionStorage.getItem('servers')))
+          getServersSuccess(JSON.parse(localStorage.getItem('servers')))
         );
       }
       else {
@@ -59,7 +59,7 @@ export const apiCall = () => {
     $.getJSON(url)
     .done((data) => {
       let serverList = JSON.parse(data.contents);
-      sessionStorage.setItem('servers', JSON.stringify(serverList));
+      localStorage.setItem('servers', JSON.stringify(serverList));
       dispatch(getServersSuccess(serverList));
     })
     .fail((error) => {
@@ -71,9 +71,9 @@ export const apiCall = () => {
 export const filterServers = (country) => {
   return dispatch => {
 
-    if (!!sessionStorage.getItem('servers')) {
+    if (!!localStorage.getItem('servers')) {
 
-      const servers = JSON.parse(sessionStorage.getItem('servers'));
+      const servers = JSON.parse(localStorage.getItem('servers'));
       let filteredServers = [];
 
       dispatch(getServersRequest());
