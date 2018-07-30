@@ -1,9 +1,18 @@
 
+#fillingDiv {
+  position: absolute;
+  right: -6px;
+  width: 6px;
+  height: 100px;
+  background: rgba(53, 69, 77, 0.75);
+  z-index: -1;
+}
+
 .navBar {
   position: absolute;
   top: 0;
   height: 100px;
-  width: 99.5%;
+  width: calc(100% - 6px);
   background: rgba(53, 69, 77, 0.75);
   color: white;
   margin-right: 0px;
@@ -16,7 +25,7 @@
 
 .navBar-item-right {
   float: right;
-  margin-right: 50px;
+  margin-right: 20px;
 }
 
 select {
@@ -31,7 +40,7 @@ select {
 }
 
 #nb-country {
-  margin: 30px 10px 0 50px;
+  margin: 30px 10px 0 30px;
 }
 
 #nb-refresh {
@@ -59,4 +68,21 @@ select {
 #nb-refresh:disabled {
   background-color: #884620;
   border: 2px solid #59615c;
+}
+
+#searchBoxName {
+  margin: 30px 10px 0 30px;
+  font-size: 28px;
+}
+
+#searchBox {
+  margin: 34px 0 0 0;
+  padding: 4px 0;
+  width: 180px;
+  border-radius: 12px;
+  outline: none;
+  text-align: center;
+  text-align-last:center;
+  justify-content: center;
+  font-size: 16px;
 }

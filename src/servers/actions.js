@@ -5,6 +5,14 @@ export const clearServers = () => ({
   type: types.CLEAR_SERVERS
 })
 
+export const searchServers = (searchValue) => ({
+    type: types.SEARCH_SERVERS,
+    payload: {
+      searchValue
+    }
+  }
+)
+
 export const getServersRequest = () => ({
     type: types.GET_SERVERS_REQUEST,
   }
@@ -13,7 +21,7 @@ export const getServersRequest = () => ({
 export const getServersSuccess = (servers) => ({
     type: types.GET_SERVERS_SUCCESS,
     payload: {
-      servers: servers
+      servers
     }
   }
 )
@@ -21,7 +29,7 @@ export const getServersSuccess = (servers) => ({
 export const getServersFailure = (error) => ({
     type: types.GET_SERVERS_FAILURE,
     payload: {
-      error: error
+      error
     }
   }
 )
@@ -29,7 +37,7 @@ export const getServersFailure = (error) => ({
 export const filterServersSuccess = (filteredServers) => ({
     type: types.FILTER_SERVERS,
     payload: {
-      filteredServers: filteredServers
+      filteredServers
     }
   }
 )

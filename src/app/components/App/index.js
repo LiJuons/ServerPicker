@@ -8,14 +8,15 @@ import './App.css';
 
 class App extends Component {
   render() {
-    const { refreshServers, filterServers, isFetching } = this.props;
+    const { refreshServers, filterServers, isFetching, searchServers } = this.props;
 
     return (
       <div className="App">
 
         <Header
-          refreshFunc={refreshServers}
           filterFunc={filterServers}
+          refreshFunc={refreshServers}
+          searchFunc={searchServers}
           disableFilter={isFetching}
         />
 
@@ -37,9 +38,10 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
+  filterServers: servers.actions.filterServers,
   refreshServers: servers.actions.apiCall,
   getServers: servers.actions.getServers,
-  filterServers: servers.actions.filterServers
+  searchServers: servers.actions.searchServers
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(App);

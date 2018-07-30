@@ -5,10 +5,9 @@
 }
 
 .list-item-box {
-  position: static;
-  width: 50%;
+  width: 20%;
   height: 20px;
-  border-top: 1px dotted grey;
+  border-top: 1.2px dotted #28333d;
   padding: 10px 30px;
 }
 
@@ -16,4 +15,24 @@ th {
   padding-top: 15px;
   padding-bottom: 25px;
   font-size: 18px;
+}
+
+#sname {
+  min-width: 300px;
+}
+
+#sdomain {
+  min-width: 200px;
+}
+
+#sipaddr {
+  min-width: 200px;
+}
+
+#sload {
+  min-width: 100px;
+}
+
+#sproto {
+  min-width: 500px;
 }

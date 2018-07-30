@@ -7,12 +7,23 @@ class Header extends Component {
 
   state = {
     selectValue: '---',
+    searchValue: '',
     refreshed: false
   }
 
-  handleChange = (e) => {
+  handleChangeSelect = (e) => {
     this.setState({selectValue:e.target.value});
     this.props.filterFunc(e.target.value);
+  }
+
+  handleChangeSearch = (e) => {
+    this.setState({searchValue:e.target.value});
+  }
+
+  handleSearch = (e) => {
+    if (e.keyCode === 13) {
+      this.props.searchFunc(this.state.searchValue);
+    }
   }
 
   serversRefresh = () => {
@@ -24,10 +35,14 @@ class Header extends Component {
   }
 
   render() {
-    const { selectValue, refreshed } = this.state;
+    const { selectValue, searchValue, refreshed } = this.state;
 
     return (
       <div className="navBar">
+
+        <div id="fillingDiv"></div>
+
+
 
         <div className="navBar-item-left" id="nb-country">Country:</div>
 
@@ -35,7 +50,7 @@ class Header extends Component {
           <select
             id="country"
             value={selectValue}
-            onChange={this.handleChange}
+            onChange={this.handleChangeSelect}
             disabled={this.props.disableFilter}
           >
             {
@@ -46,11 +61,29 @@ class Header extends Component {
           </select>
         </div>
 
+
+
         <div className="navBar-item-right">
-
           <RefreshButton serversRefresh={this.serversRefresh} refreshed={refreshed} />
-
         </div>
+
+
+
+        <div className="navBar-item-right" >
+          <input type="text"
+            name=""
+            value={searchValue}
+            onChange={this.handleChangeSearch}
+            onKeyUp={this.handleSearch}
+            disabled={this.props.disableFilter}
+            id="searchBox"
+          />
+        </div>
+
+        <div className="navBar-item-right" id="searchBoxName">
+          Search:
+        </div>
+
 
       </div>
     );

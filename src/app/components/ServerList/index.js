@@ -27,7 +27,7 @@ class ServerList extends Component {
             <tbody>
               <tr>
 
-                  <td>
+                  <td id="sname">
                     <table>
                       <tbody>
                       <tr><th>
@@ -44,7 +44,7 @@ class ServerList extends Component {
                     </table>
                   </td>
 
-                  <td>
+                  <td id="sdomain">
                     <table>
                       <tbody>
                       <tr><th>Domain</th></tr>
@@ -59,7 +59,7 @@ class ServerList extends Component {
                     </table>
                   </td>
 
-                  <td>
+                  <td  id="sipaddr">
                     <table>
                       <tbody>
                       <tr><th>IP Address</th></tr>
@@ -74,7 +74,7 @@ class ServerList extends Component {
                     </table>
                   </td>
 
-                  <td>
+                  <td  id="sload">
                     <table>
                       <tbody>
                       <tr><th>Load</th></tr>
@@ -90,7 +90,7 @@ class ServerList extends Component {
                     </table>
                   </td>
 
-                  <td>
+                  <td  id="sproto">
                     <table>
                       <tbody>
                       <tr><th>Supported Protocols</th></tr>
