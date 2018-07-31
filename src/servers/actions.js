@@ -76,21 +76,32 @@ export const apiCall = () => {
   }
 }
 
-export const filterServers = (country) => {
+export const filterServers = (searchValue) => {
   return dispatch => {
+
+    dispatch(getServersRequest());
 
     if (!!localStorage.getItem('servers')) {
 
       const servers = JSON.parse(localStorage.getItem('servers'));
       let filteredServers = [];
+      searchValue = searchValue.toUpperCase();
 
-      dispatch(getServersRequest());
+      // servers.forEach(server => {
+      //   if (server.name.includes(country)){
+      //     filteredServers.push(server);
+      //   }
+      // })
 
       servers.forEach(server => {
-        if (server.name.includes(country)){
+        if (
+            (server.name.toUpperCase().includes(searchValue)) ||
+            (server.domain.toUpperCase().includes(searchValue)) ||
+            (server.ip_address.includes(searchValue))
+          ){
           filteredServers.push(server);
         }
-      })
+      });
 
       dispatch(filterServersSuccess(filteredServers));
     }

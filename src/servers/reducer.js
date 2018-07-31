@@ -23,29 +23,10 @@ export default function serverReducer(state = INITIAL_STATE_SERVERS, { type, pay
     case types.FILTER_SERVERS:
           return Immutable.merge(state, {filteredServers: payload.filteredServers, error: false, isFetching: false});
     case types.SEARCH_SERVERS:
-          return searchServers(state, payload.searchValue);
+          return Immutable.merge(state, {error: false, isFetching: false});
     case types.CLEAR_SERVERS:
           return Immutable.merge(state, {servers: []});
     default:
           return state;
   }
 };
-
-const searchServers = (state, searchValue) => {
-
-  let filteredServers = [];
-
-  if (!!localStorage.getItem('servers')) {
-
-    const servers = JSON.parse(localStorage.getItem('servers'));
-
-    servers.forEach(server => {
-      if (server.name.toUpperCase().includes(searchValue.toUpperCase())){
-        filteredServers.push(server);
-      }
-    })
-
-  }
-
-  return Immutable.merge(state, {filteredServers: filteredServers, error: false, isFetching: false});
-}

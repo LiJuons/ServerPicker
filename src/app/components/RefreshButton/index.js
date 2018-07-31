@@ -32,24 +32,44 @@ class RefreshButton extends Component {
       seconds: seconds,
     });
 
+    if ((seconds % 5 === 0)||(seconds > 295)) {
+      localStorage.setItem('seconds', seconds);
+    }
+
     if (seconds === 0) {
       clearInterval(this.timer);
       this.timer = 0;
       this.setState({
         seconds: 300
       });
+      localStorage.removeItem('seconds');
+      this.props.reactivation();
     }
   }
 
   refreshFunc = () => {
     if (this.timer === 0) {
-      this.props.serversRefresh();
       this.timer = setInterval(this.countDown, 1000);
+      localStorage.setItem('seconds', 300);
+      this.props.serversRefresh();
     }
   }
 
   componentDidMount() {
-    let timeLeftVar = this.secondsToTime(this.state.seconds);
+    let cookyTime = localStorage.getItem('seconds');
+    cookyTime = (cookyTime > 5) ? cookyTime : false;
+
+    if (cookyTime!==false) {
+      this.timer = setInterval(this.countDown, 1000);
+      this.setState({seconds: localStorage.getItem('seconds')});
+    }
+    else {
+      clearInterval(this.timer);
+    }
+
+    let timeLeftVar = this.secondsToTime(
+      cookyTime ? cookyTime : this.state.seconds
+    );
     this.setState({ time: timeLeftVar });
   }
 

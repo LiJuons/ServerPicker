@@ -22,16 +22,29 @@ class Header extends Component {
 
   handleSearch = (e) => {
     if (e.keyCode === 13) {
-      this.props.searchFunc(this.state.searchValue);
+      //this.props.searchFunc(this.state.searchValue);
+
+      this.props.filterFunc(this.state.searchValue);
     }
   }
 
   serversRefresh = () => {
     this.props.refreshFunc();
-    this.setState({selectValue: '---', refreshed: true});
+    this.setState({selectValue: '---', searchValue: '', refreshed: true});
+
     setTimeout(() => {
       this.setState({refreshed: false});
-    }, 300000) //disable refresh for 5 minutes
+    }, localStorage.getItem('seconds')*1000); //disable refresh for 5 minutes
+  }
+
+  reactivateButton = () => {
+    this.setState({refreshed: false});
+  }
+
+  componentDidMount() {
+    if(localStorage.getItem('seconds')>5){
+      this.setState({refreshed: true});
+    }
   }
 
   render() {
@@ -42,11 +55,30 @@ class Header extends Component {
 
         <div id="fillingDiv"></div>
 
+        <div className="navBar-item-left" >
+          <input type="text"
+            value={searchValue}
+            autoFocus
+            autofocus='true'
+            placeholder="Search..."
+            onChange={this.handleChangeSearch}
+            onKeyUp={this.handleSearch}
+            onClick={()=>{this.setState({searchValue: ''})}}
+            disabled={this.props.disableFilter}
+            id="searchBox"
+          />
+        </div>
 
 
-        <div className="navBar-item-left" id="nb-country">Country:</div>
+        <div className="navBar-item-right">
+          <RefreshButton
+            serversRefresh={this.serversRefresh}
+            reactivation={this.reactivateButton}
+            refreshed={refreshed}
+          />
+        </div>
 
-        <div className="navBar-item-left">
+        {/* <div className="navBar-item-right">
           <select
             id="country"
             value={selectValue}
@@ -61,29 +93,11 @@ class Header extends Component {
           </select>
         </div>
 
-
-
-        <div className="navBar-item-right">
-          <RefreshButton serversRefresh={this.serversRefresh} refreshed={refreshed} />
-        </div>
-
-
-
-        <div className="navBar-item-right" >
-          <input type="text"
-            name=""
-            value={searchValue}
-            onChange={this.handleChangeSearch}
-            onKeyUp={this.handleSearch}
-            disabled={this.props.disableFilter}
-            id="searchBox"
-          />
-        </div>
+        <div className="navBar-item-right" id="nb-country">Country:</div>
 
         <div className="navBar-item-right" id="searchBoxName">
           Search:
-        </div>
-
+        </div> */}
 
       </div>
     );
