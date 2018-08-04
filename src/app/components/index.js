@@ -1,4 +1,4 @@
-export { default as App } from './App';
+export { default as AuthDialog } from './AuthDialog';
 export { default as ErrorMsg } from './ErrorMsg';
 export { default as Header } from './Header';
 export { default as RefreshButton } from './RefreshButton';

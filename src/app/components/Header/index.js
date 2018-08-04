@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import country_list from '../../../assets/countryList';
+//import country_list from '../../../assets/countryList';
 import { RefreshButton } from '../';
+import logoutIco from '../../../assets/logout.png';
 import './Header.css';
 
 class Header extends Component {
@@ -22,8 +23,6 @@ class Header extends Component {
 
   handleSearch = (e) => {
     if (e.keyCode === 13) {
-      //this.props.searchFunc(this.state.searchValue);
-
       this.props.filterFunc(this.state.searchValue);
     }
   }
@@ -48,7 +47,7 @@ class Header extends Component {
   }
 
   render() {
-    const { selectValue, searchValue, refreshed } = this.state;
+    const { searchValue, refreshed } = this.state;
 
     return (
       <div className="navBar">
@@ -59,7 +58,6 @@ class Header extends Component {
           <input type="text"
             value={searchValue}
             autoFocus
-            autofocus='true'
             placeholder="Search..."
             onChange={this.handleChangeSearch}
             onKeyUp={this.handleSearch}
@@ -69,6 +67,9 @@ class Header extends Component {
           />
         </div>
 
+        <div className="navBar-item-right">
+          <img src={logoutIco} alt="Logout Icon" onClick={this.props.logout} id="logoutIco" />
+        </div>
 
         <div className="navBar-item-right">
           <RefreshButton

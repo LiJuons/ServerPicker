@@ -81,3 +81,11 @@ select {
   font-style: italic;
   color: #b1b1b1;
 }
+
+#logoutIco {
+  cursor: pointer;
+  width: 60px;
+  height: auto;
+  margin-top: 20px;
+  border-radius: 72px;
+}
