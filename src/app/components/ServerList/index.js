@@ -3,7 +3,6 @@ import './ServerList.css'
 
 class ServerList extends Component {
   state = {
-    selectValue: '---',
     serverList: []
   }
 
@@ -31,7 +30,7 @@ class ServerList extends Component {
                     <table>
                       <tbody>
                       <tr><th>
-                        Server Name
+                        Server Name ({serverList.length})
                       </th></tr>
 
                       {

@@ -76,35 +76,140 @@ export const apiCall = () => {
   }
 }
 
-export const filterServers = (searchValue) => {
+export const filterServers = (state, searchType) => {
   return dispatch => {
 
-    dispatch(getServersRequest());
+      const { searchValue, selectCountry, selectProtocol, selectObfs } = state;
 
-    if (!!localStorage.getItem('servers')) {
+      dispatch(getServersRequest());
 
-      const servers = JSON.parse(localStorage.getItem('servers'));
-      let filteredServers = [];
-      searchValue = searchValue.toUpperCase();
+      if (!!localStorage.getItem('servers')) {
 
-      // servers.forEach(server => {
-      //   if (server.name.includes(country)){
-      //     filteredServers.push(server);
-      //   }
-      // })
+        const servers = JSON.parse(localStorage.getItem('servers'));
+        let filteredServers = [];
 
-      servers.forEach(server => {
-        if (
-            (server.name.toUpperCase().includes(searchValue)) ||
-            (server.domain.toUpperCase().includes(searchValue)) ||
-            (server.ip_address.includes(searchValue))
-          ){
-          filteredServers.push(server);
+        if (searchType === 'filter') //If filter search
+        {
+          if ( (selectCountry !== '---') && (selectProtocol !== '---') ) {
+            //Search by Country, Protocol and XOR
+            servers.forEach(server => {
+
+              if ( server.country.toUpperCase().includes(selectCountry.toUpperCase()) ){
+
+                if ( selectObfs === false ) {
+                  // if XOR OFF
+                  Object.entries(server.features).forEach(e => {
+                    if (e[0].toUpperCase().includes(selectProtocol.toUpperCase()) && e[1])
+                      filteredServers.push(server);
+                  });
+                }
+
+                else {
+                  // if XOR ON
+                  Object.entries(server.features).forEach(e => {
+                    if (e[0].toUpperCase().includes('OPENVPN_XOR_TCP') && e[1]){
+                      filteredServers.push(server);
+                    }
+                  })
+                }
+              }
+            });
+          }
+
+          if ( (selectCountry !== '---') && (selectProtocol === '---') ) {
+            //Search by Country and XOR
+            servers.forEach(server => {
+
+              if ( server.country.toUpperCase().includes(selectCountry.toUpperCase()) ){
+
+                if ( selectObfs === false ) {
+                  // if XOR OFF
+                  Object.entries(server.features).forEach(e => {
+                    if (e[0].toUpperCase().includes('OPENVPN_XOR_TCP') && !e[1]){
+                      filteredServers.push(server);
+                    }
+                  })
+                }
+
+                else {
+                  // if XOR ON
+                  Object.entries(server.features).forEach(e => {
+                    if (e[0].toUpperCase().includes('OPENVPN_XOR_TCP') && e[1]){
+                      filteredServers.push(server);
+                    }
+                  })
+                }
+              }
+            });
+          }
+
+          if ( (selectCountry === '---') && (selectProtocol !== '---') ) {
+            //Search by Protocol and XOR
+            servers.forEach(server => {
+
+                if ( selectObfs === false ) {
+                  // if XOR OFF
+                  Object.entries(server.features).forEach(e => {
+                    if (e[0].toUpperCase().includes(selectProtocol.toUpperCase()) && e[1])
+                      filteredServers.push(server);
+                  });
+                }
+
+                else {
+                  // if XOR ON
+                  Object.entries(server.features).forEach(e => {
+                    if (e[0].toUpperCase().includes('OPENVPN_XOR_TCP') && e[1]){
+                      filteredServers.push(server);
+                    }
+                  })
+                }
+              });
+          }
+
+
+          if ( (selectCountry === '---') && (selectProtocol === '---') ) {
+            //Search by XOR
+            servers.forEach(server => {
+                if ( selectObfs === false ) {
+                  // if XOR OFF
+                  Object.entries(server.features).forEach(e => {
+                    if (e[0].toUpperCase().includes('OPENVPN_XOR_TCP') && !e[1]){
+                      filteredServers.push(server);
+                    }
+                  })
+                }
+
+                else {
+                  // if XOR ON
+                  Object.entries(server.features).forEach(e => {
+                    if (e[0].toUpperCase().includes('OPENVPN_XOR_TCP') && e[1]){
+                      filteredServers.push(server);
+                    }
+                  })
+                }
+            });
+          }
         }
-      });
 
-      dispatch(filterServersSuccess(filteredServers));
+        else if (searchType === 'search' && searchValue.length > 0)
+        {
+          let searchVal = searchValue.toUpperCase();
+
+          servers.forEach(server => {
+            if (
+                (server.name.toUpperCase().includes(searchVal)) ||
+                (server.domain.toUpperCase().includes(searchVal)) ||
+                (server.ip_address.includes(searchVal))
+              ){
+              filteredServers.push(server);
+            }
+          });
+        }
+
+        dispatch(filterServersSuccess(filteredServers));
+
     }
+
     else {
       alert("Too soon!");
       dispatch(getServersFailure("Servers were not fully fetched yet. Please choose the country again."));
