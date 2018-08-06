@@ -37,7 +37,7 @@ class Header extends Component {
 
   serversRefresh = () => {
     this.props.refreshFunc();
-    this.setState({ selectCountry: '---', selectProtocol: '', searchValue: '', selectObfs: null, refreshed: true });
+    this.setState({ selectCountry: '---', selectProtocol: '---', searchValue: '', selectObfs: false, refreshed: true });
 
     setTimeout(() => {
       this.setState({refreshed: false});

@@ -101,6 +101,7 @@ export const filterServers = (state, searchType) => {
                   Object.entries(server.features).forEach(e => {
                     if (e[0].toUpperCase().includes(selectProtocol.toUpperCase()) && e[1])
                       filteredServers.push(server);
+                      return;
                   });
                 }
 
@@ -109,6 +110,7 @@ export const filterServers = (state, searchType) => {
                   Object.entries(server.features).forEach(e => {
                     if (e[0].toUpperCase().includes('OPENVPN_XOR_TCP') && e[1]){
                       filteredServers.push(server);
+                      return;
                     }
                   })
                 }
@@ -127,6 +129,7 @@ export const filterServers = (state, searchType) => {
                   Object.entries(server.features).forEach(e => {
                     if (e[0].toUpperCase().includes('OPENVPN_XOR_TCP') && !e[1]){
                       filteredServers.push(server);
+                      return;
                     }
                   })
                 }
@@ -136,6 +139,7 @@ export const filterServers = (state, searchType) => {
                   Object.entries(server.features).forEach(e => {
                     if (e[0].toUpperCase().includes('OPENVPN_XOR_TCP') && e[1]){
                       filteredServers.push(server);
+                      return;
                     }
                   })
                 }
@@ -152,6 +156,7 @@ export const filterServers = (state, searchType) => {
                   Object.entries(server.features).forEach(e => {
                     if (e[0].toUpperCase().includes(selectProtocol.toUpperCase()) && e[1])
                       filteredServers.push(server);
+                      return;
                   });
                 }
 
@@ -160,6 +165,7 @@ export const filterServers = (state, searchType) => {
                   Object.entries(server.features).forEach(e => {
                     if (e[0].toUpperCase().includes('OPENVPN_XOR_TCP') && e[1]){
                       filteredServers.push(server);
+                      return;
                     }
                   })
                 }
@@ -175,6 +181,7 @@ export const filterServers = (state, searchType) => {
                   Object.entries(server.features).forEach(e => {
                     if (e[0].toUpperCase().includes('OPENVPN_XOR_TCP') && !e[1]){
                       filteredServers.push(server);
+                      return;
                     }
                   })
                 }
@@ -184,6 +191,7 @@ export const filterServers = (state, searchType) => {
                   Object.entries(server.features).forEach(e => {
                     if (e[0].toUpperCase().includes('OPENVPN_XOR_TCP') && e[1]){
                       filteredServers.push(server);
+                      return;
                     }
                   })
                 }
@@ -202,6 +210,7 @@ export const filterServers = (state, searchType) => {
                 (server.ip_address.includes(searchVal))
               ){
               filteredServers.push(server);
+              return;
             }
           });
         }

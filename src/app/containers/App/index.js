@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import servers from '../../../servers';
+import auth from '../../../auth';
 import { ServersPage } from '../';
 import { Header, AuthDialog } from '../../components';
 import fire from '../../../config/firebase';
@@ -34,12 +35,15 @@ class App extends Component {
   }
 
   handleAuth = (username, password) => {
+    this.props.authRequest();
+
     fire.auth().signInWithEmailAndPassword(username, password)
       .then((response)=>{
-        this.setState({ showDialog: false });
+        this.setState({ showDialog: false }, ()=> {this.props.authSuccess()});
       })
       .catch((error) => {
         alert(error);
+        this.props.authFailure();
       });
   }
 
@@ -57,7 +61,7 @@ class App extends Component {
   }
 
   render() {
-    const { refreshServers, filterServers, isFetching, searchServers } = this.props;
+    const { refreshServers, filterServers, isFetching, searchServers, authProcStatus } = this.props;
 
     return (
       <div className="App">
@@ -87,6 +91,7 @@ class App extends Component {
               openModal={this.openModal}
               closeModal={this.closeModal}
               handleAuth={this.handleAuth}
+              authProcStatus={authProcStatus}
             />
         }
 
@@ -99,14 +104,19 @@ const mapStateToProps = state => ({
     isFetching: servers.selectors.isFetching(state),
     servers: servers.selectors.getServers(state),
     filteredServers: servers.selectors.getFilteredServers(state),
-    error: servers.selectors.getError(state)
+    error: servers.selectors.getError(state),
+    authProcStatus: auth.selectors.getAuthProcStatus(state),
 });
 
 const mapActionsToProps = {
   filterServers: servers.actions.filterServers,
   refreshServers: servers.actions.apiCall,
   getServers: servers.actions.getServers,
-  searchServers: servers.actions.searchServers
+  searchServers: servers.actions.searchServers,
+
+  authRequest: auth.actions.authRequest,
+  authSuccess: auth.actions.authSuccess,
+  authFailure: auth.actions.authFailure
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(App);

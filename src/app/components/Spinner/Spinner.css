@@ -1,5 +1,12 @@
 
-.bubbles_container {
+.bubbles_container1 {
+  margin: auto;
+  width: 100px;
+  height: 30px;
+  margin-left: -24px;
+}
+
+.bubbles_container2 {
   margin: auto;
   width: 250px;
   height: 100px;
@@ -7,13 +14,21 @@
 
 .bubbles {
   display:inline-block;
-  height: 15px;
-  width: 15px;
-  margin: 18px 6px;
-
   border-radius: 100%;
   background-color: white;
   opacity: 0;
+}
+
+.bubbles_type1 {
+  height: 8px;
+  width: 8px;
+  margin: 4px 6px;
+}
+
+.bubbles_type2 {
+  height: 15px;
+  width: 15px;
+  margin: 18px 6px;
 }
 
 .bubble_1 {

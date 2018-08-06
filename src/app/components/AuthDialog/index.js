@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Spinner } from '../';
 import './AuthDialog.css';
 
 class AuthDialog extends Component {
@@ -16,6 +17,7 @@ class AuthDialog extends Component {
   }
 
   render() {
+
     return (
       <div>
 
@@ -45,7 +47,9 @@ class AuthDialog extends Component {
                 tabIndex="2"
               />
 
-              <button type="submit" name="submit" onClick={this.preHandleAuth}>Submit</button>
+              <button type="submit" name="submit" onClick={this.preHandleAuth} id="submitBtn" >
+                { this.props.authProcStatus ? <Spinner type={1} /> : "Submit" }
+              </button>
 
             </div>
 

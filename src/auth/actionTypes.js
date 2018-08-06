@@ -1,0 +1,5 @@
+import { NAME } from './constants';
+
+export const AUTH_REQUEST = `${NAME}.REQUEST`;
+export const AUTH_SUCCESS = `${NAME}.SUCCESS`;
+export const AUTH_FAILURE = `${NAME}.FAILURE`;

@@ -1,9 +1,26 @@
 import React, { Component } from 'react';
+import orderBy from 'lodash/orderBy';
 import './ServerList.css'
 
 class ServerList extends Component {
   state = {
-    serverList: []
+    serverList: [],
+    secondClick: ''
+  }
+
+  sortServersBy = (sortKey) => {
+
+    const { serverList } = this.state;
+
+    let sortedServers = (this.state.secondClick === sortKey) ? orderBy(serverList, sortKey, 'desc') : orderBy(serverList, sortKey, 'asc');
+
+    if (this.state.secondClick === sortKey) {
+      this.setState({ serverList: sortedServers, secondClick: '' });
+    }
+    else {
+      this.setState({ serverList: sortedServers, secondClick: sortKey });
+    }
+
   }
 
   componentWillReceiveProps(newProps) {
@@ -29,7 +46,7 @@ class ServerList extends Component {
                   <td id="sname">
                     <table>
                       <tbody>
-                      <tr><th>
+                      <tr><th onClick={() => this.sortServersBy('name')}>
                         Server Name ({serverList.length})
                       </th></tr>
 
@@ -46,7 +63,7 @@ class ServerList extends Component {
                   <td id="sdomain">
                     <table>
                       <tbody>
-                      <tr><th>Domain</th></tr>
+                      <tr><th onClick={() => this.sortServersBy('domain')}>Domain</th></tr>
 
                       {
                         serverList.map(server =>
@@ -61,7 +78,7 @@ class ServerList extends Component {
                   <td  id="sipaddr">
                     <table>
                       <tbody>
-                      <tr><th>IP Address</th></tr>
+                      <tr><th onClick={() => this.sortServersBy('ip_address')}>IP Address</th></tr>
 
                       {
                         serverList.map(server =>
@@ -76,7 +93,7 @@ class ServerList extends Component {
                   <td  id="sload">
                     <table>
                       <tbody>
-                      <tr><th>Load</th></tr>
+                      <tr><th onClick={() => this.sortServersBy('load')}>Load</th></tr>
 
                       {
 
@@ -92,7 +109,7 @@ class ServerList extends Component {
                   <td  id="sproto">
                     <table>
                       <tbody>
-                      <tr><th>Supported Protocols</th></tr>
+                      <tr><th style={{ cursor: 'default' }}>Supported Protocols</th></tr>
 
                       {
                         serverList.map(server =>
