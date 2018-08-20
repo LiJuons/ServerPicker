@@ -61,7 +61,7 @@ export const getServers = () => {
 export const apiCall = () => {
   return dispatch => {
     const API_LINK = process.env.REACT_APP_SECRET_API;
-    console.log(API_LINK.substring(1,5));
+    console.log(API_LINK ? "Works like intended." : "Failure.");
     const url = 'https://allorigins.me/get?url=' + encodeURIComponent(API_LINK) + '&callback=?';
 
     dispatch(getServersRequest());
