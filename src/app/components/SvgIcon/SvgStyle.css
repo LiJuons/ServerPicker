@@ -1,0 +1,45 @@
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.closeBtn {
+  margin-top: 32px;
+  margin-left: 12px;
+  fill: #FFF;
+  cursor: pointer;
+}
+.closeBtn:hover {
+  fill: rgba(255, 0, 0, 0.6);
+}
+
+.logoutBtn {
+  margin-top: 24px;
+  margin-right: -5px;
+  cursor: pointer;
+  fill: none;
+  stroke: white;
+}
+
+.refreshBtn {
+  margin-top: 23px;
+  cursor: pointer;
+  fill: none;
+  stroke: white;
+}
+
+.filterBtn {
+  cursor: pointer;
+  fill: none;
+  stroke: white;
+}
+
+.searchIco {
+  fill: grey;
+  stroke: grey;
+  cursor: pointer;
+}
+
+.logoutBtn:hover, .refreshBtn:hover, .filterBtn:hover {
+  fill: #a10a0f;
+}

@@ -9,7 +9,6 @@ class ServerList extends Component {
   }
 
   sortServersBy = (sortKey) => {
-
     const { serverList } = this.state;
 
     let sortedServers = (this.state.secondClick === sortKey) ? orderBy(serverList, sortKey, 'desc') : orderBy(serverList, sortKey, 'asc');
@@ -20,7 +19,28 @@ class ServerList extends Component {
     else {
       this.setState({ serverList: sortedServers, secondClick: sortKey });
     }
+  }
 
+  getProtocolList = (technologies) => {
+    let theFirst = true;
+    let protocolList = '';
+    Object.entries(technologies).map(e => {
+      if (e[1].pivot.status==="online"){
+        let prot = e[1].name.replace('OpenVPN ','');
+        prot = prot.replace(' Proxy','');
+        prot = prot.replace('Obfuscated','Obfs');
+        if (theFirst) {
+          theFirst = false;
+          return protocolList += prot;
+        } else {
+          return protocolList += ', ' + prot;
+        }
+      } else return null;
+    })
+
+    if (protocolList === '') protocolList = 'No active protocol.';
+
+    return protocolList;
   }
 
   componentWillReceiveProps(newProps) {
@@ -52,7 +72,24 @@ class ServerList extends Component {
 
                       {
                         serverList.map(server =>
-                          <tr key={server.name}><td className="list-item-box" >{server.name}</td></tr>
+                          <tr key={server.id}><td className="list-item-box" style={server.status==='online' ? {} : { color: 'red' }} >{server.name}</td></tr>
+                        )
+                      }
+
+                      </tbody>
+                    </table>
+                  </td>
+
+                  <td id="scity">
+                    <table>
+                      <tbody>
+                      <tr><th onClick={() => this.sortServersBy('locations[0].country.city.name')}>
+                        City
+                      </th></tr>
+
+                      {
+                        serverList.map(server =>
+                          <tr key={server.id}><td className="list-item-box" >{server.locations[0].country.city.name}</td></tr>
                         )
                       }
 
@@ -63,11 +100,11 @@ class ServerList extends Component {
                   <td id="sdomain">
                     <table>
                       <tbody>
-                      <tr><th onClick={() => this.sortServersBy('domain')}>Domain</th></tr>
+                      <tr><th onClick={() => this.sortServersBy('hostname')}>Domain</th></tr>
 
                       {
                         serverList.map(server =>
-                          <tr key={server.domain}><td className="list-item-box" >{server.domain}</td></tr>
+                          <tr key={server.id}><td className="list-item-box" >{server.hostname}</td></tr>
                         )
                       }
 
@@ -78,11 +115,32 @@ class ServerList extends Component {
                   <td  id="sipaddr">
                     <table>
                       <tbody>
-                      <tr><th onClick={() => this.sortServersBy('ip_address')}>IP Address</th></tr>
+                      <tr><th onClick={() => this.sortServersBy('station')}>IP Address</th></tr>
 
                       {
                         serverList.map(server =>
-                          <tr key={server.ip_address}><td className="list-item-box" >{server.ip_address}</td></tr>
+                          <tr key={server.id}><td className="list-item-box" >{
+                            (server.ips.type==="exit") ? server.ips.ip : server.station
+                          }</td></tr>
+                        )
+                      }
+
+                      </tbody>
+                    </table>
+                  </td>
+
+                  <td id="sproto">
+                    <table>
+                      <tbody>
+                      <tr><th style={{ cursor: 'default' }}>Supported Protocols</th></tr>
+
+                      {
+                        serverList.map(server =>
+                          <tr key={server.id} style={{ height: 41.19 }}>
+                            <td className="list-item-box protocol-box" >
+                              { this.getProtocolList(server.technologies) }
+                            </td>
+                          </tr>
                         )
                       }
 
@@ -98,7 +156,7 @@ class ServerList extends Component {
                       {
 
                         serverList.map(server =>
-                          <tr key={server.ip_address}><td className="list-item-box" >{server.load}%</td></tr>
+                          <tr key={server.id}><td className="list-item-box" >{server.load}%</td></tr>
                         )
                       }
 
@@ -106,22 +164,19 @@ class ServerList extends Component {
                     </table>
                   </td>
 
-                  <td  id="sproto">
+                  <td id="sdate">
                     <table>
                       <tbody>
-                      <tr><th style={{ cursor: 'default' }}>Supported Protocols</th></tr>
+                      <tr><th onClick={() => this.sortServersBy('created_at')}>
+                        Date
+                      </th></tr>
 
                       {
                         serverList.map(server =>
-                          <tr key={server.ip_address}><td className="list-item-box" >
-                                {
-                                  Object.entries(server.features).map(e => {
-                                    let prot = e[0].replace('openvpn_','');
-                                    prot = prot.replace('proxy_','');
-                                    return e[1] ? prot + ' ' : '';
-                                  }
-                                  )
-                                }
+                          <tr key={server.id}><td className="list-item-box" >
+                            {
+                              server.created_at.split(' ')[0]
+                            }
                           </td></tr>
                         )
                       }

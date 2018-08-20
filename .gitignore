@@ -8,7 +8,6 @@
 /coverage
 
 # production
-/build
 
 # misc
 .DS_Store
@@ -53,7 +52,6 @@ bower_components
 .lock-wscript
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
 
 # Dependency directories
 node_modules/
@@ -80,6 +78,5 @@ typings/
 # dotenv environment variables file
 .env
 
-# next.js build output
 .next
 >>>>>>> 66240850971bb386c81bdbfe4f3157f64d1213a9

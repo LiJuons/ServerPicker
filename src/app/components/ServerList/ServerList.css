@@ -5,10 +5,10 @@
 }
 
 .list-item-box {
-  width: 20%;
-  height: 20px;
+  width: calc(100% / 7);
+  height: 40px;
   border-top: 1.2px dotted #28333d;
-  padding: 10px 30px;
+  padding: 10px 10px;
 }
 
 th {
@@ -19,7 +19,12 @@ th {
 }
 
 #sname {
-  min-width: 300px;
+  min-width: 200px;
+}
+
+#scity {
+  min-width: 150px;
+  white-space: nowrap;
 }
 
 #sdomain {
@@ -31,9 +36,23 @@ th {
 }
 
 #sload {
-  min-width: 100px;
+  min-width: 50px;
 }
 
 #sproto {
-  min-width: 500px;
+  width: calc(100% / 4);
+}
+
+.protocol-box {
+  max-width: 240px;
+  font-size: 15px;
+}
+
+@media only screen and (max-width: 1570px) {
+  #sproto {
+    width: calc(100% / 3);
+  }
+  #sdate {
+    min-width: 105px;
+  }
 }

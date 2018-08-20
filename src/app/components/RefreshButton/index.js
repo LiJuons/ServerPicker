@@ -1,4 +1,5 @@
 import React, { Component }  from 'react';
+import { SvgIcon } from '../';
 import './RefreshButton.css';
 
 class RefreshButton extends Component {
@@ -7,7 +8,7 @@ class RefreshButton extends Component {
     this.timer=0;
     this.state = {
       time: {},
-      seconds: 300
+      seconds: 1800
     }
   }
 
@@ -29,10 +30,10 @@ class RefreshButton extends Component {
     let seconds = this.state.seconds - 1;
     this.setState({
       time: this.secondsToTime(seconds),
-      seconds: seconds,
+      seconds: seconds
     });
 
-    if ((seconds % 5 === 0)||(seconds > 295)) {
+    if ((seconds % 5 === 0)||(seconds > 1795)) {
       localStorage.setItem('seconds', seconds);
     }
 
@@ -40,10 +41,17 @@ class RefreshButton extends Component {
       clearInterval(this.timer);
       this.timer = 0;
       this.setState({
-        seconds: 300
+        seconds: 1800
       });
       localStorage.removeItem('seconds');
       this.props.reactivation();
+    }
+  }
+
+  confirmRefresh = () => {
+    if (window.confirm("Are you sure you want to refresh the server list? \nServer refresh will be disabled for 30 minutes.")) {
+        alert("Please wait a moment...");
+        this.refreshFunc();
     }
   }
 
@@ -75,21 +83,31 @@ class RefreshButton extends Component {
 
   render() {
     const { refreshed } = this.props;
+    const { m, s } = this.state.time;
 
     return (
-      <button
-        type="button"
-        onClick={this.refreshFunc}
-        id="nb-refresh"
-        style={refreshed ? { fontSize: 16 } : {}}
-        disabled={refreshed ? true : false}
-      >
+
+      <div>
         {
-          refreshed
-          ? this.state.time.m+"min "+this.state.time.s+"s"
-          : "Refresh Servers "
+          refreshed ?
+          <div className="refreshBtnTime" > {(s===0)?m+":00":m+":"+s} </div>
+          : <div onClick={this.confirmRefresh}><SvgIcon iconType='refreshBtn' /></div>
         }
-      </button>
+      </div>
+
+      // <button
+      //   type="button"
+      //   onClick={this.refreshFunc}
+      //   id="nb-refresh"
+      //   style={refreshed ? { fontSize: 16 } : {}}
+      //   disabled={refreshed ? true : false}
+      // >
+      //   {
+      //     refreshed
+      //     ? this.state.time.m+"min "+this.state.time.s+"s"
+      //     : "Refresh Servers "
+      //   }
+      // </button>
     );
   }
 }

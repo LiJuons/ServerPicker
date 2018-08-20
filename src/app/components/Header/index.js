@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import country_list from '../../../assets/countryList';
-import protocol_list from '../../../assets/protocolList';
-import logoutIco from '../../../assets/logout.png';
-import { RefreshButton } from '../';
+import { country_list, protocol_list } from '../../../assets';
+import { RefreshButton, SvgIcon } from '../';
 import './Header.css';
 
 class Header extends Component {
@@ -12,7 +10,12 @@ class Header extends Component {
     selectCountry: '---',
     selectProtocol: '---',
     selectObfs: false,
-    refreshed: false
+    refreshed: false,
+    showHeader: true
+  }
+
+  toggleHeader = () => {
+    this.setState({ showHeader: !this.state.showHeader });
   }
 
   handleChange = (event) => {
@@ -55,102 +58,106 @@ class Header extends Component {
   }
 
   render() {
-    const { selectCountry, selectProtocol, selectObfs, searchValue, refreshed } = this.state;
+    const { selectCountry, selectProtocol, selectObfs, searchValue, refreshed, showHeader } = this.state;
 
     return (
-      <div className="navBar">
+      <div>
 
-        <div id="fillingDiv"></div>
-
-        <div className="navBar-item-left" >
-          <input type="text"
-            value={searchValue}
-            name="searchValue"
-            autoFocus
-            placeholder="Search..."
-            onChange={this.handleChange}
-            onKeyUp={this.searchFunction}
-            onClick={()=>{this.setState({searchValue: ''})}}
-            disabled={this.props.disableFilter}
-            id="searchBox"
-          />
+        <div id="closeBtnDiv" onClick={this.toggleHeader}>
+          <SvgIcon iconType="closeBtn" toggle={showHeader} />
         </div>
 
-        <div className="navBar-item-right">
-          <img src={logoutIco} alt="Logout Icon" onClick={this.props.logout} id="logoutIco" />
-        </div>
+        <div className={ showHeader ? "navBar" : "navBar-hidden" } >
 
-        <div className="navBar-item-right">
-          <RefreshButton
-            serversRefresh={this.serversRefresh}
-            reactivation={this.reactivateButton}
-            refreshed={refreshed}
-          />
-        </div>
+          <div id="fillingDiv"></div>
 
-        <div className="filters-container navBar-item-right">
-
-          <button
-            type="button"
-            name="button"
-            id="filterButton"
-            className="navBar-item-right"
-            onClick={this.filterFunction}
-          >
-            >
-          </button>
-
-          <div className="navBar-item-right">
-            <div className="radioInput">
-              XOR<br/>
-              <input
-                type="checkbox"
-                name="selectObfs"
-                id="checkXOR"
-                checked={selectObfs}
-                onChange={this.handleChange}
-                disabled={this.props.disableFilter}
-              />
+          <div className="navBar-item-left">
+            <input type="text"
+              value={searchValue}
+              name="searchValue"
+              autoFocus
+              placeholder="Search..."
+              onChange={this.handleChange}
+              onKeyUp={this.searchFunction}
+              onClick={()=>{this.setState({searchValue: ''})}}
+              disabled={this.props.disableFilter}
+              id="searchBox"
+            />
+            <div id="searchBtn" onClick={() => {this.props.filterFunc(this.state, 'search')}}>
+              <SvgIcon iconType="searchIco" />
             </div>
           </div>
 
-          <div className="navBar-item-right">
-            Protocol
-            <select
-              id="country"
-              name="selectProtocol"
-              value={selectProtocol}
-              onChange={this.handleChange}
-              disabled={this.props.disableFilter || selectObfs}
-            >
-              {
-                protocol_list.map(protocol =>
-                  <option key={protocol} value={protocol}>{protocol}</option>
-                )
-              }
-            </select>
+          <div className="navBar-item-right" onClick={this.props.logout}>
+            <SvgIcon iconType="logoutBtn" />
           </div>
 
           <div className="navBar-item-right">
-            Country
-            <select
-              id="country"
-              name="selectCountry"
-              value={selectCountry}
-              onChange={this.handleChange}
-              disabled={this.props.disableFilter}
-            >
-              {
-                country_list.map(country =>
-                  <option key={country} value={country}>{country}</option>
-                )
-              }
-            </select>
+            <RefreshButton
+              serversRefresh={this.serversRefresh}
+              reactivation={this.reactivateButton}
+              refreshed={refreshed}
+            />
           </div>
+
+          <div className="filters-container navBar-item-right">
+
+            <div className="navBar-item-right" onClick={this.filterFunction}>
+              <SvgIcon iconType="filterBtn" />
+            </div>
+
+            <div className="navBar-item-right">
+              <div className="radioInput">
+                XOR<br/>
+                <input
+                  type="checkbox"
+                  name="selectObfs"
+                  id="checkXOR"
+                  checked={selectObfs}
+                  onChange={this.handleChange}
+                  disabled={this.props.disableFilter}
+                />
+              </div>
+            </div>
+
+            <div className="navBar-item-right">
+              Protocol
+              <select
+                id="country"
+                name="selectProtocol"
+                value={selectProtocol}
+                onChange={this.handleChange}
+                disabled={this.props.disableFilter || selectObfs}
+              >
+                {
+                  protocol_list.map(protocol =>
+                    <option key={protocol} value={protocol}>{protocol}</option>
+                  )
+                }
+              </select>
+            </div>
+
+            <div className="navBar-item-right">
+              Country
+              <select
+                id="country"
+                name="selectCountry"
+                value={selectCountry}
+                onChange={this.handleChange}
+                disabled={this.props.disableFilter}
+              >
+                {
+                  country_list.map(country =>
+                    <option key={country} value={country}>{country}</option>
+                  )
+                }
+              </select>
+            </div>
+
+          </div>
+
 
         </div>
-
-
       </div>
     );
   }

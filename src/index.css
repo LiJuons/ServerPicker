@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  min-width: 1340px;
   overflow: hidden;
   font-family: 'Roboto';
   background: #030111;

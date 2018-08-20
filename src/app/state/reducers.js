@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux-seamless-immutable';
-import authReducer from '../../auth/reducer';
-import serverReducer from '../../servers/reducer';
+import authReducer from '../../modules/auth/reducer';
+import serverReducer from '../../modules/servers/reducer';
 
 const SERVERS = 'SERVERS';
 const AUTH = 'AUTH';

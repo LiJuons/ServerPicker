@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import servers from '../../../servers';
+import servers from '../../../modules/servers';
 import { ErrorMsg, ServerList, Spinner } from '../../components';
 import './ServersPage.css';
 

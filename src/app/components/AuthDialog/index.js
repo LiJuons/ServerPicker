@@ -25,7 +25,7 @@ class AuthDialog extends Component {
 
 
           <div className="modal-content">
-            <h3>Authentication</h3>
+            <h2 style={{ marginLeft: 8 }}>Authentication</h2>
 
             <div className="form-control">
 
@@ -48,7 +48,7 @@ class AuthDialog extends Component {
               />
 
               <button type="submit" name="submit" onClick={this.preHandleAuth} id="submitBtn" >
-                { this.props.authProcStatus ? <Spinner type={1} /> : "Submit" }
+                { this.props.authProcStatus ? <Spinner type={1} style={{ left: 80 }} /> : "Login" }
               </button>
 
             </div>

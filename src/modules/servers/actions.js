@@ -45,7 +45,7 @@ export const filterServersSuccess = (filteredServers) => ({
 export const getServers = () => {
   return dispatch => {
 
-      if (!!localStorage.getItem('servers')) {
+    if (!!localStorage.getItem('servers')) {
         dispatch(getServersRequest());
 
         dispatch(
@@ -60,7 +60,8 @@ export const getServers = () => {
 
 export const apiCall = () => {
   return dispatch => {
-    const url = 'https://allorigins.me/get?url=' + encodeURIComponent('https://api.nordvpn.com/server') + '&callback=?';
+    const API_LINK = process.env.REACT_APP_SECRET_API;
+    const url = 'https://allorigins.me/get?url=' + encodeURIComponent(API_LINK) + '&callback=?';
 
     dispatch(getServersRequest());
 
@@ -94,25 +95,27 @@ export const filterServers = (state, searchType) => {
             //Search by Country, Protocol and XOR
             servers.forEach(server => {
 
-              if ( server.country.toUpperCase().includes(selectCountry.toUpperCase()) ){
+              if ( server.locations[0].country.name.toUpperCase().includes(selectCountry.toUpperCase()) ){
+                let found = false;
 
                 if ( selectObfs === false ) {
                   // if XOR OFF
-                  Object.entries(server.features).forEach(e => {
-                    if (e[0].toUpperCase().includes(selectProtocol.toUpperCase()) && e[1])
-                      filteredServers.push(server);
-                      return;
+                  Object.entries(server.technologies).map(e => {
+                    if (e[1].name.toUpperCase().includes(selectProtocol.toUpperCase()) && e[1].pivot.status==="online" && !found) {
+                      found = true;
+                      return filteredServers.push(server);
+                    } else return null;
                   });
                 }
 
                 else {
                   // if XOR ON
-                  Object.entries(server.features).forEach(e => {
-                    if (e[0].toUpperCase().includes('OPENVPN_XOR_TCP') && e[1]){
-                      filteredServers.push(server);
-                      return;
-                    }
-                  })
+                  Object.entries(server.technologies).map(e => {
+                    if ((e[1].id===15 && e[1].pivot.status==="online" && !found) || (e[1].id===17 && e[1].pivot.status==="online" && !found)){
+                      found = true;
+                      return filteredServers.push(server);
+                    } else return null;
+                  });
                 }
               }
             });
@@ -122,26 +125,27 @@ export const filterServers = (state, searchType) => {
             //Search by Country and XOR
             servers.forEach(server => {
 
-              if ( server.country.toUpperCase().includes(selectCountry.toUpperCase()) ){
+              if ( server.locations[0].country.name.toUpperCase().includes(selectCountry.toUpperCase()) ){
+                let found = false;
 
                 if ( selectObfs === false ) {
                   // if XOR OFF
-                  Object.entries(server.features).forEach(e => {
-                    if (e[0].toUpperCase().includes('OPENVPN_XOR_TCP') && !e[1]){
-                      filteredServers.push(server);
-                      return;
-                    }
-                  })
+                  Object.entries(server.technologies).map(e => {
+                    if ((e[1].id<15 && e[1].pivot.status==="online" && !found)){
+                      found = true;
+                      return filteredServers.push(server);
+                    } else return null;
+                  });
                 }
 
                 else {
                   // if XOR ON
-                  Object.entries(server.features).forEach(e => {
-                    if (e[0].toUpperCase().includes('OPENVPN_XOR_TCP') && e[1]){
-                      filteredServers.push(server);
-                      return;
-                    }
-                  })
+                  Object.entries(server.technologies).map(e => {
+                    if ((e[1].id===15 && e[1].pivot.status==="online" && !found) || (e[1].id===17 && e[1].pivot.status==="online" && !found)){
+                      found = true;
+                      return filteredServers.push(server);
+                    } else return null;
+                  });
                 }
               }
             });
@@ -150,24 +154,26 @@ export const filterServers = (state, searchType) => {
           if ( (selectCountry === '---') && (selectProtocol !== '---') ) {
             //Search by Protocol and XOR
             servers.forEach(server => {
+                let found = false;
 
                 if ( selectObfs === false ) {
                   // if XOR OFF
-                  Object.entries(server.features).forEach(e => {
-                    if (e[0].toUpperCase().includes(selectProtocol.toUpperCase()) && e[1])
-                      filteredServers.push(server);
-                      return;
+                  Object.entries(server.technologies).map(e => {
+                    if (e[1].name.toUpperCase().includes(selectProtocol.toUpperCase()) && e[1].pivot.status==="online" && !found) {
+                      found = true;
+                      return filteredServers.push(server);
+                    } else return null;
                   });
                 }
 
                 else {
                   // if XOR ON
-                  Object.entries(server.features).forEach(e => {
-                    if (e[0].toUpperCase().includes('OPENVPN_XOR_TCP') && e[1]){
-                      filteredServers.push(server);
-                      return;
-                    }
-                  })
+                  Object.entries(server.technologies).map(e => {
+                    if ((e[1].id===15 && e[1].pivot.status==="online" && !found) || (e[1].id===17 && e[1].pivot.status==="online" && !found)) {
+                      found = true;
+                      return filteredServers.push(server);
+                    } else return null;
+                  });
                 }
               });
           }
@@ -176,24 +182,26 @@ export const filterServers = (state, searchType) => {
           if ( (selectCountry === '---') && (selectProtocol === '---') ) {
             //Search by XOR
             servers.forEach(server => {
+                let found = false;
+
                 if ( selectObfs === false ) {
                   // if XOR OFF
-                  Object.entries(server.features).forEach(e => {
-                    if (e[0].toUpperCase().includes('OPENVPN_XOR_TCP') && !e[1]){
-                      filteredServers.push(server);
-                      return;
-                    }
-                  })
+                  Object.entries(server.technologies).map(e => {
+                    if ((e[1].id<15 && e[1].pivot.status==="online" && !found)) {
+                      found = true;
+                      return filteredServers.push(server);
+                    } else return null;
+                  });
                 }
 
                 else {
                   // if XOR ON
-                  Object.entries(server.features).forEach(e => {
-                    if (e[0].toUpperCase().includes('OPENVPN_XOR_TCP') && e[1]){
-                      filteredServers.push(server);
-                      return;
-                    }
-                  })
+                  Object.entries(server.technologies).map(e => {
+                    if ((e[1].id===15 && e[1].pivot.status==="online" && !found) || (e[1].id===17 && e[1].pivot.status==="online" && !found)) {
+                      found = true;
+                      return filteredServers.push(server);
+                    } else return null;
+                  });
                 }
             });
           }
@@ -206,11 +214,11 @@ export const filterServers = (state, searchType) => {
           servers.forEach(server => {
             if (
                 (server.name.toUpperCase().includes(searchVal)) ||
-                (server.domain.toUpperCase().includes(searchVal)) ||
-                (server.ip_address.includes(searchVal))
+                (server.locations[0].country.city.name.toUpperCase().includes(searchVal)) ||
+                (server.hostname.toUpperCase().includes(searchVal)) ||
+                (server.station.includes(searchVal))
               ){
-              filteredServers.push(server);
-              return;
+              return filteredServers.push(server);
             }
           });
         }

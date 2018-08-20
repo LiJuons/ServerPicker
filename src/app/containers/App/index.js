@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import servers from '../../../servers';
-import auth from '../../../auth';
+import servers from '../../../modules/servers';
+import auth from '../../../modules/auth';
 import { ServersPage } from '../';
 import { Header, AuthDialog } from '../../components';
 import fire from '../../../config/firebase';
@@ -11,13 +11,16 @@ import './App.css';
 class App extends Component {
   state = {
     user: null,
-    showDialog: false
+    showDialog: false,
+    posScroll: 0
   }
 
   componentDidMount() {
     this.authListener();
   }
 
+  //############################### AUTHENTIFICATION FUNCTIONS #############################################
+  //########################################################################################################
   authListener = () => {
     if (!localStorage.getItem('user')) {
       this.setState({ showDialog: true });
@@ -59,6 +62,8 @@ class App extends Component {
     fire.auth().signOut();
     localStorage.removeItem('user');
   }
+  //########################################################################################################
+  //########################################################################################################
 
   render() {
     const { refreshServers, filterServers, isFetching, searchServers, authProcStatus } = this.props;
