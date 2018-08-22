@@ -86,28 +86,13 @@ class RefreshButton extends Component {
     const { m, s } = this.state.time;
 
     return (
-
       <div>
         {
           refreshed ?
-          <div className="refreshBtnTime" > {(s===0)?m+":00":m+":"+s} </div>
+          <div className="refreshBtnTime" > { m + ":" + ((s<10) ? "0"+s : s) } </div>
           : <div onClick={this.confirmRefresh}><SvgIcon iconType='refreshBtn' /></div>
         }
       </div>
-
-      // <button
-      //   type="button"
-      //   onClick={this.refreshFunc}
-      //   id="nb-refresh"
-      //   style={refreshed ? { fontSize: 16 } : {}}
-      //   disabled={refreshed ? true : false}
-      // >
-      //   {
-      //     refreshed
-      //     ? this.state.time.m+"min "+this.state.time.s+"s"
-      //     : "Refresh Servers "
-      //   }
-      // </button>
     );
   }
 }

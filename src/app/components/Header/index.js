@@ -11,11 +11,9 @@ class Header extends Component {
     selectProtocol: '---',
     selectObfs: false,
     refreshed: false,
-    showHeader: true
-  }
-
-  toggleHeader = () => {
-    this.setState({ showHeader: !this.state.showHeader });
+    showHeader: true,
+    showSettings: false,
+    separateColumns: 'true'
   }
 
   handleChange = (event) => {
@@ -25,6 +23,17 @@ class Header extends Component {
 
     this.setState({
       [name]: value
+    });
+  }
+
+  handleDisplayChange = (event) => {
+    const value = event.target.value;
+    const name = 'separateColumns';
+
+    this.setState({
+      [name]: value
+    }, () => {
+      this.props.displayChange();
     });
   }
 
@@ -58,34 +67,29 @@ class Header extends Component {
   }
 
   render() {
-    const { selectCountry, selectProtocol, selectObfs, searchValue, refreshed, showHeader } = this.state;
+    const { selectCountry, selectProtocol, selectObfs, searchValue, refreshed, showHeader, showSettings, separateColumns } = this.state;
 
     return (
       <div>
 
-        <div id="closeBtnDiv" onClick={this.toggleHeader}>
+        <div id="closeBtnDiv" onClick={() => {this.setState({ showHeader: !showHeader }); this.props.headerHide();}}>
           <SvgIcon iconType="closeBtn" toggle={showHeader} />
         </div>
 
+        <div id="fillingDiv" style={ showHeader ? { display: "block" } : { display: "none" } }></div>
+
         <div className={ showHeader ? "navBar" : "navBar-hidden" } >
 
-          <div id="fillingDiv"></div>
+          <div className="navBar-item-left" id="settingsBtnDiv"  onClick={() => {this.setState({ showSettings: !showSettings })}}>
+            {
+              showSettings
+              ? <SvgIcon iconType="filterBackBtn" />
+              : <SvgIcon iconType="settingsBtn" />
+            }
+          </div>
 
-          <div className="navBar-item-left">
-            <input type="text"
-              value={searchValue}
-              name="searchValue"
-              autoFocus
-              placeholder="Search..."
-              onChange={this.handleChange}
-              onKeyUp={this.searchFunction}
-              onClick={()=>{this.setState({searchValue: ''})}}
-              disabled={this.props.disableFilter}
-              id="searchBox"
-            />
-            <div id="searchBtn" onClick={() => {this.props.filterFunc(this.state, 'search')}}>
-              <SvgIcon iconType="searchIco" />
-            </div>
+          <div className="navBar-item-left" id="clockBtnDiv"  onClick={() => {}}>
+            <SvgIcon iconType="clockBtn" />
           </div>
 
           <div className="navBar-item-right" onClick={this.props.logout}>
@@ -100,62 +104,99 @@ class Header extends Component {
             />
           </div>
 
-          <div className="filters-container navBar-item-right">
-
-            <div className="navBar-item-right" onClick={this.filterFunction}>
-              <SvgIcon iconType="filterBtn" />
-            </div>
-
-            <div className="navBar-item-right">
-              <div className="radioInput">
-                XOR<br/>
-                <input
-                  type="checkbox"
-                  name="selectObfs"
-                  id="checkXOR"
-                  checked={selectObfs}
-                  onChange={this.handleChange}
-                  disabled={this.props.disableFilter}
-                />
+          <div className="headerFilters" style={ showSettings ? { display: 'none' } : { display: 'block' } }>
+            <div className="navBar-item-left">
+              <input type="text"
+                value={searchValue}
+                name="searchValue"
+                autoFocus
+                placeholder="Search..."
+                onChange={this.handleChange}
+                onKeyUp={this.searchFunction}
+                onClick={()=>{this.setState({searchValue: ''})}}
+                disabled={this.props.disableFilter}
+                id="searchBox"
+              />
+              <div id="searchBtn" onClick={() => {this.props.filterFunc(this.state, 'search')}}>
+                <SvgIcon iconType="searchBtn" />
               </div>
             </div>
 
-            <div className="navBar-item-right">
-              Protocol
-              <select
-                id="country"
-                name="selectProtocol"
-                value={selectProtocol}
-                onChange={this.handleChange}
-                disabled={this.props.disableFilter || selectObfs}
-              >
-                {
-                  protocol_list.map(protocol =>
-                    <option key={protocol} value={protocol}>{protocol}</option>
-                  )
-                }
-              </select>
-            </div>
+            <div className="filters-container navBar-item-right">
 
-            <div className="navBar-item-right">
-              Country
-              <select
-                id="country"
-                name="selectCountry"
-                value={selectCountry}
-                onChange={this.handleChange}
-                disabled={this.props.disableFilter}
-              >
-                {
-                  country_list.map(country =>
-                    <option key={country} value={country}>{country}</option>
-                  )
-                }
-              </select>
-            </div>
+              <div className="navBar-item-right" onClick={this.filterFunction}>
+                <SvgIcon iconType="filterBtn" />
+              </div>
 
+              <div className="navBar-item-right">
+                <div className="radioInput">
+                  XOR<br/>
+                  <input
+                    type="checkbox"
+                    name="selectObfs"
+                    id="checkXOR"
+                    checked={selectObfs}
+                    onChange={this.handleChange}
+                    disabled={this.props.disableFilter}
+                  />
+                </div>
+              </div>
+
+              <div className="navBar-item-right">
+                Protocol
+                <select
+                  id="country"
+                  name="selectProtocol"
+                  value={selectProtocol}
+                  onChange={this.handleChange}
+                  disabled={this.props.disableFilter || selectObfs}
+                >
+                  {
+                    protocol_list.map(protocol =>
+                      <option key={protocol} value={protocol}>{protocol}</option>
+                    )
+                  }
+                </select>
+              </div>
+
+              <div className="navBar-item-right">
+                Country
+                <select
+                  id="country"
+                  name="selectCountry"
+                  value={selectCountry}
+                  onChange={this.handleChange}
+                  disabled={this.props.disableFilter}
+                >
+                  {
+                    country_list.map(country =>
+                      <option key={country} value={country}>{country}</option>
+                    )
+                  }
+                </select>
+              </div>
+            </div>
           </div>
 
+          <div className="headerSettings" style={ !showSettings ? { display: 'none' } : { display: 'block' } }>
+            <div className="navBar-settings">
+              <div id="displaySetting">Display:</div>
+              <div className="navBar-settings-inner">
+                <input
+                  type="radio"
+                  value={'true'}
+                  checked={separateColumns === 'true'}
+                  onChange={this.handleDisplayChange}
+                /> Separate columns <br/>
+                <input
+                  type="radio"
+                  value={'false'}
+                  checked={separateColumns === 'false'}
+                  onChange={this.handleDisplayChange}
+                /> Server Name + IP Address
+              </div>
+            </div>
+          </div>
 
         </div>
       </div>

@@ -22,10 +22,6 @@ export default function serverReducer(state = INITIAL_STATE_SERVERS, { type, pay
           return Immutable.merge(state, {error: payload.error, isFetching: false});
     case types.FILTER_SERVERS:
           return Immutable.merge(state, {filteredServers: payload.filteredServers, error: false, isFetching: false});
-    case types.SEARCH_SERVERS:
-          return Immutable.merge(state, {error: false, isFetching: false});
-    case types.CLEAR_SERVERS:
-          return Immutable.merge(state, {servers: []});
     default:
           return state;
   }

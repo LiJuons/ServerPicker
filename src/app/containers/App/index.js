@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import servers from '../../../modules/servers';
 import auth from '../../../modules/auth';
+import servers from '../../../modules/servers';
+import filters from '../../../modules/filters';
 import { ServersPage } from '../';
 import { Header, AuthDialog } from '../../components';
 import fire from '../../../config/firebase';
@@ -19,7 +20,7 @@ class App extends Component {
     this.authListener();
   }
 
-  //############################### AUTHENTIFICATION FUNCTIONS #############################################
+  //###################### FIREBASE AUTHENTIFICATION FUNCTIONS #############################################
   //########################################################################################################
   authListener = () => {
     if (!localStorage.getItem('user')) {
@@ -66,7 +67,7 @@ class App extends Component {
   //########################################################################################################
 
   render() {
-    const { refreshServers, filterServers, isFetching, searchServers, authProcStatus } = this.props;
+    const { refreshServers, filterServers, isFetching, authProcStatus, displayChange, headerHide } = this.props;
 
     return (
       <div className="App">
@@ -79,8 +80,9 @@ class App extends Component {
               <Header
                 filterFunc={filterServers}
                 refreshFunc={refreshServers}
-                searchFunc={searchServers}
                 disableFilter={isFetching}
+                displayChange={displayChange}
+                headerHide={headerHide}
                 logout={this.logout}
               />
 
@@ -106,22 +108,27 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
+    authProcStatus: auth.selectors.getAuthProcStatus(state),
+
     isFetching: servers.selectors.isFetching(state),
     servers: servers.selectors.getServers(state),
-    filteredServers: servers.selectors.getFilteredServers(state),
     error: servers.selectors.getError(state),
-    authProcStatus: auth.selectors.getAuthProcStatus(state),
+
+    isFiltering: filters.selectors.isFiltering(state),
+    filteredServers: filters.selectors.getFilteredServers(state)
 });
 
 const mapActionsToProps = {
-  filterServers: servers.actions.filterServers,
-  refreshServers: servers.actions.apiCall,
-  getServers: servers.actions.getServers,
-  searchServers: servers.actions.searchServers,
-
   authRequest: auth.actions.authRequest,
   authSuccess: auth.actions.authSuccess,
-  authFailure: auth.actions.authFailure
+  authFailure: auth.actions.authFailure,
+
+  refreshServers: servers.actions.preApiCall,
+  getServers: servers.actions.getServers,
+
+  filterServers: filters.actions.filterServers,
+  displayChange: filters.actions.displayChange,
+  headerHide: filters.actions.headerHide
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(App);

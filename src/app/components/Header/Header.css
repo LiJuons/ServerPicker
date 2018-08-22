@@ -8,10 +8,11 @@
   background: linear-gradient(
     to top,
     rgba(53, 69, 77, 0),
+    rgba(24, 19, 60, .95),
     rgba(53, 69, 77)
   );
   color: white;
-  margin-right: 0px;
+
 
   -webkit-animation: slide-bottom 0.5s both;
   -moz-animation: slide-bottom 0.5s both;
@@ -57,9 +58,10 @@
 }
 
 .filters-container {
-  padding: 10px;
+  padding: 6px;
   padding-right: 0;
-  margin-top: 12px;
+  height: 52px;
+  margin-top: 16px;
   border: rgba(255, 0, 0, 0.6) 2px solid;
   border-radius: 32px;
   background: linear-gradient(
@@ -69,9 +71,51 @@
   );
 }
 
+.navBar-settings {
+  margin: 16px 200px;
+  width: 400px;
+  height: 46px;
+
+  padding: 8px;
+  padding-left: 32px;
+  border: rgba(255, 0, 0, 0.6) 2px solid;
+  border-radius: 32px;
+  background: linear-gradient(
+    to top,
+    rgba(24, 19, 60, 0.9),
+    rgba(53, 69, 77)
+  );
+  text-align: left;
+}
+#displaySetting {
+  float: left;
+  font-size: 26px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+.navBar-settings-inner {
+  float: left;
+  margin-left: 20px;
+  line-height: 1.5;
+}
+
 #closeBtnDiv {
   position: absolute;
-  z-index: 999;
+  z-index: 1;
+  margin-top: 32px;
+  margin-left: 12px;
+}
+
+#settingsBtnDiv {
+  margin-top: 31px;
+  margin-left: 60px;
+  height: 36px;
+}
+
+#clockBtnDiv {
+  margin-top: 31px;
+  margin-left: 12px;
+  height: 36px;
 }
 
 #nb-country {
@@ -84,7 +128,7 @@
 }
 
 #searchBox {
-  margin: 24px 0 0 64px;
+  margin: 22px 0 0 16px;
   padding: 6px ;
   width: 500px;
   border-radius: 28px;
@@ -110,8 +154,8 @@
 
 #searchBtn {
   position: absolute;
-  top: 24px;
-  left: 535px;
+  top: 23px;
+  left: 630px;
   height: 42px;
   padding-top: 12px;
   padding-left: 5px;
@@ -127,36 +171,49 @@
 }
 
 #fillingDiv {
-  position: absolute;
-  right: -6px;
+  position: fixed;
+  z-index: -3;
+  right: 0;
   width: 6px;
   height: 100px;
   background: linear-gradient(
     to top,
     rgba(53, 69, 77, 0),
+    rgba(24, 19, 60, .95),
     rgba(53, 69, 77)
   );
-  z-index: -1;
+
+  -webkit-animation: slide-bottom 0.5s both;
+  -moz-animation: slide-bottom 0.5s both;
+  -ms-animation: slide-bottom 0.5s both;
+  -o-animation: slide-bottom 0.5s both;
+  animation: slide-bottom 0.5s both;
 }
 
 @-webkit-keyframes slide-bottom {
   0% {
     -webkit-transform: translateY(-100px);
             transform: translateY(-100px);
+            opacity: 0;
+            display: block;
   }
   100% {
     -webkit-transform: translateY(0);
             transform: translateY(0);
+            opacity: 1;
   }
 }
 @keyframes slide-bottom {
   0% {
     -webkit-transform: translateY(-100px);
             transform: translateY(-100px);
+            opacity: 0;
+            display: block;
   }
   100% {
     -webkit-transform: translateY(0);
             transform: translateY(0);
+            opacity: 1;
   }
 }
 
@@ -164,19 +221,25 @@
   0% {
     -webkit-transform: translateY(0);
             transform: translateY(0);
+            opacity: 1;
   }
   100% {
     -webkit-transform: translateY(-100px);
             transform: translateY(-100px);
+            opacity: 0;
+            display: none;
   }
 }
 @keyframes slide-top {
   0% {
     -webkit-transform: translateY(0);
             transform: translateY(0);
+            opacity: 1;
   }
   100% {
     -webkit-transform: translateY(-100px);
             transform: translateY(-100px);
+            opacity: 0;
+            display: none;
   }
 }

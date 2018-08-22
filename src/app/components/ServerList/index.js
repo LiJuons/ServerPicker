@@ -49,6 +49,7 @@ class ServerList extends Component {
 
   render() {
     const { serverList } = this.state;
+    const { displaySeparate } = this.props;
 
     return (
       <div>
@@ -63,22 +64,57 @@ class ServerList extends Component {
             <tbody>
               <tr>
 
-                  <td id="sname">
-                    <table>
-                      <tbody>
-                      <tr><th onClick={() => this.sortServersBy('name')}>
-                        Server Name ({serverList.length})
-                      </th></tr>
+                  {
 
-                      {
-                        serverList.map(server =>
-                          <tr key={server.id}><td className="list-item-box" style={server.status==='online' ? {} : { color: 'red' }} >{server.name}</td></tr>
-                        )
-                      }
+                    displaySeparate ?
 
-                      </tbody>
-                    </table>
-                  </td>
+                    <td id="sname">
+                      <table>
+                        <tbody>
+                        <tr><th onClick={() => this.sortServersBy('name')}>
+                          Server Name ({serverList.length})
+                        </th></tr>
+
+                        {
+                          serverList.map(server =>
+                            <tr key={server.id}>
+                              <td className="list-item-box" style={server.status==='online' ? {} : { color: 'red' }} >
+                                {server.name}
+                              </td>
+                            </tr>
+                          )
+                        }
+
+                        </tbody>
+                      </table>
+                    </td>
+
+                    :
+
+                    <td id="snameandip">
+                      <table>
+                        <tbody>
+                        <tr><th onClick={() => this.sortServersBy('name')}>
+                          Server Name ({serverList.length})
+                        </th></tr>
+
+                        {
+                          serverList.map(server =>
+                            <tr key={server.id}>
+                              <td className="list-item-box" style={server.status==='online' ? {} : { color: 'red' }} >
+                                {server.name} - {(server.ips.type==="exit") ? server.ips.ip : server.station}
+                              </td>
+                            </tr>
+                          )
+                        }
+
+                        </tbody>
+                      </table>
+                    </td>
+
+                  }
+
+
 
                   <td id="scity">
                     <table>
@@ -112,22 +148,30 @@ class ServerList extends Component {
                     </table>
                   </td>
 
-                  <td  id="sipaddr">
-                    <table>
-                      <tbody>
-                      <tr><th onClick={() => this.sortServersBy('station')}>IP Address</th></tr>
+                  {
 
-                      {
-                        serverList.map(server =>
-                          <tr key={server.id}><td className="list-item-box" >{
-                            (server.ips.type==="exit") ? server.ips.ip : server.station
-                          }</td></tr>
-                        )
-                      }
+                    displaySeparate ?
 
-                      </tbody>
-                    </table>
-                  </td>
+                    <td  id="sipaddr">
+                      <table>
+                        <tbody>
+                        <tr><th onClick={() => this.sortServersBy('station')}>IP Address</th></tr>
+
+                        {
+                          serverList.map(server =>
+                            <tr key={server.id}><td className="list-item-box" >{
+                              (server.ips.type==="exit") ? server.ips.ip : server.station
+                            }</td></tr>
+                          )
+                        }
+
+                        </tbody>
+                      </table>
+                    </td>
+
+                    : <td></td>
+
+                  }
 
                   <td id="sproto">
                     <table>
@@ -137,7 +181,7 @@ class ServerList extends Component {
                       {
                         serverList.map(server =>
                           <tr key={server.id} style={{ height: 41.19 }}>
-                            <td className="list-item-box protocol-box" >
+                            <td className="list-item-box" >
                               { this.getProtocolList(server.technologies) }
                             </td>
                           </tr>

@@ -1,5 +1,7 @@
 
 .page-container {
+  position: fixed;
+  z-index: -1;
   width: 100%;
   overflow-y: auto;
   height: 100vh;
@@ -9,6 +11,64 @@
   cursor: wait;
 }
 
-.emptyDiv {
-  height: 100px;
+.showBlock {
+  -webkit-animation: slide-down 0.5s both;
+  -moz-animation: slide-down 0.5s both;
+  -ms-animation: slide-down 0.5s both;
+  -o-animation: slide-down 0.5s both;
+  animation: slide-down 0.5s both;
+}
+
+.hideBlock {
+  -webkit-animation: slide-up 0.5s both;
+  -moz-animation: slide-up 0.5s both;
+  -ms-animation: slide-up 0.5s both;
+  -o-animation: slide-up 0.5s both;
+  animation: slide-up 0.5s both;
+}
+
+@-webkit-keyframes slide-down {
+  0% {
+            height: 0;
+            opacity: 0;
+            display: block;
+  }
+  100% {
+            height: 100px;
+            opacity: 1;
+  }
+}
+@keyframes slide-down {
+  0% {
+            height: 0;
+            opacity: 0;
+            display: block;
+  }
+  100% {
+            height: 100px;
+            opacity: 1;
+  }
+}
+
+@-webkit-keyframes slide-up {
+  0% {
+            height: 100px;
+            opacity: 1;
+  }
+  100% {
+            height: 0;
+            opacity: 0;
+            display: none;
+  }
+}
+@keyframes slide-up {
+  0% {
+            height: 100px;
+            opacity: 1;
+  }
+  100% {
+            height: 0;
+            opacity: 0;
+            display: none;
+  }
 }

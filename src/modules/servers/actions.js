@@ -1,18 +1,6 @@
 import $ from "jquery";
 import * as types from './actionTypes';
 
-export const clearServers = () => ({
-  type: types.CLEAR_SERVERS
-})
-
-export const searchServers = (searchValue) => ({
-    type: types.SEARCH_SERVERS,
-    payload: {
-      searchValue
-    }
-  }
-)
-
 export const getServersRequest = () => ({
     type: types.GET_SERVERS_REQUEST,
   }
@@ -34,14 +22,6 @@ export const getServersFailure = (error) => ({
   }
 )
 
-export const filterServersSuccess = (filteredServers) => ({
-    type: types.FILTER_SERVERS,
-    payload: {
-      filteredServers
-    }
-  }
-)
-
 export const getServers = () => {
   return dispatch => {
 
@@ -53,16 +33,18 @@ export const getServers = () => {
         );
       }
       else {
-        dispatch(apiCall());
+        dispatch(preApiCall());
       }
     }
 }
 
 export const apiCall = () => {
   return dispatch => {
+
     const API_LINK = process.env.REACT_APP_SECRET_API;
-    console.log(API_LINK ? "Works like intended." : "Failure.");
     const url = 'https://allorigins.me/get?url=' + encodeURIComponent(API_LINK) + '&callback=?';
+
+    console.log(API_LINK ? "Server list is being fetched." : "Failed to reach API.");
 
     dispatch(getServersRequest());
 
@@ -78,166 +60,39 @@ export const apiCall = () => {
   }
 }
 
-export const filterServers = (state, searchType) => {
+export const preApiCall = () => {
   return dispatch => {
 
-      const { searchValue, selectCountry, selectProtocol, selectObfs } = state;
+    if (!!localStorage.getItem('servers')) {
+      const serverLength = JSON.parse(localStorage.getItem('servers')).length;
+      const API_COUNT = process.env.REACT_APP_API_COUNT;
+      const urlForCheck = 'https://allorigins.me/get?url=' + encodeURIComponent(API_COUNT) + '&callback=?';
 
-      dispatch(getServersRequest());
+      $.getJSON(urlForCheck)
+      .done((data) => {
+        let apiCount = JSON.parse(data.contents).count;
 
-      if (!!localStorage.getItem('servers')) {
+        if (serverLength === apiCount) {
+          alert('Server list is refreshed.');
+          dispatch(
+            getServersSuccess(JSON.parse(localStorage.getItem('servers')))
+          );
+        }
+        else {
+          let serversChangeNumber = apiCount - serverLength;
+          let addremove = (serversChangeNumber>0) ? 'new servers have been added.' : 'old servers have been removed.';
+          alert('New server list is being fetched. \n[' + Math.abs(serversChangeNumber) + '] ' + addremove);
+          dispatch(apiCall());
+        }
 
-        const servers = JSON.parse(localStorage.getItem('servers'));
-        let filteredServers = [];
-
-        if (servers.length>0) {
-
-          if (searchType === 'filter') //If filter search
-          {
-            if ( (selectCountry !== '---') && (selectProtocol !== '---') ) {
-              //Search by Country, Protocol and XOR
-              servers.forEach(server => {
-
-                if ( server.locations[0].country.name.toUpperCase().includes(selectCountry.toUpperCase()) ){
-                  let found = false;
-
-                  if ( selectObfs === false ) {
-                    // if XOR OFF
-                    Object.entries(server.technologies).map(e => {
-                      if (e[1].name.toUpperCase().includes(selectProtocol.toUpperCase()) && e[1].pivot.status==="online" && !found) {
-                        found = true;
-                        return filteredServers.push(server);
-                      } else return null;
-                    });
-                  }
-
-                  else {
-                    // if XOR ON
-                    Object.entries(server.technologies).map(e => {
-                      if ((e[1].id===15 && e[1].pivot.status==="online" && !found) || (e[1].id===17 && e[1].pivot.status==="online" && !found)){
-                        found = true;
-                        return filteredServers.push(server);
-                      } else return null;
-                    });
-                  }
-                }
-              });
-            }
-
-            if ( (selectCountry !== '---') && (selectProtocol === '---') ) {
-              //Search by Country and XOR
-              servers.forEach(server => {
-
-                if ( server.locations[0].country.name.toUpperCase().includes(selectCountry.toUpperCase()) ){
-                  let found = false;
-
-                  if ( selectObfs === false ) {
-                    // if XOR OFF
-                    Object.entries(server.technologies).map(e => {
-                      if ((e[1].id<15 && e[1].pivot.status==="online" && !found)){
-                        found = true;
-                        return filteredServers.push(server);
-                      } else return null;
-                    });
-                  }
-
-                  else {
-                    // if XOR ON
-                    Object.entries(server.technologies).map(e => {
-                      if ((e[1].id===15 && e[1].pivot.status==="online" && !found) || (e[1].id===17 && e[1].pivot.status==="online" && !found)){
-                        found = true;
-                        return filteredServers.push(server);
-                      } else return null;
-                    });
-                  }
-                }
-              });
-            }
-
-            if ( (selectCountry === '---') && (selectProtocol !== '---') ) {
-              //Search by Protocol and XOR
-              servers.forEach(server => {
-                  let found = false;
-
-                  if ( selectObfs === false ) {
-                    // if XOR OFF
-                    Object.entries(server.technologies).map(e => {
-                      if (e[1].name.toUpperCase().includes(selectProtocol.toUpperCase()) && e[1].pivot.status==="online" && !found) {
-                        found = true;
-                        return filteredServers.push(server);
-                      } else return null;
-                    });
-                  }
-
-                  else {
-                    // if XOR ON
-                    Object.entries(server.technologies).map(e => {
-                      if ((e[1].id===15 && e[1].pivot.status==="online" && !found) || (e[1].id===17 && e[1].pivot.status==="online" && !found)) {
-                        found = true;
-                        return filteredServers.push(server);
-                      } else return null;
-                    });
-                  }
-                });
-            }
-
-
-            if ( (selectCountry === '---') && (selectProtocol === '---') ) {
-              //Search by XOR
-              servers.forEach(server => {
-                  let found = false;
-
-                  if ( selectObfs === false ) {
-                    // if XOR OFF
-                    Object.entries(server.technologies).map(e => {
-                      if ((e[1].id<15 && e[1].pivot.status==="online" && !found)) {
-                        found = true;
-                        return filteredServers.push(server);
-                      } else return null;
-                    });
-                  }
-
-                  else {
-                    // if XOR ON
-                    Object.entries(server.technologies).map(e => {
-                      if ((e[1].id===15 && e[1].pivot.status==="online" && !found) || (e[1].id===17 && e[1].pivot.status==="online" && !found)) {
-                        found = true;
-                        return filteredServers.push(server);
-                      } else return null;
-                    });
-                  }
-              });
-            }
-          }
-
-          else if (searchType === 'search' && searchValue.length > 0)
-          {
-            let searchVal = searchValue.toUpperCase();
-
-            servers.forEach(server => {
-              if (
-                  (server.name.toUpperCase().includes(searchVal)) ||
-                  (server.locations[0].country.city.name.toUpperCase().includes(searchVal)) ||
-                  (server.hostname.toUpperCase().includes(searchVal)) ||
-                  (server.station.includes(searchVal))
-                ){
-                return filteredServers.push(server);
-              }
-            });
-          }
-
-        dispatch(filterServersSuccess(filteredServers));
-
-      } else {
-        alert("Something went wrong...");
-        dispatch(getServersFailure("Servers were not fully fetched yet. Please try refreshing again."));
-      }
-
+      })
+      .fail((error) => {
+        console.log(error);
+        dispatch(getServersFailure("Failed to fetch the servers.\nPlease try refreshing the page."));
+      });
     }
-
     else {
-      alert("Too soon!");
-      dispatch(getServersFailure("Servers were not fully fetched yet. Please choose the country again."));
+      dispatch(apiCall());
     }
 
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import servers from '../../../modules/servers';
+import filters from '../../../modules/filters';
 import { ErrorMsg, ServerList, Spinner } from '../../components';
 import './ServersPage.css';
 
@@ -11,23 +12,23 @@ class ServersPage extends Component {
   }
 
   render() {
-    const { filteredServers, servers, isFetching, fetchError } = this.props;
+    const { filteredServers, servers, isFetching, fetchError, isFiltering, filterError, displaySeparate, headerHide } = this.props;
 
     return (
-      <div className={isFetching ? "page-container loading" : "page-container"}>
+      <div className={(isFetching || isFiltering) ? "page-container loading" : "page-container"}>
 
-        <div className="emptyDiv"></div>
+        <div className={ headerHide ? "hideBlock" : "showBlock" }></div>
 
         {
-          isFetching ? //if Fetching show spinner, else...
+          (isFetching || isFiltering) //if Fetching show spinner, else...
 
-          <Spinner /> :
+          ? <Spinner />
 
-          !!fetchError ? //if error, show message, else...
+          : (!!fetchError || !!filterError) //if error, show message, else...
 
-          <ErrorMsg message={fetchError} /> :
+          ? <ErrorMsg message={!!fetchError ? fetchError : filterError} />
 
-          <ServerList servers={servers} filteredServers={JSON.stringify(filteredServers)} />
+          : <ServerList servers={servers} filteredServers={JSON.stringify(filteredServers)} displaySeparate={displaySeparate} />
         }
 
       </div>
@@ -38,8 +39,13 @@ class ServersPage extends Component {
 const mapStateToProps = state => ({
     isFetching: servers.selectors.isFetching(state),
     servers: servers.selectors.getServers(state),
-    filteredServers: servers.selectors.getFilteredServers(state),
-    fetchError: servers.selectors.getError(state)
+    fetchError: servers.selectors.getError(state),
+
+    isFiltering: filters.selectors.isFiltering(state),
+    filteredServers: filters.selectors.getFilteredServers(state),
+    filterError: filters.selectors.getError(state),
+    displaySeparate: filters.selectors.displaySeparate(state),
+    headerHide: filters.selectors.headerHide(state)
 });
 
 const mapActionsToProps = {

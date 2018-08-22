@@ -4,13 +4,41 @@
 }
 
 .closeBtn {
-  margin-top: 32px;
-  margin-left: 12px;
   fill: #FFF;
   cursor: pointer;
 }
 .closeBtn:hover {
-  fill: rgba(255, 0, 0, 0.6);
+  fill: #a10a0f;
+}
+
+.settingsBtn {
+  stroke: #FFF;
+  fill: #FFF;
+  cursor: pointer;
+}
+.settingsBtn:hover {
+  fill: #a10a0f;
+  stroke: #a10a0f;
+}
+
+.filterBackBtn {
+  stroke: #FFF;
+  fill: #FFF;
+  cursor: pointer;
+}
+.filterBackBtn:hover {
+  fill: #a10a0f;
+  stroke: #a10a0f;
+}
+
+.clockBtn {
+  stroke: #FFF;
+  fill: #FFF;
+  cursor: pointer;
+}
+.clockBtn:hover {
+  fill: #a10a0f;
+  stroke: #a10a0f;
 }
 
 .logoutBtn {
@@ -29,12 +57,13 @@
 }
 
 .filterBtn {
+  margin-right: -12px;
   cursor: pointer;
   fill: none;
   stroke: white;
 }
 
-.searchIco {
+.searchBtn {
   fill: grey;
   stroke: grey;
   cursor: pointer;

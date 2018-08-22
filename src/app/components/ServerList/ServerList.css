@@ -19,20 +19,24 @@ th {
 }
 
 #sname {
+  width: 100%;
   min-width: 200px;
 }
 
 #scity {
+  width: calc(100vw / 9);
   min-width: 150px;
   white-space: nowrap;
 }
 
 #sdomain {
+  width: calc(100vw / 7);
   min-width: 200px;
 }
 
 #sipaddr {
-  min-width: 200px;
+  width: calc(100vw / 5);
+  min-width: 150px;
 }
 
 #sload {
@@ -40,17 +44,16 @@ th {
 }
 
 #sproto {
-  width: calc(100% / 4);
-}
-
-.protocol-box {
+  width: calc(100vw / 4);
+  min-width: 400px;
   font-size: 15px;
 }
 
+#snameandip {
+  min-width: 300px;
+}
+
 @media only screen and (max-width: 1570px) {
-  #sproto {
-    width: calc(100% / 3);
-  }
   #sdate {
     min-width: 105px;
   }
