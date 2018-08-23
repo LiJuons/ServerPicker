@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { country_list, protocol_list } from '../../../assets';
-import { RefreshButton, SvgIcon } from '../';
+import { RefreshButton, SvgIcon, TimeInfoBox } from '../';
 import './Header.css';
 
 class Header extends Component {
@@ -13,7 +13,9 @@ class Header extends Component {
     refreshed: false,
     showHeader: true,
     showSettings: false,
-    separateColumns: 'true'
+    showTimeInfo: false,
+    separateColumns: 'true',
+    timePiece: 31
   }
 
   handleChange = (event) => {
@@ -35,6 +37,20 @@ class Header extends Component {
     }, () => {
       this.props.displayChange();
     });
+  }
+
+  timeFilter = () => {
+    const { timePiece } = this.state;
+
+    if (timePiece===31) {
+      this.setState({showTimeInfo: true}, () => {
+        setTimeout(() => {
+          this.setState({showTimeInfo: false});
+        }, 10000);
+      });
+    }
+
+    this.props.filterNewServers(timePiece);
   }
 
   filterFunction = () => {
@@ -67,10 +83,23 @@ class Header extends Component {
   }
 
   render() {
-    const { selectCountry, selectProtocol, selectObfs, searchValue, refreshed, showHeader, showSettings, separateColumns } = this.state;
+    const {
+      selectCountry,
+      selectProtocol,
+      selectObfs,
+      searchValue,
+      refreshed,
+      showHeader,
+      showSettings,
+      separateColumns,
+      timePiece,
+      showTimeInfo
+    } = this.state;
 
     return (
       <div>
+
+        <TimeInfoBox days={timePiece} shouldDisplay={ showTimeInfo } />
 
         <div id="closeBtnDiv" onClick={() => {this.setState({ showHeader: !showHeader }); this.props.headerHide();}}>
           <SvgIcon iconType="closeBtn" toggle={showHeader} />
@@ -88,7 +117,7 @@ class Header extends Component {
             }
           </div>
 
-          <div className="navBar-item-left" id="clockBtnDiv"  onClick={() => {}}>
+          <div className="navBar-item-left" id="clockBtnDiv"  onClick={() => {this.timeFilter()}}>
             <SvgIcon iconType="clockBtn" />
           </div>
 
@@ -179,23 +208,40 @@ class Header extends Component {
           </div>
 
           <div className="headerSettings" style={ !showSettings ? { display: 'none' } : { display: 'block' } }>
-            <div className="navBar-settings">
+
+            <div className="navBar-settings-left">
               <div id="displaySetting">Display:</div>
-              <div className="navBar-settings-inner">
+              <div className="navBar-settings-display-options">
                 <input
                   type="radio"
                   value={'true'}
                   checked={separateColumns === 'true'}
                   onChange={this.handleDisplayChange}
-                /> Separate columns <br/>
+                /> Normal <br/>
                 <input
                   type="radio"
                   value={'false'}
                   checked={separateColumns === 'false'}
                   onChange={this.handleDisplayChange}
-                /> Server Name + IP Address
+                /> Server name + IP address
               </div>
             </div>
+
+            <div className="navBar-settings-right">
+              <div id="displaySetting">Time Filter:</div>
+              <div className="">
+                <input
+                  type="range"
+                  name="timePiece"
+                  id="timepiece"
+                  min="0" max="31" step="1"
+                  value={timePiece}
+                  onChange={this.handleChange}
+                />
+                <div id="timepiece-value">Days: {timePiece}</div>
+              </div>
+            </div>
+
           </div>
 
         </div>

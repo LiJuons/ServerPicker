@@ -5,6 +5,11 @@ export const displayChange = () => ({
   }
 )
 
+export const setNewServers = () => ({
+    type: types.SHOW_NEW_SERVERS,
+  }
+)
+
 export const headerHide = () => ({
     type: types.HEADER_HIDE,
   }
@@ -30,6 +35,62 @@ export const filterServersFailure = (error) => ({
     }
   }
 )
+
+export const filterNewServers = (timePiece) => {
+  return dispatch => {
+    dispatch(filterServersRequest());
+
+    if (!!localStorage.getItem('servers')) {
+
+      const servers = JSON.parse(localStorage.getItem('servers'));
+      let filteredServers = [];
+
+      if (servers.length>0) {
+        let today = new Date();
+        let dd = today.getDate();
+        let mm = today.getMonth()+1; //January is 0!
+        let yyyy = today.getFullYear();
+
+        if (dd > timePiece) {
+          dd -= timePiece;
+        } else {
+          mm -= 1;
+          dd = new Date(yyyy, mm, 0).getDate() - (timePiece - dd);
+        }
+
+        if(dd<10) {
+            dd = '0'+dd
+        }
+
+        if(mm<10) {
+            mm = '0'+mm
+        }
+
+        today = yyyy + '-' + mm + '-' + dd;
+
+        servers.forEach(server => {
+
+          if ( server.created_at.split(' ')[0]>=today){
+            return filteredServers.push(server);
+          }
+        });
+
+        dispatch(filterServersSuccess(filteredServers));
+      }
+
+      else {
+        alert("Something went wrong...");
+        dispatch(filterServersFailure("Servers were not fully fetched yet. Please try refreshing again."));
+      }
+
+    }
+    else {
+      alert("Something went wrong...");
+      dispatch(filterServersFailure("Servers were not fully fetched yet. Please try refreshing again."));
+    }
+
+  }
+}
 
 export const filterServers = (state, searchType) => {
   return dispatch => {

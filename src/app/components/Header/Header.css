@@ -71,9 +71,7 @@
   );
 }
 
-.navBar-settings {
-  margin: 16px 200px;
-  width: 400px;
+.navBar-settings-left, .navBar-settings-right {
   height: 46px;
 
   padding: 8px;
@@ -87,16 +85,39 @@
   );
   text-align: left;
 }
+.navBar-settings-left {
+  float:left;
+  width: 350px;
+  margin: 16px 50px;
+}
+.navBar-settings-right {
+  float: right;
+  width: 470px;
+  margin: 16px 50px 0 0;
+  padding-right: 20px;
+}
+
 #displaySetting {
   float: left;
   font-size: 26px;
-  font-weight: bold;
-  margin-top: 5px;
+  margin-top: 8px;
 }
-.navBar-settings-inner {
+.navBar-settings-display-options {
   float: left;
   margin-left: 20px;
+  margin-top: 2px;
   line-height: 1.5;
+}
+#timepiece {
+  margin: 15px 0 0 12px;
+  width: 250px;
+  cursor: pointer;
+}
+#timepiece-value {
+  float: right;
+  width: 68px;
+  margin: 11px 0px 0 0;
+  font-size: 18px;
 }
 
 #closeBtnDiv {

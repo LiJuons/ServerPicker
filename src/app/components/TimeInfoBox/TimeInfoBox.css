@@ -1,0 +1,11 @@
+
+.infoBox {
+  position: absolute;
+  width: 450px;
+  top: 25%;
+  left: calc(50% - 235px);
+  background: rgba(161, 10, 15, 0.9);
+  padding: 20px 15px;
+  border-radius: 36px;
+  line-height: 1.5;
+}

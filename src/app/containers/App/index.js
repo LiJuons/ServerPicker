@@ -67,7 +67,7 @@ class App extends Component {
   //########################################################################################################
 
   render() {
-    const { refreshServers, filterServers, isFetching, authProcStatus, displayChange, headerHide } = this.props;
+    const { refreshServers, filterServers, isFetching, authProcStatus, displayChange, headerHide, filterNewServers } = this.props;
 
     return (
       <div className="App">
@@ -83,6 +83,7 @@ class App extends Component {
                 disableFilter={isFetching}
                 displayChange={displayChange}
                 headerHide={headerHide}
+                filterNewServers={filterNewServers}
                 logout={this.logout}
               />
 
@@ -128,6 +129,7 @@ const mapActionsToProps = {
 
   filterServers: filters.actions.filterServers,
   displayChange: filters.actions.displayChange,
+  filterNewServers: filters.actions.filterNewServers,
   headerHide: filters.actions.headerHide
 }
 
