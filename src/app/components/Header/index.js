@@ -238,7 +238,7 @@ class Header extends Component {
                   value={timePiece}
                   onChange={this.handleChange}
                 />
-                <div id="timepiece-value">Days: {timePiece}</div>
+                <div id="timepiece-value">Days: <i style={{'text-decoration': 'underline'}}>{timePiece}</i></div>
               </div>
             </div>
 

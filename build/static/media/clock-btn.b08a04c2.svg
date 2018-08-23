@@ -9,7 +9,7 @@
       .cls-1n, .cls-2n {
         stroke-linecap: round;
         stroke-linejoin: round;
-        stroke-width: 4px;
+        stroke-width: 4.2px;
       }
 
       .cls-2n {
