@@ -1,0 +1,14 @@
+{
+  "main.css": "static/css/main.11c42525.css",
+  "main.css.map": "static/css/main.11c42525.css.map",
+  "main.js": "static/js/main.730fc821.js",
+  "main.js.map": "static/js/main.730fc821.js.map",
+  "static\\media\\clock-btn.svg": "static/media/clock-btn.b08a04c2.svg",
+  "static\\media\\close-btn.svg": "static/media/close-btn.5feeacdd.svg",
+  "static\\media\\filter-back-btn.svg": "static/media/filter-back-btn.4cf35b8a.svg",
+  "static\\media\\filter-btn.svg": "static/media/filter-btn.d1ded2e6.svg",
+  "static\\media\\logout-btn.svg": "static/media/logout-btn.0c040e50.svg",
+  "static\\media\\refresh-btn.svg": "static/media/refresh-btn.04468ad0.svg",
+  "static\\media\\search-btn.svg": "static/media/search-btn.438dabe9.svg",
+  "static\\media\\settings-btn.svg": "static/media/settings-btn.3f3679ea.svg"
+}

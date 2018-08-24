@@ -19,7 +19,7 @@ th {
 }
 
 #sname {
-  width: 100%;
+  width: calc(100vw / 5);
   min-width: 200px;
 }
 
@@ -50,6 +50,7 @@ th {
 }
 
 #snameandip {
+  width: calc(100vw / 4);
   min-width: 300px;
 }
 
