@@ -19,12 +19,12 @@ th {
 }
 
 #sname {
-  width: calc(100vw / 5);
+  width: calc(100vw / 7);
   min-width: 200px;
 }
 
 #scity {
-  width: calc(100vw / 9);
+  width: calc(100vw / 7);
   min-width: 150px;
   white-space: nowrap;
 }
@@ -35,18 +35,24 @@ th {
 }
 
 #sipaddr {
-  width: calc(100vw / 5);
+  width: calc(100vw / 7);
   min-width: 150px;
 }
 
 #sload {
-  min-width: 50px;
+  width: calc(100vw / 16);
+  min-width: 100px;
 }
 
 #sproto {
-  width: calc(100vw / 4);
+  width: calc(100vw / 5);
   min-width: 400px;
   font-size: 15px;
+}
+
+#sdate {
+  width: calc(100vw / 7);
+  min-width: 120px;
 }
 
 #snameandip {
