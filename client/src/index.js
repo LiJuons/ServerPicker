@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './app/state/index';
-import './index.css';
 import { App } from './app/containers';
-
-console.log("Naujas ServerPicker v1.2 update. Jei tai pirmas kartas, kada isijungei server picker - paspausk refresh mygtuka.");
+import './index.css';
 
 const isIE = /*@cc_on!@*/false || !!document.documentMode;
 

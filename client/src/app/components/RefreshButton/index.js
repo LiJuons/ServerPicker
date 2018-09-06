@@ -3,12 +3,12 @@ import { SvgIcon } from '../';
 import './RefreshButton.css';
 
 class RefreshButton extends Component {
-  constructor() {
+  constructor(props) {
     super();
     this.timer=0;
     this.state = {
       time: {},
-      seconds: 1800
+      seconds: props.timeout
     }
   }
 
@@ -27,13 +27,15 @@ class RefreshButton extends Component {
   }
 
   countDown = () => {
+    const { timeout } = this.props;
     let seconds = this.state.seconds - 1;
+
     this.setState({
       time: this.secondsToTime(seconds),
       seconds: seconds
     });
 
-    if ((seconds % 5 === 0)||(seconds > 1795)) {
+    if ((seconds % 5 === 0)||(seconds > timeout - 5)) {
       localStorage.setItem('seconds', seconds);
     }
 
@@ -41,7 +43,7 @@ class RefreshButton extends Component {
       clearInterval(this.timer);
       this.timer = 0;
       this.setState({
-        seconds: 1800
+        seconds: timeout
       });
       localStorage.removeItem('seconds');
       this.props.reactivation();
@@ -58,7 +60,7 @@ class RefreshButton extends Component {
   refreshFunc = () => {
     if (this.timer === 0) {
       this.timer = setInterval(this.countDown, 1000);
-      localStorage.setItem('seconds', 300);
+      localStorage.setItem('seconds', this.props.timeout);
       this.props.serversRefresh();
     }
   }

@@ -65,7 +65,13 @@ class Header extends Component {
 
   serversRefresh = () => {
     this.props.refreshFunc();
-    this.setState({ selectCountry: '---', selectProtocol: '---', searchValue: '', selectObfs: false, refreshed: true });
+    this.setState({
+      selectCountry: '---',
+      selectProtocol: '---',
+      searchValue: '',
+      selectObfs: false,
+      refreshed: true
+    });
 
     setTimeout(() => {
       this.setState({refreshed: false});
@@ -130,6 +136,7 @@ class Header extends Component {
               serversRefresh={this.serversRefresh}
               reactivation={this.reactivateButton}
               refreshed={refreshed}
+              timeout={15}//How long should it restrict the refresh
             />
           </div>
 
@@ -238,7 +245,7 @@ class Header extends Component {
                   value={timePiece}
                   onChange={this.handleChange}
                 />
-                <div id="timepiece-value">Days: <i style={{'text-decoration': 'underline'}}>{timePiece}</i></div>
+                <div id="timepiece-value">Days: <i style={{ textDecoration: 'underline' }}>{timePiece}</i></div>
               </div>
             </div>
 

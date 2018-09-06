@@ -2,98 +2,103 @@ import $ from "jquery";
 import * as types from './actionTypes';
 
 export const getServersRequest = () => ({
-    type: types.GET_SERVERS_REQUEST,
+      type: types.GET_SERVERS_REQUEST,
   }
 )
 
-export const getServersSuccess = (servers) => ({
-    type: types.GET_SERVERS_SUCCESS,
-    payload: {
-      servers
-    }
+export const getServersSuccess = () => ({
+      type: types.GET_SERVERS_SUCCESS,
   }
 )
 
 export const getServersFailure = (error) => ({
-    type: types.GET_SERVERS_FAILURE,
-    payload: {
-      error
-    }
+      type: types.GET_SERVERS_FAILURE,
+      payload: {
+        error
+      }
   }
 )
 
+export const getServersUpdate = (servers) => ({
+      type: types.GET_SERVERS_UPDATE,
+      payload: {
+        servers
+      }
+  }
+)
+
+//Updates the client's server list from servers.json
 export const getServers = () => {
   return dispatch => {
 
-    if (!!localStorage.getItem('servers')) {
-        dispatch(getServersRequest());
+    $.getJSON('/servers')
+    .done((result) => {
+      const serverList = result.data;
 
-        dispatch(
-          getServersSuccess(JSON.parse(localStorage.getItem('servers')))
-        );
+      if (serverList && serverList.length>0) {
+        localStorage.setItem('servers', JSON.stringify(serverList));
+        dispatch(getServersUpdate(serverList));
       }
       else {
-        dispatch(preApiCall());
+        dispatch(apiCall());
       }
-    }
-}
-
-export const apiCall = () => {
-  return dispatch => {
-
-    const API_LINK = process.env.REACT_APP_SECRET_API;
-    const url = 'https://allorigins.me/get?url=' + encodeURIComponent(API_LINK) + '&callback=?';
-
-    console.log(API_LINK ? "Server list is being fetched." : "Failed to reach API.");
-
-    dispatch(getServersRequest());
-
-    $.getJSON(url)
-    .done((data) => {
-      let serverList = JSON.parse(data.contents);
-      localStorage.setItem('servers', JSON.stringify(serverList));
-      dispatch(getServersSuccess(serverList));
     })
     .fail((error) => {
       dispatch(getServersFailure("Failed to fetch the servers.\nPlease try refreshing the page."));
     });
+
   }
 }
 
+//Calls to API to fetch the new server list into the servers.json file => if success, calls getServers
+export const apiCall = () => {
+  return dispatch => {
+
+      dispatch(getServersRequest());
+
+      $.getJSON('/updateServers')
+      .done((result) => {
+        dispatch(getServers());
+      })
+      .fail((error) => {
+        dispatch(getServersFailure("Failed to fetch the servers.\nPlease try refreshing the page."));
+      });
+  }
+}
+
+//Compares the length of current and fetched server list, if different - calls the apiCall
 export const preApiCall = () => {
   return dispatch => {
 
-    if (!!localStorage.getItem('servers')) {
-      const serverLength = JSON.parse(localStorage.getItem('servers')).length;
-      const API_COUNT = process.env.REACT_APP_API_COUNT;
-      const urlForCheck = 'https://allorigins.me/get?url=' + encodeURIComponent(API_COUNT) + '&callback=?';
+      if (!!localStorage.getItem('servers')) {
 
-      $.getJSON(urlForCheck)
-      .done((data) => {
-        let apiCount = JSON.parse(data.contents).count;
+        let serverLength = JSON.parse(localStorage.getItem('servers')).length;
+        serverLength = (serverLength > 0) ? serverLength : 0;
 
-        if (serverLength === apiCount) {
-          alert('Server list is refreshed.');
-          dispatch(
-            getServersSuccess(JSON.parse(localStorage.getItem('servers')))
-          );
-        }
-        else {
-          let serversChangeNumber = apiCount - serverLength;
-          let addremove = (serversChangeNumber>0) ? 'new servers have been added.' : 'old servers have been removed.';
-          alert('New server list is being fetched. \n[' + Math.abs(serversChangeNumber) + '] ' + addremove);
-          dispatch(apiCall());
-        }
+        $.getJSON('/serverCount')
+        .done((result) => {
+          const apiCount = result.data.count;
 
-      })
-      .fail((error) => {
-        console.log(error);
-        dispatch(getServersFailure("Failed to fetch the servers.\nPlease try refreshing the page."));
-      });
-    }
-    else {
-      dispatch(apiCall());
-    }
+          if (serverLength === apiCount) {
+            alert('Server list is refreshed.');
+            dispatch(getServersSuccess());
+          }
+          else {
+            const serversChangeNumber = apiCount - serverLength;
+            const addremove = (serversChangeNumber>0) ? 'new servers have been added.' : 'old servers have been removed.';
+
+            alert('New server list is being fetched. \n[' + Math.abs(serversChangeNumber) + '] ' + addremove);
+            dispatch(apiCall());
+          }
+
+        })
+        .fail((error) => {
+          dispatch(getServersFailure("Failed to fetch the servers.\nPlease try refreshing the page."));
+        });
+      }
+      else {
+        dispatch(apiCall());
+      }
 
   }
 }

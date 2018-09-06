@@ -8,30 +8,30 @@
 
 .bubbles_container2 {
   margin: auto;
-  width: 250px;
-  height: 100px;
+  margin-top: 120px;
 }
 
-.bubbles {
+.bubbles_type1, .bubbles_type2 {
   display:inline-block;
   border-radius: 100%;
-  background-color: #4c0406;
   opacity: 0;
 }
 
 .bubbles_type1 {
+  background-color: #4c0406;
   height: 8px;
   width: 8px;
   margin: 4px 6px;
 }
 
 .bubbles_type2 {
-  height: 15px;
-  width: 15px;
-  margin: 18px 6px;
+  background-color: #a7080b;
+  height: 50px;
+  width: 50px;
+  margin: 0 60px;
 }
 
-.bubble_1 {
+.bubble_1, .bubble_2, .bubble_3 {
   -webkit-animation: pulse .9s infinite;
   -moz-animation: pulse .9s infinite;
   -ms-animation: pulse .9s infinite;
@@ -40,12 +40,6 @@
 }
 
 .bubble_2 {
-  -webkit-animation: pulse .9s infinite;
-  -moz-animation: pulse .9s infinite;
-  -ms-animation: pulse .9s infinite;
-  -o-animation: pulse .9s infinite;
-  animation: pulse .9s infinite;
-
   -webkit-animation-delay: .15s;
   -moz-animation-delay: .15s;
   -ms-animation-delay: .15s;
@@ -54,12 +48,6 @@
 }
 
 .bubble_3 {
-  -webkit-animation: pulse .9s infinite;
-  -moz-animation: pulse .9s infinite;
-  -ms-animation: pulse .9s infinite;
-  -o-animation: pulse .9s infinite;
-  animation: pulse .9s infinite;
-
   -webkit-animation-delay: .3s;
   -moz-animation-delay: .3s;
   -ms-animation-delay: .3s;

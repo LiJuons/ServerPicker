@@ -9,6 +9,9 @@
 
 # production
 # git rm -r build
+/client/build
+/client/static
+Servers.json
 
 # misc
 .DS_Store

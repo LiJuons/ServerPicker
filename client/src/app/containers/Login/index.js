@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
-import { Spinner } from '../';
-import './AuthDialog.css';
+import { connect } from 'react-redux';
+import { Spinner } from '../../components';
+import { auth } from '../../../modules';
+import './Login.css';
 
-class AuthDialog extends Component {
+class Login extends Component {
+
   state = {
     username: '',
     password: ''
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.isLogged && !!sessionStorage.token && sessionStorage.token !== 'undefined') {
+      this.props.history.replace("/");
+    }
   }
 
   handleChange= (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  preHandleAuth = () => {
-    this.props.handleAuth(this.state.username, this.state.password);
+  handleAuth = () => {
+    const { username, password } = this.state;
+    this.props.authRequest(username, password);
   }
 
   render() {
@@ -47,7 +57,7 @@ class AuthDialog extends Component {
                 tabIndex="2"
               />
 
-              <button type="submit" name="submit" onClick={this.preHandleAuth} id="submitBtn" >
+              <button type="submit" name="submit" onClick={this.handleAuth} id="submitBtn" >
                 { this.props.authProcStatus ? <Spinner type={1} style={{ left: 80 }} /> : "Login" }
               </button>
 
@@ -59,6 +69,16 @@ class AuthDialog extends Component {
       </div>
     );
   }
+
 }
 
-export default AuthDialog;
+const mapStateToProps = state => ({
+    authProcStatus: auth.selectors.getAuthProcStatus(state),
+    isLogged: auth.selectors.isLogged(state)
+});
+
+const mapActionsToProps = {
+  authRequest: auth.actions.authRequest
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(Login);

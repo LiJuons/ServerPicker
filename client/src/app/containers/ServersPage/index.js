@@ -1,21 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import servers from '../../../modules/servers';
-import filters from '../../../modules/filters';
+import { auth, servers, filters } from '../../../modules';
 import { ErrorMsg, ServerList, Spinner } from '../../components';
 import './ServersPage.css';
 
 class ServersPage extends Component {
 
   componentWillMount() {
-    this.props.getServers();
+    if (this.checkAccess()) {
+      this.props.getServers();
+    }
+  }
+
+  componentDidUpdate() {
+    this.checkAccess();
+  }
+
+  checkAccess = () => {
+    const { isLogged, history } = this.props;
+
+    if (!isLogged || !sessionStorage.token || sessionStorage.token === 'undefined') {
+      history.replace("/login");
+      return false;
+    }
+    else return true;
   }
 
   render() {
-    const { filteredServers, servers, isFetching, fetchError, isFiltering, filterError, displaySeparate, headerHide } = this.props;
+    const {
+      filteredServers, servers, isFetching,
+      fetchError, isFiltering, filterError,
+      displaySeparate, headerHide
+    } = this.props;
 
     return (
-      <div className={(isFetching || isFiltering) ? "page-container loading" : "page-container"}>
+      <div className={
+        (isFetching || isFiltering) ? "page-container loading" : "page-container"
+      }>
 
         <div className={ headerHide ? "hideBlock" : "showBlock" }></div>
 
@@ -28,7 +49,11 @@ class ServersPage extends Component {
 
           ? <ErrorMsg message={!!fetchError ? fetchError : filterError} />
 
-          : <ServerList servers={servers} filteredServers={JSON.stringify(filteredServers)} displaySeparate={displaySeparate} />
+          : <ServerList
+              servers={servers}
+              filteredServers={JSON.stringify(filteredServers)}
+              displaySeparate={displaySeparate}
+            />
         }
 
       </div>
@@ -37,6 +62,8 @@ class ServersPage extends Component {
 }
 
 const mapStateToProps = state => ({
+    isLogged: auth.selectors.isLogged(state),
+
     isFetching: servers.selectors.isFetching(state),
     servers: servers.selectors.getServers(state),
     fetchError: servers.selectors.getError(state),
