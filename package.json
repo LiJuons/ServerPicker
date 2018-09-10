@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "description": "",
   "scripts": {
-    "heroku-postbuild": "cd ./server && npm heroku-postbuild"
+    "start": "cd ./server && npm install"
   },
   "engines": {
     "node": "8.11.4"
