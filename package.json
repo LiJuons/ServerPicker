@@ -4,5 +4,8 @@
   "description": "",
   "scripts": {
     "heroku-postbuild": "cd ./server && npm heroku-postbuild"
+  },
+  "engines": {
+    "node": "8.11.4"
   }
 }
