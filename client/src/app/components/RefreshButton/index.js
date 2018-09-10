@@ -5,10 +5,11 @@ import './RefreshButton.css';
 class RefreshButton extends Component {
   constructor(props) {
     super();
+    this.isCancelled = false;
     this.timer=0;
     this.state = {
       time: {},
-      seconds: props.timeout
+      seconds: props.timeout,
     }
   }
 
@@ -30,23 +31,25 @@ class RefreshButton extends Component {
     const { timeout } = this.props;
     let seconds = this.state.seconds - 1;
 
-    this.setState({
-      time: this.secondsToTime(seconds),
-      seconds: seconds
-    });
-
-    if ((seconds % 5 === 0)||(seconds > timeout - 5)) {
-      localStorage.setItem('seconds', seconds);
-    }
-
-    if (seconds === 0) {
-      clearInterval(this.timer);
-      this.timer = 0;
+    if (!this.isCancelled) {
       this.setState({
-        seconds: timeout
+        time: this.secondsToTime(seconds),
+        seconds: seconds
       });
-      localStorage.removeItem('seconds');
-      this.props.reactivation();
+
+      if ((seconds % 5 === 0)||(seconds > timeout - 5)) {
+        localStorage.setItem('seconds', seconds);
+      }
+
+      if (seconds === 0) {
+        clearInterval(this.timer);
+        this.timer = 0;
+        this.setState({
+          seconds: timeout
+        });
+        localStorage.removeItem('seconds');
+        this.props.reactivation();
+      }
     }
   }
 
@@ -81,6 +84,10 @@ class RefreshButton extends Component {
       cookyTime ? cookyTime : this.state.seconds
     );
     this.setState({ time: timeLeftVar });
+  }
+
+  componentWillUnmount() {
+    this.isCancelled = true;
   }
 
   render() {

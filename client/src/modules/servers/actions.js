@@ -31,12 +31,18 @@ export const getServersUpdate = (servers) => ({
 export const getServers = () => {
   return dispatch => {
 
-    $.getJSON('/servers')
+    $.ajax({
+        type: 'GET',
+        url: '/servers',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `JWT ${sessionStorage.token}`
+        }
+    })
     .done((result) => {
       const serverList = result.data;
-
       if (serverList && serverList.length>0) {
-        localStorage.setItem('servers', JSON.stringify(serverList));
+        localStorage.setItem('listLength', serverList.length);
         dispatch(getServersUpdate(serverList));
       }
       else {
@@ -56,7 +62,14 @@ export const apiCall = () => {
 
       dispatch(getServersRequest());
 
-      $.getJSON('/updateServers')
+      $.ajax({
+          type: 'GET',
+          url: '/updateServers',
+          headers: {
+            Accept: 'application/json',
+            Authorization: `JWT ${sessionStorage.token}`
+          }
+      })
       .done((result) => {
         dispatch(getServers());
       })
@@ -68,23 +81,27 @@ export const apiCall = () => {
 
 //Compares the length of current and fetched server list, if different - calls the apiCall
 export const preApiCall = () => {
-  return dispatch => {
+  return (dispatch, getState) => {
+      let { listLength } = localStorage;
+      if (!!listLength) {
+        listLength = (listLength > 0) ? parseInt(listLength, 10) : 0;
 
-      if (!!localStorage.getItem('servers')) {
-
-        let serverLength = JSON.parse(localStorage.getItem('servers')).length;
-        serverLength = (serverLength > 0) ? serverLength : 0;
-
-        $.getJSON('/serverCount')
+        $.ajax({
+            type: 'GET',
+            url: '/serverCount',
+            headers: {
+              Accept: 'application/json',
+              Authorization: `JWT ${sessionStorage.token}`
+            }
+        })
         .done((result) => {
           const apiCount = result.data.count;
-
-          if (serverLength === apiCount) {
+          if (listLength === apiCount) {
             alert('Server list is refreshed.');
             dispatch(getServersSuccess());
           }
           else {
-            const serversChangeNumber = apiCount - serverLength;
+            const serversChangeNumber = apiCount - listLength;
             const addremove = (serversChangeNumber>0) ? 'new servers have been added.' : 'old servers have been removed.';
 
             alert('New server list is being fetched. \n[' + Math.abs(serversChangeNumber) + '] ' + addremove);

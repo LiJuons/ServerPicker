@@ -1,8 +1,6 @@
 import $ from "jquery";
 import * as types from './actionTypes';
 
-const saved_token = sessionStorage.getItem('token');
-
 export const authInit = () => ({
     type: types.AUTH_REQUEST
 })
@@ -32,12 +30,12 @@ export const authLogout = () => ({
 })
 
 export const authRequest = (username, password) => (dispatch) => {
+      const { token } = sessionStorage;
+
       dispatch(authInit());
 
-      if (saved_token !== 'undefined' && saved_token) {
-
+      if (token && token !== 'undefined') {
         dispatch(authCheck());
-
       } else {
 
         $.ajax({
@@ -62,15 +60,16 @@ export const authRequest = (username, password) => (dispatch) => {
 }
 
 export const authCheck = () => (dispatch) => {
+    const { token } = sessionStorage;
 
-    if (!!saved_token && saved_token !== 'undefined') {
+    if (!!token && token !== 'undefined') {
 
       $.ajax({
           type: 'GET',
           url: '/auth',
           headers: {
             Accept: 'application/json',
-            Authorization: `JWT ${saved_token}`
+            Authorization: `JWT ${token}`
           }
       })
       .done(res => {

@@ -7,11 +7,16 @@
 # testing
 /coverage
 
+# development
+/client/build
+#/client/static
+#Servers.json
+
 # production
 # git rm -r build
-/client/build
-/client/static
-Servers.json
+/client/scripts
+/client/src
+
 
 # misc
 .DS_Store

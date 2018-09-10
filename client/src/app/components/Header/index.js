@@ -4,7 +4,8 @@ import { RefreshButton, SvgIcon, TimeInfoBox } from '../';
 import './Header.css';
 
 class Header extends Component {
-
+  isCancelled = false;
+  refreshTimeout = null;
   state = {
     searchValue: '',
     selectCountry: '---',
@@ -23,26 +24,30 @@ class Header extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    this.setState({
-      [name]: value
-    });
+    if (!this.isCancelled) {
+      this.setState({
+        [name]: value
+      });
+    }
   }
 
   handleDisplayChange = (event) => {
     const value = event.target.value;
     const name = 'separateColumns';
 
-    this.setState({
-      [name]: value
-    }, () => {
-      this.props.displayChange();
-    });
+    if (!this.isCancelled) {
+      this.setState({
+        [name]: value
+      }, () => {
+        this.props.displayChange();
+      });
+    }
   }
 
   timeFilter = () => {
     const { timePiece } = this.state;
 
-    if (timePiece===31) {
+    if (timePiece===31 && !this.isCancelled) {
       this.setState({showTimeInfo: true}, () => {
         setTimeout(() => {
           this.setState({showTimeInfo: false});
@@ -73,19 +78,27 @@ class Header extends Component {
       refreshed: true
     });
 
-    setTimeout(() => {
-      this.setState({refreshed: false});
-    }, localStorage.getItem('seconds')*1000); //disable refresh for 5 minutes
+    if (!this.isCancelled) {
+
+      this.refreshTimeout = setTimeout(() => {
+        this.setState({refreshed: false});
+      }, localStorage.getItem('seconds')*1000); //disable refresh for 5 minutes
+    }
   }
 
   reactivateButton = () => {
-    this.setState({refreshed: false});
+    if (!this.isCancelled) this.setState({refreshed: false});
   }
 
   componentDidMount() {
-    if(localStorage.getItem('seconds')>5){
+    if(localStorage.getItem('seconds')>5 && !this.isCancelled){
       this.setState({refreshed: true});
     }
+  }
+
+  componentWillUnmount() {
+    this.isCancelled = true;
+    clearTimeout(this.refreshTimeout);
   }
 
   render() {
