@@ -26,7 +26,8 @@ class Header extends Component {
 
     if (!this.isCancelled) {
       this.setState({
-        [name]: value
+        [name]: value,
+        showTimeInfo: false
       });
     }
   }
@@ -55,16 +56,16 @@ class Header extends Component {
       });
     }
 
-    this.props.filterNewServers(timePiece);
+    this.props.filterNewServers(timePiece, this.props.servers);
   }
 
   filterFunction = () => {
-    this.props.filterFunc(this.state, 'filter');
+    this.props.filterFunc(this.state, this.props.servers, 'filter');
   }
 
   searchFunction = (e) => {
     if (e.keyCode === 13) {
-      this.props.filterFunc(this.state, 'search');
+      this.props.filterFunc(this.state, this.props.servers, 'search');
     }
   }
 
@@ -149,7 +150,7 @@ class Header extends Component {
               serversRefresh={this.serversRefresh}
               reactivation={this.reactivateButton}
               refreshed={refreshed}
-              timeout={15}//How long should it restrict the refresh
+              timeout={3}//How long should it restrict the refresh
             />
           </div>
 

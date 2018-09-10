@@ -83,6 +83,12 @@ app.get('/auth', authMiddleware, (req, res) => {
   res.json("Connected.");
 });
 
+
+//Calls the update function
+app.get('/updateServers', authMiddleware, async (req, res) => {
+  serverUpdate(req, res);
+});
+
 //Fetches the number of servers from the API
 app.get('/serverCount', authMiddleware, async (req, res) => {
 
@@ -103,11 +109,6 @@ app.get('/serverCount', authMiddleware, async (req, res) => {
 
 });
 
-//Calls the update function
-app.get('/updateServers', authMiddleware, async (req, res) => {
-  serverUpdate(req, res);
-});
-
 //Gets servers from the server.json (file)
 app.get('/servers', authMiddleware, (req, res) => {
   try {
@@ -118,7 +119,6 @@ app.get('/servers', authMiddleware, (req, res) => {
           error: 'Failed to get servers.'
         });
       }
-
       res.status(200).json(JSON.parse(data));
     });
   }

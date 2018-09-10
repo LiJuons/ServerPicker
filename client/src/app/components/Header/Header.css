@@ -4,7 +4,7 @@
   top: 0;
   height: 100px;
   width: calc(100% - 18px);
-  min-width: 1340px;
+  min-width: 1240px;
   background: linear-gradient(
     to top,
     rgba(53, 69, 77, 0),
@@ -124,17 +124,17 @@
   position: absolute;
   z-index: 1;
   margin-top: 32px;
-  margin-left: 12px;
+  margin-left: 17px;
 }
 
 #settingsBtnDiv {
-  margin-top: 31px;
-  margin-left: 60px;
+  margin-top: 24px;
+  margin-left: 68px;
   height: 36px;
 }
 
 #clockBtnDiv {
-  margin-top: 31px;
+  margin-top: 24px;
   margin-left: 12px;
   height: 36px;
 }
@@ -150,7 +150,7 @@
 
 #searchBox {
   margin: 22px 0 0 16px;
-  padding: 6px ;
+  padding: 8px 6px;
   width: 500px;
   border-radius: 28px;
   border: none;
@@ -176,7 +176,7 @@
 #searchBtn {
   position: absolute;
   top: 23px;
-  left: 630px;
+  left: 668px;
   height: 42px;
   padding-top: 12px;
   padding-left: 5px;
@@ -309,4 +309,22 @@ input[type=range]::-moz-range-thumb {
 
 input[type=range]:focus::-webkit-slider-runnable-track, input[type=range]:hover::-webkit-slider-runnable-track {
   background: #c80000;
+}
+
+@media only screen and (max-width: 1400px) {
+  #searchBox {
+    width: 400px;
+  }
+  #searchBtn {
+    left: 570px;
+  }
+}
+
+@media only screen and (max-width: 1525px) {
+  .navBar-settings-right {
+    width: 345px;
+  }
+  #timepiece {
+    width: 130px;
+  }
 }

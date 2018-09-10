@@ -16,14 +16,14 @@ class App extends Component {
     const {
       refreshServers, filterServers, isFetching,
       displayChange, headerHide, filterNewServers,
-      isLogged, authLogout
+      isLogged, authLogout, servers
     } = this.props;
 
     return (
       <div className="App">
 
         {
-          (isLogged && !!sessionStorage.token && sessionStorage.token !== 'undefined')  &&
+          (isLogged && !!sessionStorage.token && typeof(sessionStorage.token) !== 'undefined')  &&
               <Header
                 filterFunc={filterServers}
                 refreshFunc={refreshServers}
@@ -31,6 +31,7 @@ class App extends Component {
                 displayChange={displayChange}
                 headerHide={headerHide}
                 filterNewServers={filterNewServers}
+                servers={servers}
                 logout={authLogout}
               />
         }
@@ -49,6 +50,7 @@ class App extends Component {
 const mapStateToProps = state => ({
     isLogged: auth.selectors.isLogged(state),
     isFetching: servers.selectors.isFetching(state),
+    servers: servers.selectors.getServers(state),
     error: servers.selectors.getError(state)
 });
 

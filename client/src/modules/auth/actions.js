@@ -34,7 +34,7 @@ export const authRequest = (username, password) => (dispatch) => {
 
       dispatch(authInit());
 
-      if (token && token !== 'undefined') {
+      if (token && typeof(token) !== 'undefined') {
         dispatch(authCheck());
       } else {
 
@@ -62,7 +62,7 @@ export const authRequest = (username, password) => (dispatch) => {
 export const authCheck = () => (dispatch) => {
     const { token } = sessionStorage;
 
-    if (!!token && token !== 'undefined') {
+    if (!!token && typeof(token) !== 'undefined') {
 
       $.ajax({
           type: 'GET',

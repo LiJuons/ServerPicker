@@ -36,13 +36,11 @@ export const filterServersFailure = (error) => ({
   }
 )
 
-export const filterNewServers = (timePiece) => {
+export const filterNewServers = (timePiece, servers) => {
   return dispatch => {
     dispatch(filterServersRequest());
 
-    if (!!localStorage.getItem('servers')) {
-
-      const servers = JSON.parse(localStorage.getItem('servers'));
+    if (!!servers) {
       let filteredServers = [];
 
       if (servers.length>0) {
@@ -92,16 +90,14 @@ export const filterNewServers = (timePiece) => {
   }
 }
 
-export const filterServers = (state, searchType) => {
+export const filterServers = (state, servers, searchType) => {
   return dispatch => {
 
       const { searchValue, selectCountry, selectProtocol, selectObfs } = state;
 
       dispatch(filterServersRequest());
 
-      if (!!localStorage.getItem('servers')) {
-
-        const servers = JSON.parse(localStorage.getItem('servers'));
+      if (!!servers) {
         let filteredServers = [];
 
         if (servers.length>0) {

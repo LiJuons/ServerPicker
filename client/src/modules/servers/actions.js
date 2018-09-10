@@ -42,7 +42,9 @@ export const getServers = () => {
     .done((result) => {
       const serverList = result.data;
       if (serverList && serverList.length>0) {
-        localStorage.setItem('listLength', serverList.length);
+        if (typeof(Storage) !== "undefined") {
+          localStorage.setItem('listLength', serverList.length);
+        }
         dispatch(getServersUpdate(serverList));
       }
       else {
@@ -82,36 +84,41 @@ export const apiCall = () => {
 //Compares the length of current and fetched server list, if different - calls the apiCall
 export const preApiCall = () => {
   return (dispatch, getState) => {
-      let { listLength } = localStorage;
-      if (!!listLength) {
-        listLength = (listLength > 0) ? parseInt(listLength, 10) : 0;
+      if (typeof(Storage) !== "undefined") {
+        const { listLength } = localStorage;
+        if (!!listLength) {
+          const serverListLength = (listLength > 0) ? parseInt(listLength, 10) : 0;
 
-        $.ajax({
-            type: 'GET',
-            url: '/serverCount',
-            headers: {
-              Accept: 'application/json',
-              Authorization: `JWT ${sessionStorage.token}`
+          $.ajax({
+              type: 'GET',
+              url: '/serverCount',
+              headers: {
+                Accept: 'application/json',
+                Authorization: `JWT ${sessionStorage.token}`
+              }
+          })
+          .done((result) => {
+            const apiCount = result.data.count;
+            if (serverListLength === apiCount) {
+              alert('Server list is refreshed.');
+              dispatch(getServersSuccess());
             }
-        })
-        .done((result) => {
-          const apiCount = result.data.count;
-          if (listLength === apiCount) {
-            alert('Server list is refreshed.');
-            dispatch(getServersSuccess());
-          }
-          else {
-            const serversChangeNumber = apiCount - listLength;
-            const addremove = (serversChangeNumber>0) ? 'new servers have been added.' : 'old servers have been removed.';
+            else {
+              const serversChangeNumber = apiCount - serverListLength;
+              const addremove = (serversChangeNumber>0) ? 'new servers have been added.' : 'old servers have been removed.';
 
-            alert('New server list is being fetched. \n[' + Math.abs(serversChangeNumber) + '] ' + addremove);
-            dispatch(apiCall());
-          }
+              alert('New server list is being fetched. \n[' + Math.abs(serversChangeNumber) + '] ' + addremove);
+              dispatch(apiCall());
+            }
 
-        })
-        .fail((error) => {
-          dispatch(getServersFailure("Failed to fetch the servers.\nPlease try refreshing the page."));
-        });
+          })
+          .fail((error) => {
+            dispatch(getServersFailure("Failed to fetch the servers.\nPlease try refreshing the page."));
+          });
+        }
+        else {
+          dispatch(apiCall());
+        }
       }
       else {
         dispatch(apiCall());
