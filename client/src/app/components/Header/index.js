@@ -150,7 +150,7 @@ class Header extends Component {
               serversRefresh={this.serversRefresh}
               reactivation={this.reactivateButton}
               refreshed={refreshed}
-              timeout={3}//How long should it restrict the refresh
+              timeout={1800}//How long should it restrict the refresh
             />
           </div>
 
