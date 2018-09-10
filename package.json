@@ -1,0 +1,8 @@
+{
+  "name": "Server Picker application",
+  "version": "1.0.1",
+  "description": "",
+  "scripts": {
+    "heroku-postbuild": "cd ./server/heroku-postbuild"
+  }
+}
