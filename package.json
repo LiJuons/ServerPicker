@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "",
   "scripts": {
+    "start": "cd ./server && npm start",
     "heroku-prebuild": "cd ./server && npm install"
   },
   "engines": {
