@@ -3,6 +3,6 @@
   "version": "1.0.1",
   "description": "",
   "scripts": {
-    "heroku-postbuild": "cd ./server/heroku-postbuild"
+    "heroku-postbuild": "cd ./server && npm heroku-postbuild"
   }
 }
