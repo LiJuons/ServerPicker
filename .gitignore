@@ -9,13 +9,13 @@
 
 # development
 /client/build
-#/client/static
-#Servers.json
+/client/static
+Servers.json
 
 # production
 # git rm -r build
-/client/scripts
-/client/src
+#/client/scripts
+#/client/src
 
 
 # misc
