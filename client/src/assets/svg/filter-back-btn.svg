@@ -3,7 +3,8 @@
     <style>
       .cls-1fb {
         stroke: #fff;
-        fill: none;
+        fill: evenodd;
+        fill-rule: evenodd;
       }
 
       .cls-1fb, .cls-2fb {
@@ -12,9 +13,8 @@
       }
 
       .cls-2fb {
-        stroke: evenodd;
-        fill: evenodd;
-        fill-rule: evenodd;
+        stroke: #fff;
+        fill: #fff;
       }
     </style>
   </defs>

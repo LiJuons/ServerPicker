@@ -2,7 +2,8 @@
   <defs>
     <style>
       .cls-1n {
-        fill: none;
+        fill: evenodd;
+        fill-rule: evenodd;
         stroke: #fff;
       }
 
@@ -13,9 +14,8 @@
       }
 
       .cls-2n {
-        fill: evenodd;
-        fill-rule: evenodd;
-        stroke: evenodd;
+        fill: #FFF;
+        stroke: #FFF;
       }
     </style>
   </defs>

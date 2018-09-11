@@ -54,8 +54,9 @@ class RefreshButton extends Component {
   }
 
   confirmRefresh = () => {
-    if (window.confirm("Are you sure you want to refresh the server list? \nServer refresh will be disabled for 30 minutes.")) {
-        alert("Please wait a moment...");
+    if (window.confirm("Are you sure you want to refresh the server list?"+
+              "\nServer refresh feature will be disabled for 30 minutes.")) 
+    {
         this.refreshFunc();
     }
   }

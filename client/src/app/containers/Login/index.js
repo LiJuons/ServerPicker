@@ -31,37 +31,43 @@ class Login extends Component {
     return (
       <div>
 
-        <div id="myModal" className="modal" >
+        <div id="myModal" className="modal">
 
 
           <div className="modal-content">
             <h2 style={{ marginLeft: 8 }}>Authentication</h2>
 
-            <div className="form-control">
+              <div className="form-control">
 
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                placeholder="Username"
-                onChange={this.handleChange}
-                tabIndex="1"
-              />
+                <input
+                  type="text"
+                  name="username"
+                  value={this.state.username}
+                  placeholder="Username"
+                  onChange={this.handleChange}
+                  onKeyPress={(e)=>{if ((e.keyCode || e.which) === 13) {
+                      this.handleAuth()
+                    }}}
+                  tabIndex="1"
+                />
 
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                placeholder="Password"
-                onChange={this.handleChange}
-                tabIndex="2"
-              />
+                <input
+                  type="password"
+                  name="password"
+                  value={this.state.password}
+                  placeholder="Password"
+                  onChange={this.handleChange}
+                  onKeyPress={(e)=>{if ((e.keyCode || e.which) === 13) {
+                      this.handleAuth()
+                    }}}
+                  tabIndex="2"
+                />
 
-              <button type="submit" name="submit" onClick={this.handleAuth} id="submitBtn" >
-                { this.props.authProcStatus ? <Spinner type={1} style={{ left: 80 }} /> : "Login" }
-              </button>
+                <button type="submit" name="submit" onClick={this.handleAuth} id="submitBtn" >
+                  { this.props.authProcStatus ? <Spinner type={1} style={{ left: 80 }} /> : "Login" }
+                </button>
 
-            </div>
+              </div>
 
           </div>
 

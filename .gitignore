@@ -8,13 +8,13 @@
 /coverage
 
 # development
-#/client/build
-#/client/static
-#Servers.json
+/client/build
+/client/static
+Servers.json
 
 # production (git rm -r build)
-/client/scripts
-/client/src
+#/client/scripts
+#/client/src
 
 
 # misc

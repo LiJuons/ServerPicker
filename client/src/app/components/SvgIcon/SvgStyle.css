@@ -4,7 +4,7 @@
 }
 
 .closeBtn {
-  fill: #888;
+  fill: #FFF;
   cursor: pointer;
 }
 .closeBtn:hover {
@@ -13,7 +13,7 @@
 
 .settingsBtn {
   stroke: #FFF;
-  fill: #FFF;
+  fill: none;
   cursor: pointer;
 }
 .settingsBtn:hover {
@@ -23,7 +23,7 @@
 
 .filterBackBtn {
   stroke: #FFF;
-  fill: #FFF;
+  fill: none;
   cursor: pointer;
 }
 .filterBackBtn:hover {
@@ -33,7 +33,7 @@
 
 .clockBtn {
   stroke: #FFF;
-  fill: #FFF;
+  fill: none;
   cursor: pointer;
 }
 .clockBtn:hover {

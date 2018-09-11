@@ -68,7 +68,7 @@ class ServerList extends Component {
 
                     displaySeparate ?
 
-                    <td id="sname">
+                    <td className='name'>
                       <table>
                         <tbody>
                         <tr><th onClick={() => this.sortServersBy('name')}>
@@ -91,7 +91,7 @@ class ServerList extends Component {
 
                     :
 
-                    <td id="snameandip">
+                    <td className='nameandip'>
                       <table>
                         <tbody>
                         <tr><th onClick={() => this.sortServersBy('name')}>
@@ -116,7 +116,7 @@ class ServerList extends Component {
 
 
 
-                  <td id="scity">
+                  <td className='city'>
                     <table>
                       <tbody>
                       <tr><th onClick={() => this.sortServersBy('locations[0].country.city.name')}>
@@ -133,7 +133,7 @@ class ServerList extends Component {
                     </table>
                   </td>
 
-                  <td id="sdomain">
+                  <td className='domain'>
                     <table>
                       <tbody>
                       <tr><th onClick={() => this.sortServersBy('hostname')}>Domain</th></tr>
@@ -152,7 +152,7 @@ class ServerList extends Component {
 
                     displaySeparate ?
 
-                    <td  id="sipaddr">
+                    <td  className='ipaddr'>
                       <table>
                         <tbody>
                         <tr><th onClick={() => this.sortServersBy('station')}>IP Address</th></tr>
@@ -173,7 +173,7 @@ class ServerList extends Component {
 
                   }
 
-                  <td id="sproto">
+                  <td className='proto'>
                     <table>
                       <tbody>
                       <tr><th style={{ cursor: 'default' }}>Supported Protocols</th></tr>
@@ -192,7 +192,7 @@ class ServerList extends Component {
                     </table>
                   </td>
 
-                  <td  id="sload">
+                  <td  className='load'>
                     <table>
                       <tbody>
                       <tr><th onClick={() => this.sortServersBy('load')}>Load</th></tr>
@@ -208,7 +208,7 @@ class ServerList extends Component {
                     </table>
                   </td>
 
-                  <td id="sdate">
+                  <td className='date'>
                     <table>
                       <tbody>
                       <tr><th onClick={() => this.sortServersBy('created_at')}>

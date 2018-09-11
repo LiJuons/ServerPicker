@@ -6,10 +6,13 @@ import store from './app/state/index';
 import { App } from './app/containers';
 import './index.css';
 
-const isIE = /*@cc_on!@*/false || !!document.documentMode;
+// Checks if one of these browsers is used
+const isChrome = !!window.chrome && !!window.chrome.webstore;
+const isFirefox = typeof InstallTrigger !== 'undefined';
 
-if (!!isIE) alert("Internet Explorer does not support Server Picker. \nPlease use Mozilla Firefox or Google Chrome.");
-else {
+if (!isChrome && !isFirefox) {
+  alert("ServerPicker is currently supported only on \nMozilla Firefox and Google Chrome internet browsers.");
+} else {
   ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>

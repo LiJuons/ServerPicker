@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, '../client')));
 //Set schedule for server list update every hour at 15 minutes
 let refreshRule = new schedule.RecurrenceRule();
 refreshRule.minute = 15;
-const refreshSchedule = schedule.scheduleJob(refreshRule, function(){
+const refreshSchedule = schedule.scheduleJob(refreshRule, () => {
   serverUpdate();
 });
 
@@ -131,7 +131,7 @@ app.get('/servers', authMiddleware, (req, res) => {
   }
 });
 
-app.get('*', function (req, res) {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 

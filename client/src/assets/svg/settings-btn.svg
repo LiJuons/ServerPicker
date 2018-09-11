@@ -1,23 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 100 100">
   <defs>
     <style>
-      .cls-1se, .cls-2se {
-        fill: none;
+      .cls-1se, .cls-2se, .cls-3se {
+        stroke: #fff;
       }
 
       .cls-1se {
-        stroke: #fff;
+        fill: evenodd;
+        fill-rule: evenodd;
         stroke-width: 3.5px;
       }
 
       .cls-2se {
-        stroke: evenodd;
+        fill: none;
         stroke-width: 16px;
       }
 
       .cls-3se {
-        fill: evenodd;
-        stroke: evenodd;
+        fill: #FFF;
       }
     </style>
   </defs>

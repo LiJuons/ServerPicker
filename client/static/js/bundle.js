@@ -850,7 +850,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\r\n.server-list-container {\r\n  width: 100%;\r\n  text-align: center;\r\n}\r\n\r\n.list-item-box {\r\n  width: calc(100% / 7);\r\n  height: 40px;\r\n  border-top: 1.2px dotted #28333d;\r\n  padding: 10px 10px;\r\n}\r\n\r\nth {\r\n  padding-top: 15px;\r\n  padding-bottom: 25px;\r\n  font-size: 18px;\r\n  cursor: pointer;\r\n}\r\n\r\n#sname {\r\n  width: calc(100vw / 7);\r\n  min-width: 200px;\r\n}\r\n\r\n#scity {\r\n  width: calc(100vw / 7);\r\n  min-width: 150px;\r\n  white-space: nowrap;\r\n}\r\n\r\n#sdomain {\r\n  width: calc(100vw / 7);\r\n  min-width: 200px;\r\n}\r\n\r\n#sipaddr {\r\n  width: calc(100vw / 7);\r\n  min-width: 150px;\r\n}\r\n\r\n#sload {\r\n  width: calc(100vw / 16);\r\n  min-width: 100px;\r\n}\r\n\r\n#sproto {\r\n  width: calc(100vw / 5);\r\n  min-width: 400px;\r\n  font-size: 15px;\r\n}\r\n\r\n#sdate {\r\n  width: calc(100vw / 7);\r\n  min-width: 120px;\r\n}\r\n\r\n#snameandip {\r\n  width: calc(100vw / 4);\r\n  min-width: 300px;\r\n}\r\n\r\n@media only screen and (max-width: 1570px) {\r\n  #sdate {\r\n    min-width: 105px;\r\n  }\r\n}\r\n", ""]);
+exports.push([module.i, "\r\n.server-list-container {\r\n  width: 100%;\r\n  min-width: 1340px;\r\n  text-align: center;\r\n}\r\n\r\n.list-item-box {\r\n  width: calc(100% / 7);\r\n  height: 40px;\r\n  border-top: 1.2px dotted #28333d;\r\n  padding: 10px 10px;\r\n}\r\n\r\nth {\r\n  padding-top: 15px;\r\n  padding-bottom: 25px;\r\n  font-size: 18px;\r\n  cursor: pointer;\r\n}\r\n\r\ntable {\r\n  width: 100%;\r\n}\r\n\r\n/* Table columns style */\r\n\r\n.name {\r\n  width: calc(100vw / 5);\r\n  min-width: 200px;\r\n}\r\n\r\n.city {\r\n  width: calc(100vw / 7);\r\n  min-width: 150px;\r\n  white-space: nowrap;\r\n}\r\n\r\n.domain {\r\n  width: calc(100vw / 7);\r\n  min-width: 200px;\r\n}\r\n\r\n.ipaddr {\r\n  width: calc(100vw / 7);\r\n  min-width: 150px;\r\n}\r\n\r\n.load {\r\n  width: calc(100vw / 14);\r\n  min-width: 100px;\r\n}\r\n\r\n.proto {\r\n  width: calc(100vw / 4);\r\n  min-width: 400px;\r\n  font-size: 15px;\r\n}\r\n\r\n.date {\r\n  width: calc(100vw / 8);\r\n  min-width: 105px;\r\n}\r\n\r\n.nameandip {\r\n  width: calc(100vw / 2);\r\n  min-width: 300px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -890,7 +890,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\r\n.rotate {\r\n  -webkit-transform: rotate(180deg);\r\n      -ms-transform: rotate(180deg);\r\n          transform: rotate(180deg);\r\n}\r\n\r\n.closeBtn {\r\n  fill: #888;\r\n  cursor: pointer;\r\n}\r\n.closeBtn:hover {\r\n  fill: #a10a0f;\r\n}\r\n\r\n.settingsBtn {\r\n  stroke: #FFF;\r\n  fill: #FFF;\r\n  cursor: pointer;\r\n}\r\n.settingsBtn:hover {\r\n  fill: #a10a0f;\r\n  stroke: #a10a0f;\r\n}\r\n\r\n.filterBackBtn {\r\n  stroke: #FFF;\r\n  fill: #FFF;\r\n  cursor: pointer;\r\n}\r\n.filterBackBtn:hover {\r\n  fill: #a10a0f;\r\n  stroke: #a10a0f;\r\n}\r\n\r\n.clockBtn {\r\n  stroke: #FFF;\r\n  fill: #FFF;\r\n  cursor: pointer;\r\n}\r\n.clockBtn:hover {\r\n  fill: #a10a0f;\r\n  stroke: #a10a0f;\r\n}\r\n\r\n.logoutBtn {\r\n  margin-top: 24px;\r\n  margin-right: -5px;\r\n  cursor: pointer;\r\n  fill: none;\r\n  stroke: white;\r\n}\r\n\r\n.refreshBtn {\r\n  margin-top: 23px;\r\n  cursor: pointer;\r\n  fill: none;\r\n  stroke: white;\r\n}\r\n\r\n.filterBtn {\r\n  margin-right: -12px;\r\n  cursor: pointer;\r\n  fill: none;\r\n  stroke: white;\r\n}\r\n\r\n.searchBtn {\r\n  fill: grey;\r\n  stroke: grey;\r\n  cursor: pointer;\r\n}\r\n\r\n.logoutBtn:hover, .refreshBtn:hover, .filterBtn:hover {\r\n  fill: #a10a0f;\r\n}\r\n", ""]);
+exports.push([module.i, "\r\n.rotate {\r\n  -webkit-transform: rotate(180deg);\r\n      -ms-transform: rotate(180deg);\r\n          transform: rotate(180deg);\r\n}\r\n\r\n.closeBtn {\r\n  fill: #FFF;\r\n  cursor: pointer;\r\n}\r\n.closeBtn:hover {\r\n  fill: #a10a0f;\r\n}\r\n\r\n.settingsBtn {\r\n  stroke: #FFF;\r\n  fill: none;\r\n  cursor: pointer;\r\n}\r\n.settingsBtn:hover {\r\n  fill: #a10a0f;\r\n  stroke: #a10a0f;\r\n}\r\n\r\n.filterBackBtn {\r\n  stroke: #FFF;\r\n  fill: none;\r\n  cursor: pointer;\r\n}\r\n.filterBackBtn:hover {\r\n  fill: #a10a0f;\r\n  stroke: #a10a0f;\r\n}\r\n\r\n.clockBtn {\r\n  stroke: #FFF;\r\n  fill: none;\r\n  cursor: pointer;\r\n}\r\n.clockBtn:hover {\r\n  fill: #a10a0f;\r\n  stroke: #a10a0f;\r\n}\r\n\r\n.logoutBtn {\r\n  margin-top: 24px;\r\n  margin-right: -5px;\r\n  cursor: pointer;\r\n  fill: none;\r\n  stroke: white;\r\n}\r\n\r\n.refreshBtn {\r\n  margin-top: 23px;\r\n  cursor: pointer;\r\n  fill: none;\r\n  stroke: white;\r\n}\r\n\r\n.filterBtn {\r\n  margin-right: -12px;\r\n  cursor: pointer;\r\n  fill: none;\r\n  stroke: white;\r\n}\r\n\r\n.searchBtn {\r\n  fill: grey;\r\n  stroke: grey;\r\n  cursor: pointer;\r\n}\r\n\r\n.logoutBtn:hover, .refreshBtn:hover, .filterBtn:hover {\r\n  fill: #a10a0f;\r\n}\r\n", ""]);
 
 // exports
 
@@ -49463,8 +49463,7 @@ var RefreshButton = function (_Component) {
     };
 
     _this.confirmRefresh = function () {
-      if (window.confirm("Are you sure you want to refresh the server list? \nServer refresh will be disabled for 30 minutes.")) {
-        alert("Please wait a moment...");
+      if (window.confirm("Are you sure you want to refresh the server list?" + "\nServer refresh feature will be disabled for 30 minutes.")) {
         _this.refreshFunc();
       }
     };
@@ -49536,7 +49535,7 @@ var RefreshButton = function (_Component) {
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 98
+            lineNumber: 99
           },
           __self: this
         },
@@ -49544,7 +49543,7 @@ var RefreshButton = function (_Component) {
           'div',
           { className: 'refreshBtnTime', __source: {
               fileName: _jsxFileName,
-              lineNumber: 101
+              lineNumber: 102
             },
             __self: this
           },
@@ -49555,13 +49554,13 @@ var RefreshButton = function (_Component) {
           'div',
           { onClick: this.confirmRefresh, __source: {
               fileName: _jsxFileName,
-              lineNumber: 102
+              lineNumber: 103
             },
             __self: this
           },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1____["f" /* SvgIcon */], { iconType: 'refreshBtn', __source: {
               fileName: _jsxFileName,
-              lineNumber: 102
+              lineNumber: 103
             },
             __self: this
           })
@@ -49744,7 +49743,7 @@ var ServerList = function (_Component) {
               },
               displaySeparate ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'td',
-                { id: 'sname', __source: {
+                { className: 'name', __source: {
                     fileName: _jsxFileName,
                     lineNumber: 71
                   },
@@ -49817,7 +49816,7 @@ var ServerList = function (_Component) {
                 )
               ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'td',
-                { id: 'snameandip', __source: {
+                { className: 'nameandip', __source: {
                     fileName: _jsxFileName,
                     lineNumber: 94
                   },
@@ -49893,7 +49892,7 @@ var ServerList = function (_Component) {
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'td',
-                { id: 'scity', __source: {
+                { className: 'city', __source: {
                     fileName: _jsxFileName,
                     lineNumber: 119
                   },
@@ -49965,7 +49964,7 @@ var ServerList = function (_Component) {
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'td',
-                { id: 'sdomain', __source: {
+                { className: 'domain', __source: {
                     fileName: _jsxFileName,
                     lineNumber: 136
                   },
@@ -50037,7 +50036,7 @@ var ServerList = function (_Component) {
               ),
               displaySeparate ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'td',
-                { id: 'sipaddr', __source: {
+                { className: 'ipaddr', __source: {
                     fileName: _jsxFileName,
                     lineNumber: 155
                   },
@@ -50115,7 +50114,7 @@ var ServerList = function (_Component) {
               }),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'td',
-                { id: 'sproto', __source: {
+                { className: 'proto', __source: {
                     fileName: _jsxFileName,
                     lineNumber: 176
                   },
@@ -50185,7 +50184,7 @@ var ServerList = function (_Component) {
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'td',
-                { id: 'sload', __source: {
+                { className: 'load', __source: {
                     fileName: _jsxFileName,
                     lineNumber: 195
                   },
@@ -50258,7 +50257,7 @@ var ServerList = function (_Component) {
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'td',
-                { id: 'sdate', __source: {
+                { className: 'date', __source: {
                     fileName: _jsxFileName,
                     lineNumber: 211
                   },
@@ -50997,6 +50996,7 @@ var Login = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
@@ -51047,6 +51047,11 @@ var Login = function (_Component) {
                 value: this.state.username,
                 placeholder: 'Username',
                 onChange: this.handleChange,
+                onKeyPress: function onKeyPress(e) {
+                  if ((e.keyCode || e.which) === 13) {
+                    _this2.handleAuth();
+                  }
+                },
                 tabIndex: '1',
                 __source: {
                   fileName: _jsxFileName,
@@ -51060,10 +51065,15 @@ var Login = function (_Component) {
                 value: this.state.password,
                 placeholder: 'Password',
                 onChange: this.handleChange,
+                onKeyPress: function onKeyPress(e) {
+                  if ((e.keyCode || e.which) === 13) {
+                    _this2.handleAuth();
+                  }
+                },
                 tabIndex: '2',
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 51
+                  lineNumber: 54
                 },
                 __self: this
               }),
@@ -51071,13 +51081,13 @@ var Login = function (_Component) {
                 'button',
                 { type: 'submit', name: 'submit', onClick: this.handleAuth, id: 'submitBtn', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 60
+                    lineNumber: 66
                   },
                   __self: this
                 },
                 this.props.authProcStatus ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components__["e" /* Spinner */], { type: 1, style: { left: 80 }, __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 61
+                    lineNumber: 67
                   },
                   __self: this
                 }) : "Login"
@@ -51494,7 +51504,7 @@ var protocol_list = ["---", "UDP", "TCP", "IKEv2", "L2TP", "PPTP", "SOCKS"];
 /*! exports used: default */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "static/media/clock-btn.9d101ade.svg";
+module.exports = __webpack_require__.p + "static/media/clock-btn.1ff8fc42.svg";
 
 /***/ }),
 
@@ -51506,7 +51516,7 @@ module.exports = __webpack_require__.p + "static/media/clock-btn.9d101ade.svg";
 /*! exports used: default */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "static/media/close-btn.3913e820.svg";
+module.exports = __webpack_require__.p + "static/media/close-btn.ad74e1ab.svg";
 
 /***/ }),
 
@@ -51518,7 +51528,7 @@ module.exports = __webpack_require__.p + "static/media/close-btn.3913e820.svg";
 /*! exports used: default */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "static/media/filter-back-btn.2e65f222.svg";
+module.exports = __webpack_require__.p + "static/media/filter-back-btn.0bb0618d.svg";
 
 /***/ }),
 
@@ -51578,7 +51588,7 @@ module.exports = __webpack_require__.p + "static/media/search-btn.438dabe9.svg";
 /*! exports used: default */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "static/media/settings-btn.98b2dce2.svg";
+module.exports = __webpack_require__.p + "static/media/settings-btn.1b9ccc87.svg";
 
 /***/ }),
 
@@ -51647,14 +51657,18 @@ var _jsxFileName = 'C:\\Users\\LiJonas\\Documents\\Projects\\server-picker\\clie
 
 
 
-var isIE = /*@cc_on!@*/false || !!document.documentMode;
+// Checks if one of these browsers is used
+var isChrome = !!window.chrome && !!window.chrome.webstore;
+var isFirefox = typeof InstallTrigger !== 'undefined';
 
-if (!!isIE) alert("Internet Explorer does not support Server Picker. \nPlease use Mozilla Firefox or Google Chrome.");else {
+if (!isChrome && !isFirefox) {
+  alert("ServerPicker is currently supported only on \nMozilla Firefox and Google Chrome internet browsers.");
+} else {
   __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     __WEBPACK_IMPORTED_MODULE_3_react_redux__["a" /* Provider */],
     { store: __WEBPACK_IMPORTED_MODULE_4__app_state_index__["a" /* default */], __source: {
         fileName: _jsxFileName,
-        lineNumber: 14
+        lineNumber: 17
       },
       __self: this
     },
@@ -51663,14 +51677,14 @@ if (!!isIE) alert("Internet Explorer does not support Server Picker. \nPlease us
       {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 15
+          lineNumber: 18
         },
         __self: this
       },
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__app_containers__["a" /* App */], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 16
+          lineNumber: 19
         },
         __self: this
       })
