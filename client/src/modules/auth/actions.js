@@ -29,7 +29,8 @@ export const authLogout = () => ({
     type: types.AUTH_LOGOUT
 })
 
-export const authRequest = (username, password) => (dispatch) => {
+export const authRequest = (username, password) => (dispatch) =>
+  new Promise ((resolve, reject) => {
       const { token } = sessionStorage;
 
       dispatch(authInit());
@@ -51,13 +52,16 @@ export const authRequest = (username, password) => (dispatch) => {
         })
         .done(res => {
           dispatch(authSuccess(res.token));
+          resolve();
         })
         .fail(err => {
-          dispatch(authFailure(err.statusText));
+          const error = (err.status === 401) ? "Wrong username or password." : err.statusText;
+          dispatch(authFailure(error));
+          reject(error);
         });
 
       }
-}
+  })
 
 export const authCheck = () => (dispatch) => {
     const { token } = sessionStorage;

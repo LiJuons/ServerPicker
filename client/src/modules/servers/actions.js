@@ -83,11 +83,11 @@ export const apiCall = () => {
 
 //Compares the length of current and fetched server list, if different - calls the apiCall
 export const preApiCall = () => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
       if (typeof(Storage) !== "undefined") {
         const { listLength } = localStorage;
         if (!!listLength) {
-          const serverListLength = (listLength > 0) ? parseInt(listLength, 10) : 0;
+          const serverListLength = (listLength > 0) ? parseInt(listLength, 10) - 12 : 0;
 
           $.ajax({
               type: 'GET',

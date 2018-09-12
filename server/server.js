@@ -112,14 +112,36 @@ app.get('/serverCount', authMiddleware, async (req, res) => {
 //Gets servers from the server.json (file)
 app.get('/servers', authMiddleware, (req, res) => {
   try {
+
+    //Read all servers from the file
     FS.readFile(__dirname + '/../Servers.json', (err, data) => {
+
+      //If error cought, return errror
       if(err) {
         console.log(err);
         return res.status(400).json({
           error: 'Failed to get servers.'
         });
       }
-      res.status(200).json(JSON.parse(data));
+
+      //If success
+      const serverList = JSON.parse(data);
+
+        //Read all blackhole serers from the file
+        FS.readFile(__dirname + '/../BlackholeServers.json', (err, data) => {
+          if(err) {
+            console.log(err);
+            return res.status(400).json({
+              error: 'Failed to get servers.'
+            });
+          }
+
+          const blackholeList = JSON.parse(data);
+          const fullList = { data: [...serverList.data, ...blackholeList.data] };
+
+          //Send merged serverlist
+          res.status(200).json(fullList);
+        });
     });
   }
 

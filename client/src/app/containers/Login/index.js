@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Spinner } from '../../components';
+import { Spinner, ErrorMsg } from '../../components';
 import { auth } from '../../../modules';
 import './Login.css';
 
@@ -8,7 +8,8 @@ class Login extends Component {
 
   state = {
     username: '',
-    password: ''
+    password: '',
+    error: ''
   }
 
   componentWillReceiveProps(newProps) {
@@ -18,18 +19,30 @@ class Login extends Component {
   }
 
   handleChange= (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({
+      [e.target.name]: e.target.value,
+      error: ''
+    });
   }
 
   handleAuth = () => {
     const { username, password } = this.state;
-    this.props.authRequest(username, password);
+    this.props.authRequest(username, password)
+      .catch((error) => {
+        this.setState({ error })
+      });
   }
 
   render() {
+    const { authProcStatus } = this.props;
+    const { error } = this.state;
 
     return (
       <div>
+
+        {
+          !!error && <ErrorMsg message={error}/>
+        }
 
         <div id="myModal" className="modal">
 
@@ -64,7 +77,7 @@ class Login extends Component {
                 />
 
                 <button type="submit" name="submit" onClick={this.handleAuth} id="submitBtn" >
-                  { this.props.authProcStatus ? <Spinner type={1} style={{ left: 80 }} /> : "Login" }
+                  { authProcStatus ? <Spinner type={1} style={{ left: 80 }} /> : "Login" }
                 </button>
 
               </div>

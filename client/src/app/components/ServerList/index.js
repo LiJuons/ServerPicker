@@ -5,19 +5,25 @@ import './ServerList.css'
 class ServerList extends Component {
   state = {
     serverList: [],
-    secondClick: ''
+    secondClick: '',
+    sortInProcess: false
   }
 
   sortServersBy = (sortKey) => {
     const { serverList } = this.state;
+    this.setState({ sortInProcess: true });
 
     let sortedServers = (this.state.secondClick === sortKey) ? orderBy(serverList, sortKey, 'desc') : orderBy(serverList, sortKey, 'asc');
 
     if (this.state.secondClick === sortKey) {
-      this.setState({ serverList: sortedServers, secondClick: '' });
+      this.setState({ serverList: sortedServers, secondClick: '' }, () => {
+        this.setState({ sortInProcess: false })
+      });
     }
     else {
-      this.setState({ serverList: sortedServers, secondClick: sortKey });
+      this.setState({ serverList: sortedServers, secondClick: sortKey }, () => {
+        this.setState({ sortInProcess: false })
+      });
     }
   }
 
@@ -48,11 +54,11 @@ class ServerList extends Component {
   }
 
   render() {
-    const { serverList } = this.state;
+    const { serverList, sortInProcess } = this.state;
     const { displaySeparate } = this.props;
 
     return (
-      <div>
+      <div style={ sortInProcess ? { cursor: 'wait' } : { cursor: 'default' } }>
 
         {
           serverList.length > 0

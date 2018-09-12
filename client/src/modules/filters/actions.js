@@ -5,11 +5,6 @@ export const displayChange = () => ({
   }
 )
 
-export const setNewServers = () => ({
-    type: types.SHOW_NEW_SERVERS,
-  }
-)
-
 export const headerHide = () => ({
     type: types.HEADER_HIDE,
   }

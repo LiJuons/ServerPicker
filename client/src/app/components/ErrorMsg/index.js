@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
+import './ErrorMsg.css';
 
-const ErrorMsg = (props) => (
-  <div style={{ margin: 20 }}>
-    {props.message}
-  </div>
-);
+class ErrorMsg extends Component {
+  state = {
+    showError: true
+  }
+
+  componentWillReceiveProps() {
+    this.setState({ showError: true });
+  }
+
+  render() {
+    const { showError } = this.state;
+    const { message } = this.props;
+
+    return (
+      <div className={ showError ? "error-container" : "error-hidden" } >
+        <div>{message}</div>
+        <div className="error-exit" onClick={ () => this.setState({ showError: false }) }>X</div>
+      </div>
+    );
+  }
+}
 
 export default ErrorMsg;

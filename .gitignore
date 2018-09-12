@@ -11,6 +11,7 @@
 /client/build
 /client/static
 Servers.json
+BlackholeServers.json
 
 # production (git rm -r build)
 #/client/scripts
