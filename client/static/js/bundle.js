@@ -49092,17 +49092,36 @@ var Header = function (_Component) {
               },
               __self: this
             },
-            showSettings ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2____["f" /* SvgIcon */], { iconType: 'filterBackBtn', __source: {
-                fileName: _jsxFileName,
-                lineNumber: 135
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { style: showSettings ? { display: 'block' } : { display: 'none' }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 133
+                },
+                __self: this
               },
-              __self: this
-            }) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2____["f" /* SvgIcon */], { iconType: 'settingsBtn', __source: {
-                fileName: _jsxFileName,
-                lineNumber: 136
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2____["f" /* SvgIcon */], { iconType: 'filterBackBtn', __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 134
+                },
+                __self: this
+              })
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { style: showSettings ? { display: 'none' } : { display: 'block' }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 136
+                },
+                __self: this
               },
-              __self: this
-            })
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2____["f" /* SvgIcon */], { iconType: 'settingsBtn', __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 137
+                },
+                __self: this
+              })
+            )
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
@@ -49110,13 +49129,13 @@ var Header = function (_Component) {
                 _this2.timeFilter();
               }, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 140
+                lineNumber: 141
               },
               __self: this
             },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2____["f" /* SvgIcon */], { iconType: 'clockBtn', __source: {
                 fileName: _jsxFileName,
-                lineNumber: 141
+                lineNumber: 142
               },
               __self: this
             })
@@ -49125,13 +49144,13 @@ var Header = function (_Component) {
             'div',
             { className: 'navBar-item-right', onClick: this.props.logout, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 144
+                lineNumber: 145
               },
               __self: this
             },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2____["f" /* SvgIcon */], { iconType: 'logoutBtn', __source: {
                 fileName: _jsxFileName,
-                lineNumber: 145
+                lineNumber: 146
               },
               __self: this
             })
@@ -49140,7 +49159,7 @@ var Header = function (_Component) {
             'div',
             { className: 'navBar-item-right', __source: {
                 fileName: _jsxFileName,
-                lineNumber: 148
+                lineNumber: 149
               },
               __self: this
             },
@@ -49151,7 +49170,7 @@ var Header = function (_Component) {
               timeout: 1800 //How long should it restrict the refresh
               , __source: {
                 fileName: _jsxFileName,
-                lineNumber: 149
+                lineNumber: 150
               },
               __self: this
             })
@@ -49160,7 +49179,7 @@ var Header = function (_Component) {
             'div',
             { className: 'headerFilters', style: showSettings ? { display: 'none' } : { display: 'block' }, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 157
+                lineNumber: 158
               },
               __self: this
             },
@@ -49168,7 +49187,7 @@ var Header = function (_Component) {
               'div',
               { className: 'navBar-item-left', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 158
+                  lineNumber: 159
                 },
                 __self: this
               },
@@ -49186,7 +49205,7 @@ var Header = function (_Component) {
                 id: 'searchBox',
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 159
+                  lineNumber: 160
                 },
                 __self: this
               }),
@@ -49196,13 +49215,13 @@ var Header = function (_Component) {
                     _this2.props.filterFunc(_this2.state, 'search');
                   }, __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 170
+                    lineNumber: 171
                   },
                   __self: this
                 },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2____["f" /* SvgIcon */], { iconType: 'searchBtn', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 171
+                    lineNumber: 172
                   },
                   __self: this
                 })
@@ -49212,7 +49231,7 @@ var Header = function (_Component) {
               'div',
               { className: 'filters-container navBar-item-right', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 175
+                  lineNumber: 176
                 },
                 __self: this
               },
@@ -49220,13 +49239,13 @@ var Header = function (_Component) {
                 'div',
                 { className: 'navBar-item-right', onClick: this.filterFunction, __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 177
+                    lineNumber: 178
                   },
                   __self: this
                 },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2____["f" /* SvgIcon */], { iconType: 'filterBtn', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 178
+                    lineNumber: 179
                   },
                   __self: this
                 })
@@ -49235,7 +49254,7 @@ var Header = function (_Component) {
                 'div',
                 { className: 'navBar-item-right', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 181
+                    lineNumber: 182
                   },
                   __self: this
                 },
@@ -49243,7 +49262,7 @@ var Header = function (_Component) {
                   'div',
                   { className: 'radioInput', __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 182
+                      lineNumber: 183
                     },
                     __self: this
                   },
@@ -49251,7 +49270,7 @@ var Header = function (_Component) {
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 183
+                      lineNumber: 184
                     },
                     __self: this
                   }),
@@ -49264,7 +49283,7 @@ var Header = function (_Component) {
                     disabled: this.props.disableFilter,
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 184
+                      lineNumber: 185
                     },
                     __self: this
                   })
@@ -49274,7 +49293,7 @@ var Header = function (_Component) {
                 'div',
                 { className: 'navBar-item-right', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 195
+                    lineNumber: 196
                   },
                   __self: this
                 },
@@ -49289,7 +49308,7 @@ var Header = function (_Component) {
                     disabled: this.props.disableFilter || selectObfs,
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 197
+                      lineNumber: 198
                     },
                     __self: this
                   },
@@ -49298,7 +49317,7 @@ var Header = function (_Component) {
                       'option',
                       { key: protocol, value: protocol, __source: {
                           fileName: _jsxFileName,
-                          lineNumber: 206
+                          lineNumber: 207
                         },
                         __self: _this2
                       },
@@ -49311,7 +49330,7 @@ var Header = function (_Component) {
                 'div',
                 { className: 'navBar-item-right', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 212
+                    lineNumber: 213
                   },
                   __self: this
                 },
@@ -49326,7 +49345,7 @@ var Header = function (_Component) {
                     disabled: this.props.disableFilter,
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 214
+                      lineNumber: 215
                     },
                     __self: this
                   },
@@ -49335,7 +49354,7 @@ var Header = function (_Component) {
                       'option',
                       { key: country, value: country, __source: {
                           fileName: _jsxFileName,
-                          lineNumber: 223
+                          lineNumber: 224
                         },
                         __self: _this2
                       },
@@ -49350,7 +49369,7 @@ var Header = function (_Component) {
             'div',
             { className: 'headerSettings', style: !showSettings ? { display: 'none' } : { display: 'block' }, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 231
+                lineNumber: 232
               },
               __self: this
             },
@@ -49358,7 +49377,7 @@ var Header = function (_Component) {
               'div',
               { className: 'navBar-settings-left', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 233
+                  lineNumber: 234
                 },
                 __self: this
               },
@@ -49366,7 +49385,7 @@ var Header = function (_Component) {
                 'div',
                 { id: 'displaySetting', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 234
+                    lineNumber: 235
                   },
                   __self: this
                 },
@@ -49376,7 +49395,7 @@ var Header = function (_Component) {
                 'div',
                 { className: 'navBar-settings-display-options', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 235
+                    lineNumber: 236
                   },
                   __self: this
                 },
@@ -49387,7 +49406,7 @@ var Header = function (_Component) {
                   onChange: this.handleDisplayChange,
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 236
+                    lineNumber: 237
                   },
                   __self: this
                 }),
@@ -49395,7 +49414,7 @@ var Header = function (_Component) {
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 241
+                    lineNumber: 242
                   },
                   __self: this
                 }),
@@ -49406,7 +49425,7 @@ var Header = function (_Component) {
                   onChange: this.handleDisplayChange,
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 242
+                    lineNumber: 243
                   },
                   __self: this
                 }),
@@ -49417,7 +49436,7 @@ var Header = function (_Component) {
               'div',
               { className: 'navBar-settings-right', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 251
+                  lineNumber: 252
                 },
                 __self: this
               },
@@ -49425,7 +49444,7 @@ var Header = function (_Component) {
                 'div',
                 { id: 'displaySetting', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 252
+                    lineNumber: 253
                   },
                   __self: this
                 },
@@ -49435,7 +49454,7 @@ var Header = function (_Component) {
                 'div',
                 { className: '', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 253
+                    lineNumber: 254
                   },
                   __self: this
                 },
@@ -49448,7 +49467,7 @@ var Header = function (_Component) {
                   onChange: this.handleChange,
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 254
+                    lineNumber: 255
                   },
                   __self: this
                 }),
@@ -49456,7 +49475,7 @@ var Header = function (_Component) {
                   'div',
                   { id: 'timepiece-value', __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 262
+                      lineNumber: 263
                     },
                     __self: this
                   },
@@ -49465,7 +49484,7 @@ var Header = function (_Component) {
                     'i',
                     { style: { textDecoration: 'underline' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 262
+                        lineNumber: 263
                       },
                       __self: this
                     },

@@ -130,11 +130,12 @@ class Header extends Component {
         <div className={ showHeader ? "navBar" : "navBar-hidden" } >
 
           <div className="navBar-item-left" id="settingsBtnDiv"  onClick={() => {this.setState({ showSettings: !showSettings })}}>
-            {
-              showSettings
-              ? <SvgIcon iconType="filterBackBtn" />
-              : <SvgIcon iconType="settingsBtn" />
-            }
+            <div style={ showSettings ? { display: 'block' } : { display: 'none' } }>
+              <SvgIcon iconType="filterBackBtn" />
+            </div>
+            <div style={ showSettings ? { display: 'none' } : { display: 'block' } }>
+              <SvgIcon iconType="settingsBtn" />
+            </div>
           </div>
 
           <div className="navBar-item-left" id="clockBtnDiv"  onClick={() => {this.timeFilter()}}>
