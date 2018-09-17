@@ -7,15 +7,15 @@
 # testing
 /coverage
 
-# development
-#/client/build
-#/client/static
-#Servers.json
-#BlackholeServers.json
+# development (github push)
+/client/build
+/client/static
+Servers.json
+BlackholeServers.json
 
-# production (git rm -r build)
-/client/scripts
-/client/src
+# production (git rm -r build) (heroku push)
+#/client/scripts
+#/client/src
 
 
 # misc
