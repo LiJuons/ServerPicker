@@ -4,7 +4,7 @@ import { Spinner, ErrorMsg } from '../../components';
 import { auth } from '../../../modules';
 import './Login.css';
 
-class Login extends Component {
+export class Login extends Component {
 
   state = {
     username: '',
@@ -34,7 +34,7 @@ class Login extends Component {
   }
 
   render() {
-    const { authProcStatus } = this.props;
+    const { authProccessing } = this.props;
     const { error } = this.state;
 
     return (
@@ -77,7 +77,7 @@ class Login extends Component {
                 />
 
                 <button type="submit" name="submit" onClick={this.handleAuth} id="submitBtn" >
-                  { authProcStatus ? <Spinner type={1} style={{ left: 80 }} /> : "Login" }
+                  { authProccessing ? <Spinner type={1} style={{ left: 80 }} /> : "Login" }
                 </button>
 
               </div>
@@ -92,7 +92,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-    authProcStatus: auth.selectors.getAuthProcStatus(state),
+    authProccessing: auth.selectors.getAuthProcStatus(state),
     isLogged: auth.selectors.isLogged(state)
 });
 

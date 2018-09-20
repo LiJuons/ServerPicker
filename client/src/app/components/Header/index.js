@@ -196,7 +196,7 @@ class Header extends Component {
               <div className="navBar-item-right">
                 Protocol
                 <select
-                  id="country"
+                  id="protocol"
                   name="selectProtocol"
                   value={selectProtocol}
                   onChange={this.handleChange}
@@ -232,7 +232,7 @@ class Header extends Component {
           <div className="headerSettings" style={ !showSettings ? { display: 'none' } : { display: 'block' } }>
 
             <div className="navBar-settings-left">
-              <div id="displaySetting">Display:</div>
+              <div className="settingTitle">Display:</div>
               <div className="navBar-settings-display-options">
                 <input
                   type="radio"
@@ -250,8 +250,8 @@ class Header extends Component {
             </div>
 
             <div className="navBar-settings-right">
-              <div id="displaySetting">Time Filter:</div>
-              <div className="">
+              <div className="settingTitle">Time Filter:</div>
+              <div>
                 <input
                   type="range"
                   name="timePiece"

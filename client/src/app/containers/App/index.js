@@ -6,7 +6,7 @@ import { ServersPage, Login } from '../';
 import { Header } from '../../components';
 import './App.css';
 
-class App extends Component {
+export class App extends Component {
 
   componentDidMount() {
     this.props.authCheck();

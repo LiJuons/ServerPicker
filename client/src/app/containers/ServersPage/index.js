@@ -4,7 +4,7 @@ import { auth, servers, filters } from '../../../modules';
 import { ErrorMsg, ServerList, Spinner } from '../../components';
 import './ServersPage.css';
 
-class ServersPage extends Component {
+export class ServersPage extends Component {
 
   componentWillMount() {
     if (this.checkAccess()) {
