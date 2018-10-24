@@ -4,27 +4,22 @@ import './ServerList.css'
 
 class ServerList extends Component {
   state = {
-    serverList: [],
     secondClick: '',
     sortInProcess: false
   }
 
   sortServersBy = (sortKey) => {
-    const { serverList } = this.state;
+    const serverList = JSON.parse(this.props.filteredServers);
     this.setState({ sortInProcess: true });
 
-    let sortedServers = (this.state.secondClick === sortKey) ? orderBy(serverList, sortKey, 'desc') : orderBy(serverList, sortKey, 'asc');
+    const sortedServers = (this.state.secondClick === sortKey) ? orderBy(serverList, sortKey, 'desc') : orderBy(serverList, sortKey, 'asc');
 
-    if (this.state.secondClick === sortKey) {
-      this.setState({ serverList: sortedServers, secondClick: '' }, () => {
-        this.setState({ sortInProcess: false })
-      });
-    }
-    else {
-      this.setState({ serverList: sortedServers, secondClick: sortKey }, () => {
-        this.setState({ sortInProcess: false })
-      });
-    }
+    this.props.setServers(sortedServers);
+
+    this.setState({ secondClick: (this.state.secondClick === sortKey) ? '' : sortKey }, () => {
+      this.setState({ sortInProcess: false })
+    });
+
   }
 
   getProtocolList = (technologies) => {

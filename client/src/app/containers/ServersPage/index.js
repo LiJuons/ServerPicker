@@ -30,7 +30,7 @@ export class ServersPage extends Component {
     const {
       filteredServers, servers, isFetching,
       fetchError, isFiltering, filterError,
-      displaySeparate, headerHide
+      displaySeparate, headerHide, setFilteredServers
     } = this.props;
 
     return (
@@ -52,6 +52,7 @@ export class ServersPage extends Component {
           : <ServerList
               servers={servers}
               filteredServers={JSON.stringify(filteredServers)}
+              setServers={setFilteredServers}
               displaySeparate={displaySeparate}
             />
         }
@@ -76,7 +77,8 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
-  getServers: servers.actions.getServers
+  getServers: servers.actions.getServers,
+  setFilteredServers: filters.actions.filterServersSuccess
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(ServersPage);
