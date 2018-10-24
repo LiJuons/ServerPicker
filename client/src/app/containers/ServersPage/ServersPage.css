@@ -11,6 +11,11 @@
   cursor: wait;
 }
 
+.error-div {
+  margin-top: 5%;
+  font-size: 32px;
+}
+
 .showBlock {
   -webkit-animation: slide-down 0.5s both;
   -moz-animation: slide-down 0.5s both;

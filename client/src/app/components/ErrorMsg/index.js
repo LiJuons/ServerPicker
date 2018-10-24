@@ -10,6 +10,10 @@ class ErrorMsg extends Component {
     this.setState({ showError: true });
   }
 
+  toggleErrorBox = () => {
+    this.setState({ showError: false });
+  }
+
   render() {
     const { showError } = this.state;
     const { message } = this.props;
@@ -17,7 +21,7 @@ class ErrorMsg extends Component {
     return (
       <div className={ showError ? "error-container" : "error-hidden" } >
         <div>{message}</div>
-        <div className="error-exit" onClick={ () => this.setState({ showError: false }) }>X</div>
+        <div className="error-exit" onClick={this.toggleErrorBox}>X</div>
       </div>
     );
   }

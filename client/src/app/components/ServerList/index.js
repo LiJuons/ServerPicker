@@ -49,13 +49,40 @@ class ServerList extends Component {
     return protocolList;
   }
 
-  componentWillReceiveProps(newProps) {
-    this.setState({ serverList: JSON.parse(newProps.filteredServers) })
+  getCategory = (categories) => {
+    let categoryList = '';
+
+    Object.entries(categories).map(category => {
+        switch (category[1].id){
+          case 1:
+            return categoryList += "DoubleVPN ";
+          case 3:
+            return categoryList += "OnionVPN ";
+          case 9:
+            return categoryList += "Dedicated ";
+          case 11:
+            return categoryList += "Standard ";
+          case 15:
+            return categoryList += "P2P ";
+          case 17:
+            return categoryList += "Obfuscated ";
+          case 99:
+            return categoryList += "BlackHole ";
+          default:
+            return categoryList;
+        }
+      }
+    );
+
+    if (categoryList.includes("Standard")&&categoryList.length>9) categoryList = categoryList.replace("Standard ","");
+
+    return categoryList;
   }
 
   render() {
-    const { serverList, sortInProcess } = this.state;
-    const { displaySeparate } = this.props;
+    const { sortInProcess } = this.state;
+    const { displaySeparate, filteredServers } = this.props;
+    const serverList = JSON.parse(filteredServers);
 
     return (
       <div style={ sortInProcess ? { cursor: 'wait' } : { cursor: 'default' } }>
@@ -78,7 +105,7 @@ class ServerList extends Component {
                       <table>
                         <tbody>
                         <tr><th onClick={() => this.sortServersBy('name')}>
-                          Server Name ({serverList.length})
+                          <div className="clickable">Server Name ({serverList.length})</div>
                         </th></tr>
 
                         {
@@ -101,7 +128,7 @@ class ServerList extends Component {
                       <table>
                         <tbody>
                         <tr><th onClick={() => this.sortServersBy('name')}>
-                          Server Name ({serverList.length})
+                          <div className="clickable">Server Name ({serverList.length})</div>
                         </th></tr>
 
                         {
@@ -126,7 +153,7 @@ class ServerList extends Component {
                     <table>
                       <tbody>
                       <tr><th onClick={() => this.sortServersBy('locations[0].country.city.name')}>
-                        City
+                        <div className="clickable">City</div>
                       </th></tr>
 
                       {
@@ -142,7 +169,9 @@ class ServerList extends Component {
                   <td className='domain'>
                     <table>
                       <tbody>
-                      <tr><th onClick={() => this.sortServersBy('hostname')}>Domain</th></tr>
+                      <tr><th onClick={() => this.sortServersBy('hostname')}>
+                        <div className="clickable">Domain</div>
+                      </th></tr>
 
                       {
                         serverList.map(server =>
@@ -161,7 +190,9 @@ class ServerList extends Component {
                     <td  className='ipaddr'>
                       <table>
                         <tbody>
-                        <tr><th onClick={() => this.sortServersBy('station')}>IP Address</th></tr>
+                        <tr><th onClick={() => this.sortServersBy('station')}>
+                          <div className="clickable">IP Address</div>
+                        </th></tr>
 
                         {
                           serverList.map(server =>
@@ -178,6 +209,23 @@ class ServerList extends Component {
                     : <td></td>
 
                   }
+
+                  <td className='category'>
+                    <table>
+                      <tbody>
+                      <tr><th style={{ cursor: 'default' }}>Category</th></tr>
+
+                      {
+                        serverList.map(server =>
+                          <tr key={server.id}><td className="list-item-box" >
+                            { this.getCategory(server.groups) }
+                          </td></tr>
+                        )
+                      }
+
+                      </tbody>
+                    </table>
+                  </td>
 
                   <td className='proto'>
                     <table>
@@ -201,12 +249,16 @@ class ServerList extends Component {
                   <td  className='load'>
                     <table>
                       <tbody>
-                      <tr><th onClick={() => this.sortServersBy('load')}>Load</th></tr>
+                      <tr><th onClick={() => this.sortServersBy('load')}>
+                        <div className="clickable">Load</div>
+                      </th></tr>
 
                       {
 
                         serverList.map(server =>
-                          <tr key={server.id}><td className="list-item-box" >{server.load}%</td></tr>
+                          <tr key={server.id}><td className="list-item-box" >
+                            {server.load}%
+                          </td></tr>
                         )
                       }
 
@@ -218,7 +270,7 @@ class ServerList extends Component {
                     <table>
                       <tbody>
                       <tr><th onClick={() => this.sortServersBy('created_at')}>
-                        Date
+                        <div className="clickable">Date</div>
                       </th></tr>
 
                       {

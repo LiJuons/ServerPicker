@@ -16,7 +16,7 @@ export default function filterReducer(state = INITIAL_STATE_SERVERS, { type, pay
     case types.FILTER_SERVERS_SUCCESS:
           return Immutable.merge(state, {filteredServers: payload.filteredServers, error: false, isFiltering: false});
     case types.FILTER_SERVERS_FAILURE:
-          return Immutable.merge(state, {error: payload.error, isFiltering: false});
+          return Immutable.merge(state, {filteredServers: [], error: payload.error, isFiltering: false});
     case types.DISPLAY_CHANGE:
           return Immutable.merge(state, {separateColumns: !state.separateColumns});
     case types.HEADER_HIDE:

@@ -1,4 +1,4 @@
-import $ from "jquery";
+import 'whatwg-fetch';
 import * as types from './actionTypes';
 
 export const authInit = () => ({
@@ -39,26 +39,24 @@ export const authRequest = (username, password) => (dispatch) =>
         dispatch(authCheck());
       } else {
 
-        $.ajax({
-            type: 'POST',
-            url: '/login',
-            headers: {
-              contentType: 'application/x-www-form-urlencoded'
-            },
-            data: {
-              username,
-              password
-            }
-        })
-        .done(res => {
-          dispatch(authSuccess(res.token));
-          resolve();
-        })
-        .fail(err => {
-          const error = (err.status === 401) ? "Wrong username or password." : err.statusText;
-          dispatch(authFailure(error));
-          reject(error);
-        });
+        fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username, password
+          })
+        }).then(response => {
+            if (!response.ok) {
+              const err = (response.status === 401) ? "Wrong username or password." : response.statusText;
+              dispatch(authFailure(err));
+              reject(err);
+            } else return response.json();
+          }).then(resp => {
+            dispatch(authSuccess(resp.token));
+            resolve();
+        }).catch(() => {});
 
       }
   })
@@ -68,19 +66,15 @@ export const authCheck = () => (dispatch) => {
 
     if (!!token && typeof(token) !== 'undefined') {
 
-      $.ajax({
-          type: 'GET',
-          url: '/auth',
-          headers: {
-            Accept: 'application/json',
-            Authorization: `JWT ${token}`
-          }
-      })
-      .done(res => {
+      fetch('/auth', {
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': `JWT ${token}`
+        }
+      }).then(res => {
         dispatch(authConfirm());
-      })
-      .fail(err => {
-        dispatch(authFailure(err.statusText));
+      }).catch(() => {
+        dispatch(authFailure("Unauthorized."));
       });
 
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { auth, servers, filters } from '../../../modules';
-import { ErrorMsg, ServerList, Spinner } from '../../components';
+import { ServerList, Spinner } from '../../components';
 import './ServersPage.css';
 
 export class ServersPage extends Component {
@@ -47,7 +47,7 @@ export class ServersPage extends Component {
 
           : (!!fetchError || !!filterError) //if error, show message, else...
 
-          ? <ErrorMsg message={!!fetchError ? fetchError : filterError} />
+          ? <div className="error-div">{!!fetchError ? fetchError : filterError}</div>
 
           : <ServerList
               servers={servers}

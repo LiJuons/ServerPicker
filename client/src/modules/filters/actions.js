@@ -95,9 +95,9 @@ export const filterServers = (state, servers, searchType) => {
       if (!!servers) {
         let filteredServers = [];
 
-        if (servers.length>0) {
+        if (servers.length>0) { //if there are servers
 
-          if (searchType === 'filter') //If filter search
+          if (searchType === 'filter' && ((selectCountry!=='---') || (selectProtocol!=='---') || (selectObfs===true))) //If filter search
           {
             if ( (selectCountry !== '---') && (selectProtocol !== '---') ) {
               //Search by Country, Protocol and XOR
@@ -231,7 +231,15 @@ export const filterServers = (state, servers, searchType) => {
             });
           }
 
-        dispatch(filterServersSuccess(filteredServers));
+          else {
+            dispatch(filterServersFailure("No servers found."));
+          }
+
+          if (filteredServers.length>0) {
+            dispatch(filterServersSuccess(filteredServers));
+          } else {
+            dispatch(filterServersFailure("No servers found."));
+          }
 
       }
 

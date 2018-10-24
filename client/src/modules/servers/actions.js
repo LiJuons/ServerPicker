@@ -1,4 +1,4 @@
-import $ from "jquery";
+import 'whatwg-fetch';
 import * as types from './actionTypes';
 
 export const getServersRequest = () => ({
@@ -31,16 +31,13 @@ export const getServersUpdate = (servers) => ({
 export const getServers = () => {
   return dispatch => {
 
-    $.ajax({
-        type: 'GET',
-        url: '/servers',
-        headers: {
-          Accept: 'application/json',
-          Authorization: `JWT ${sessionStorage.token}`
-        }
-    })
-    .done((result) => {
-      const serverList = result.data;
+    fetch('/servers', {
+      headers: {
+        Accept: 'application/json',
+        Authorization: `JWT ${sessionStorage.token}`
+      }
+    }).then(response => response.json()).then(json => {
+      const serverList = json.data;
       if (serverList && serverList.length>0) {
         if (typeof(Storage) !== "undefined") {
           localStorage.setItem('listLength', serverList.length);
@@ -50,8 +47,7 @@ export const getServers = () => {
       else {
         dispatch(apiCall());
       }
-    })
-    .fail((error) => {
+    }).catch( () => {
       dispatch(getServersFailure("Failed to fetch the servers.\nPlease try refreshing the page."));
     });
 
@@ -64,18 +60,14 @@ export const apiCall = () => {
 
       dispatch(getServersRequest());
 
-      $.ajax({
-          type: 'GET',
-          url: '/updateServers',
-          headers: {
-            Accept: 'application/json',
-            Authorization: `JWT ${sessionStorage.token}`
-          }
-      })
-      .done((result) => {
+      fetch('/updateServers', {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `JWT ${sessionStorage.token}`
+        }
+      }).then(response => response.json()).then((result) => {
         dispatch(getServers());
-      })
-      .fail((error) => {
+      }).catch(() => {
         dispatch(getServersFailure("Failed to fetch the servers.\nPlease try refreshing the page."));
       });
   }
@@ -89,15 +81,12 @@ export const preApiCall = () => {
         if (!!listLength) {
           const serverListLength = (listLength > 0) ? parseInt(listLength, 10) - 12 : 0;
 
-          $.ajax({
-              type: 'GET',
-              url: '/serverCount',
-              headers: {
-                Accept: 'application/json',
-                Authorization: `JWT ${sessionStorage.token}`
-              }
-          })
-          .done((result) => {
+          fetch('/serverCount', {
+            headers: {
+              Accept: 'application/json',
+              Authorization: `JWT ${sessionStorage.token}`
+            }
+          }).then(response => response.json()).then((result) => {
             const apiCount = result.data.count;
             if (serverListLength === apiCount) {
               alert('Server list is refreshed.');
@@ -111,10 +100,10 @@ export const preApiCall = () => {
               dispatch(apiCall());
             }
 
-          })
-          .fail((error) => {
+          }).catch(() => {
             dispatch(getServersFailure("Failed to fetch the servers.\nPlease try refreshing the page."));
           });
+
         }
         else {
           dispatch(apiCall());

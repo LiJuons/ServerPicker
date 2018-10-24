@@ -27,6 +27,11 @@
                     }
                 }
             ],
+            "groups": [
+                {
+                    "id": 99
+                }
+            ],
             "ips": [
                 {
                     "type": "entry",
@@ -63,6 +68,11 @@
                     "pivot": {
                         "status": "online"
                     }
+                }
+            ],
+            "groups": [
+                {
+                    "id": 99
                 }
             ],
             "ips": [
@@ -103,6 +113,11 @@
                     }
                 }
             ],
+            "groups": [
+                {
+                    "id": 99
+                }
+            ],
             "ips": [
                 {
                     "type": "entry",
@@ -139,6 +154,11 @@
                     "pivot": {
                         "status": "online"
                     }
+                }
+            ],
+            "groups": [
+                {
+                    "id": 99
                 }
             ],
             "ips": [
@@ -179,6 +199,11 @@
                     }
                 }
             ],
+            "groups": [
+                {
+                    "id": 99
+                }
+            ],
             "ips": [
                 {
                     "type": "entry",
@@ -215,6 +240,11 @@
                     "pivot": {
                         "status": "online"
                     }
+                }
+            ],
+            "groups": [
+                {
+                    "id": 99
                 }
             ],
             "ips": [
@@ -255,6 +285,11 @@
                     }
                 }
             ],
+            "groups": [
+                {
+                    "id": 99
+                }
+            ],
             "ips": [
                 {
                     "type": "entry",
@@ -291,6 +326,11 @@
                     "pivot": {
                         "status": "online"
                     }
+                }
+            ],
+            "groups": [
+                {
+                    "id": 99
                 }
             ],
             "ips": [
@@ -331,6 +371,11 @@
                     }
                 }
             ],
+            "groups": [
+                {
+                    "id": 99
+                }
+            ],
             "ips": [
                 {
                     "type": "entry",
@@ -367,6 +412,11 @@
                     "pivot": {
                         "status": "online"
                     }
+                }
+            ],
+            "groups": [
+                {
+                    "id": 99
                 }
             ],
             "ips": [
@@ -407,6 +457,11 @@
                     }
                 }
             ],
+            "groups": [
+                {
+                    "id": 99
+                }
+            ],
             "ips": [
                 {
                     "type": "entry",
@@ -443,6 +498,11 @@
                     "pivot": {
                         "status": "online"
                     }
+                }
+            ],
+            "groups": [
+                {
+                    "id": 99
                 }
             ],
             "ips": [
