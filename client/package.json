@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:5000",
   "dependencies": {
+    "clipboard-copy": "^2.0.1",
     "heroku-cli-util": "^8.0.9",
     "lodash": "^4.17.10",
     "react": "^16.4.1",

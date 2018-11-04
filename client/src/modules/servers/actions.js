@@ -6,8 +6,12 @@ export const getServersRequest = () => ({
   }
 )
 
-export const getServersSuccess = () => ({
+export const getServersSuccess = (servers, shouldUpdate) => ({
       type: types.GET_SERVERS_SUCCESS,
+      payload: {
+        servers,
+        shouldUpdate
+      }
   }
 )
 
@@ -15,14 +19,6 @@ export const getServersFailure = (error) => ({
       type: types.GET_SERVERS_FAILURE,
       payload: {
         error
-      }
-  }
-)
-
-export const getServersUpdate = (servers) => ({
-      type: types.GET_SERVERS_UPDATE,
-      payload: {
-        servers
       }
   }
 )
@@ -42,7 +38,7 @@ export const getServers = () => {
         if (typeof(Storage) !== "undefined") {
           localStorage.setItem('listLength', serverList.length);
         }
-        dispatch(getServersUpdate(serverList));
+        dispatch(getServersSuccess(serverList, true));
       }
       else {
         dispatch(apiCall());
@@ -90,7 +86,7 @@ export const preApiCall = () => {
             const apiCount = result.data.count;
             if (serverListLength === apiCount) {
               alert('Server list is refreshed.');
-              dispatch(getServersSuccess());
+              dispatch(getServersSuccess([], false));
             }
             else {
               const serversChangeNumber = apiCount - serverListLength;

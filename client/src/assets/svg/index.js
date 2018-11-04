@@ -7,3 +7,4 @@ export { default as filterBackBtn } from './filter-back-btn.svg';
 export { default as refreshBtn } from './refresh-btn.svg';
 export { default as searchBtn } from './search-btn.svg';
 export { default as settingsBtn } from './settings-btn.svg';
+export { default as copyBtn } from './copy-clip.svg';

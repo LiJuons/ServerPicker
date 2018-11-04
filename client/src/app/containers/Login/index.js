@@ -18,6 +18,8 @@ export class Login extends Component {
     }
   }
 
+  encodeHTML = (s) => (s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'));
+
   handleChange= (e) => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -27,11 +29,16 @@ export class Login extends Component {
 
   handleAuth = () => {
     const { username, password } = this.state;
+    this.encodeHTML(username);
+    this.encodeHTML(password);
+
     this.props.authRequest(username, password)
       .catch((error) => {
         this.setState({ error })
       });
   }
+
+  hideError = () => {this.setState({error: ''});}
 
   render() {
     const { authProccessing } = this.props;
@@ -41,7 +48,7 @@ export class Login extends Component {
       <div>
 
         {
-          !!error && <ErrorMsg message={error}/>
+          !!error && <ErrorMsg message={error} hideError={() => this.hideError}/>
         }
 
         <div id="myModal" className="modal">

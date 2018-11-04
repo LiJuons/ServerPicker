@@ -1,16 +1,10 @@
 import { combineReducers } from 'redux-seamless-immutable';
-import authReducer from '../../modules/auth/reducer';
-import serverReducer from '../../modules/servers/reducer';
-import filterReducer from '../../modules/filters/reducer';
-
-const AUTH = 'AUTH';
-const SERVERS = 'SERVERS';
-const FILTERS = 'FILTERS';
+import { auth, servers, filters } from '../../modules';
 
 const rootReducer = combineReducers({
-  [AUTH]: authReducer,
-  [SERVERS]: serverReducer,
-  [FILTERS]: filterReducer
+  [auth.constants.NAME]: auth.reducers,
+  [servers.constants.NAME]: servers.reducers,
+  [filters.constants.NAME]: filters.reducers
 });
 
 export default rootReducer;

@@ -6,10 +6,6 @@
   cursor: pointer;
 }
 
-.error-hidden {
-  display: none;
-}
-
 .error-container {
   position: absolute;
   width: 100%;

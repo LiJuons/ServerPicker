@@ -68,7 +68,11 @@ export const filterNewServers = (timePiece, servers) => {
           }
         });
 
-        dispatch(filterServersSuccess(filteredServers));
+        if (filteredServers.length>0) {
+          dispatch(filterServersSuccess(filteredServers));
+        } else {
+          dispatch(filterServersFailure("No servers found."));
+        }
       }
 
       else {

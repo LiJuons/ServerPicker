@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import orderBy from 'lodash/orderBy';
+import copy from 'clipboard-copy';
+import { SvgIcon } from '../';
 import './ServerList.css'
 
 class ServerList extends Component {
@@ -74,6 +76,15 @@ class ServerList extends Component {
     return categoryList;
   }
 
+  copyToClipboard = (currentList) => {
+    let listCopy = [];
+    listCopy = currentList.map(server =>
+      server.name.replace("#","# ") + ' - ' + (server.ips.type==="exit" ? server.ips.ip : server.station)
+    )
+    listCopy = listCopy.join('\n');
+    copy(listCopy);
+  }
+
   render() {
     const { sortInProcess } = this.state;
     const { displaySeparate, filteredServers } = this.props;
@@ -99,8 +110,19 @@ class ServerList extends Component {
                     <td className='name'>
                       <table>
                         <tbody>
-                        <tr><th onClick={() => this.sortServersBy('name')}>
-                          <div className="clickable">Server Name ({serverList.length})</div>
+                        <tr><th>
+                          <div>
+                          <div
+                            className="clickable"
+                            onClick={() => this.sortServersBy('name')}
+                          >Server Name ({serverList.length})</div>
+                          <div
+                            style={{ display: 'inline-block' }}
+                            onClick={() => this.copyToClipboard(serverList)}
+                          >
+                            <SvgIcon iconType="copyBtn" />
+                          </div>
+                          </div>
                         </th></tr>
 
                         {
@@ -122,8 +144,20 @@ class ServerList extends Component {
                     <td className='nameandip'>
                       <table>
                         <tbody>
-                        <tr><th onClick={() => this.sortServersBy('name')}>
-                          <div className="clickable">Server Name ({serverList.length})</div>
+                        <tr><th>
+                        <div>
+                          <div
+                            onClick={() => this.sortServersBy('name')}
+                            className="clickable"
+                            style={{ display: 'inline-block' }}
+                          >Server Name ({serverList.length})</div>
+                          <div
+                            style={{ display: 'inline-block' }}
+                            onClick={() => this.copyToClipboard(serverList)}
+                          >
+                            <SvgIcon iconType="copyBtn" />
+                          </div>
+                        </div>
                         </th></tr>
 
                         {

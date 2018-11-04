@@ -5,10 +5,6 @@ export const authInit = () => ({
     type: types.AUTH_REQUEST
 })
 
-export const authConfirm = () => ({
-    type: types.AUTH_CONFIRM
-})
-
 export const authSuccess = (token) => ({
     type: types.AUTH_SUCCESS,
     payload: {
@@ -72,7 +68,7 @@ export const authCheck = () => (dispatch) => {
           'Authorization': `JWT ${token}`
         }
       }).then(res => {
-        dispatch(authConfirm());
+        dispatch(authSuccess(token));
       }).catch(() => {
         dispatch(authFailure("Unauthorized."));
       });
